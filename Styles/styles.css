@@ -1,21 +1,72 @@
-body {
-    font-family: Arial, sans-serif;
-}
-
-header, footer {
-    background-color: #f8f9fa;
-    padding: 20px;
-}
-
-#riddleSection, #pointsSection {
-    margin-bottom: 20px;
+/* Vollbildkarte */
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
 }
 
 #map {
-    height: 500px;
+    height: 100%;
     width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
 }
 
-.badge {
-    font-size: 1em;
+/* Rätselcontainer */
+#riddleContainer {
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 10px 15px;
+    border-radius: 10px;
+    text-align: center;
+    max-width: 80%;
 }
+
+/* Hinweis-Button */
+.round-button {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    width: 60px;
+    height: 60px;
+    background-color: #007bff;
+    color: white;
+    border-radius: 50%;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.round-button:active {
+    background-color: #0056b3;
+}
+
+/* Vibrationshinweis-Button */
+.small-button {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    width: 50px;
+    height: 50px;
+    background-color: #28a745;
+    color: white;
+    border-radius: 50%;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.small-button:active {
+    background-color: #1e7e34;
+}
+
+/* Hinweistext */
+#currentHint {
+    margin-top: 5px;
+    font-style: italic;
+}
+

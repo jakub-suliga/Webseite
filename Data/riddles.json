@@ -3,24 +3,23 @@
     {
       "id": 1,
       "question": "Suche den Ort, an dem Züge kommen und gehen. Hier treffen sich Reisende aus aller Welt.",
-      "hint": "Es ist der Hauptverkehrsknotenpunkt der Stadt.",
-      "answer": "Karlsruhe Hauptbahnhof",
+      "hint1": "Es ist der Hauptverkehrsknotenpunkt der Stadt.",
+      "hint2": "Hier findest du viele Gleise und Züge.",
+      "hint3": "Es ist der Hauptbahnhof von Karlsruhe.",
       "latitude": 48.9937,
       "longitude": 8.4006,
-      "proximity": 100,
-      "points": 100,
-      "badge": "Erster Fund"
+      "proximity": 100
     },
     {
       "id": 2,
       "question": "Finde das Schloss, von dem aus die Straßen strahlenförmig in alle Richtungen führen.",
-      "hint": "Ein historisches Gebäude im Zentrum von Karlsruhe.",
-      "answer": "Schloss Karlsruhe",
+      "hint1": "Ein historisches Gebäude im Zentrum von Karlsruhe.",
+      "hint2": "Hier residierte einst der Markgraf von Baden.",
+      "hint3": "Es ist das Schloss Karlsruhe.",
       "latitude": 49.0140,
       "longitude": 8.4043,
-      "proximity": 100,
-      "points": 150,
-      "badge": "Schlossentdecker"
+      "proximity": 100
     }
   ]
 }
+
