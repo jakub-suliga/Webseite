@@ -11,6 +11,7 @@ html, body {
     position: absolute;
     top: 0;
     left: 0;
+    z-index: 1; /* Karte liegt unter den anderen Elementen */
 }
 
 /* Rätselcontainer */
@@ -24,6 +25,7 @@ html, body {
     border-radius: 10px;
     text-align: center;
     max-width: 80%;
+    z-index: 2; /* Rätselcontainer über der Karte */
 }
 
 /* Hinweis-Button */
@@ -39,6 +41,7 @@ html, body {
     border: none;
     font-size: 24px;
     cursor: pointer;
+    z-index: 2; /* Button über der Karte */
 }
 
 .round-button:active {
@@ -58,6 +61,7 @@ html, body {
     border: none;
     font-size: 20px;
     cursor: pointer;
+    z-index: 2; /* Button über der Karte */
 }
 
 .small-button:active {
@@ -69,4 +73,3 @@ html, body {
     margin-top: 5px;
     font-style: italic;
 }
-

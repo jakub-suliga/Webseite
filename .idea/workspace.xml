@@ -4,13 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="64d86377-39d9-4ee1-968a-5c4a93b5dd25" name="Changes" comment="Added files and change in maps.js the var map">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Data/riddles.json" beforeDir="false" afterPath="$PROJECT_DIR$/Data/riddles.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Scripts/Api/maps.js" beforeDir="false" afterPath="$PROJECT_DIR$/Scripts/Api/maps.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Styles/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/Styles/styles.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/karte.html" beforeDir="false" afterPath="$PROJECT_DIR$/karte.html" afterDir="false" />
-    </list>
+    <list default="true" id="64d86377-39d9-4ee1-968a-5c4a93b5dd25" name="Changes" comment="Changed karte.html so the map is fullscreen and changed the position of the ridels and hint" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -27,6 +21,7 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="UPDATE_TYPE" value="REBASE" />
   </component>
   <component name="ProblemsViewState">
     <option name="selectedTabId" value="CurrentFile" />
@@ -74,7 +69,7 @@
       <workItem from="1731005033033" duration="798000" />
       <workItem from="1731099626828" duration="171000" />
       <workItem from="1732195646314" duration="2016000" />
-      <workItem from="1732441295650" duration="3913000" />
+      <workItem from="1732441295650" duration="4222000" />
     </task>
     <task id="LOCAL-00001" summary="Added folder structure and implemented index.html">
       <option name="closed" value="true" />
@@ -116,7 +111,15 @@
       <option name="project" value="LOCAL" />
       <updated>1732444490638</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Changed karte.html so the map is fullscreen and changed the position of the ridels and hint">
+      <option name="closed" value="true" />
+      <created>1732445740213</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1732445740213</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -138,6 +141,7 @@
     <MESSAGE value="Added header in index.html" />
     <MESSAGE value="Added files and added a website" />
     <MESSAGE value="Added files and change in maps.js the var map" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added files and change in maps.js the var map" />
+    <MESSAGE value="Changed karte.html so the map is fullscreen and changed the position of the ridels and hint" />
+    <option name="LAST_COMMIT_MESSAGE" value="Changed karte.html so the map is fullscreen and changed the position of the ridels and hint" />
   </component>
 </project>
