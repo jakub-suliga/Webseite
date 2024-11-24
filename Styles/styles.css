@@ -1,9 +1,34 @@
 /* Allgemeine Stile */
-body {
-    font-family: Arial, sans-serif;
+/* styles/styles.css */
+
+/* styles/styles.css */
+
+/* Sicherstellen, dass der gesamte Körper keine Abstände hat */
+body, html {
     margin: 0;
     padding: 0;
+    height: 100%;
 }
+
+/* Anpassung des Rätselcontainers */
+#riddleContainer {
+    font-size: 1rem; /* Verkleinern des Schriftgrads */
+}
+
+/* Sicherstellen, dass die Karte den gesamten Hintergrund einnimmt */
+#map {
+    height: 100vh;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+/* Weitere Anpassungen nach Bedarf */
+
+
+/* Weitere Anpassungen nach Bedarf */
+
 
 /* Header und Footer */
 header, footer {

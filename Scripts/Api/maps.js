@@ -29,13 +29,15 @@ document.addEventListener('DOMContentLoaded', function() {
         attribution: '&copy; OpenStreetMap-Mitwirkende'
     }).addTo(map);
 
-    // Punkteanzeige auf der Karte
-    var pointsDisplay = L.control({position: 'topright'});
-    pointsDisplay.onAdd = function(map) {
-        var div = L.DomUtil.create('div', 'points-display');
-        div.innerHTML = 'Punkte für dieses Rätsel: ' + (currentRiddle.points || 0);
-        return div;
-    };
+    // Punkteanzeige auf der Karte aktualisieren
+    function updatePointsDisplay() {
+        var div = document.querySelector('.points-display');
+        if (div) {
+            div.innerHTML = 'Punkte: ' + points;
+        }
+    }
+
+    updatePointsDisplay(); // Initialer Aufruf
 
     // Bounding Boxes für die Städte
     const cityBoundaries = {
@@ -110,6 +112,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 return response.json();
             })
             .then(function(data) {
+                console.log('Geladene Daten:', data); // Debugging
                 var allRiddles = data.riddles;
                 // Filter nach Stadt
                 riddles = allRiddles.filter(function(riddle) {
@@ -145,14 +148,27 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Funktion zur zufälligen Auswahl eines ungelösten Rätsels
     function getRandomRiddle() {
+        if (riddles.length === 0) return null;
         var randomIndex = Math.floor(Math.random() * riddles.length);
+        console.log('Ausgewähltes Rätsel:', riddles[randomIndex]); // Debugging
         return riddles[randomIndex];
     }
 
     // Funktion zur Anzeige des aktuellen Rätsels
     function displayRiddle() {
+        if (!currentRiddle || !currentRiddle.question) {
+            console.error('currentRiddle ist undefiniert oder hat keine Frage:', currentRiddle);
+            document.getElementById('currentRiddle').innerText = 'Kein gültiges Rätsel gefunden.';
+            return;
+        }
+
+        console.log('Anzeige des Rätsels:', currentRiddle); // Debugging
+
         document.getElementById('currentRiddle').innerText = currentRiddle.question;
         document.getElementById('currentHint').innerText = '';
+        document.getElementById('riddleAnswer').style.display = 'none';
+        document.getElementById('answerText').innerText = '';
+
         hintsUsed = {
             text: 0,
             direction: 0,
@@ -179,15 +195,6 @@ document.addEventListener('DOMContentLoaded', function() {
             iconAnchor: [16, 32],
             popupAnchor: [0, -32]
         });
-    }
-
-    // Punkteanzeige aktualisieren
-    function updatePointsDisplay() {
-        var pointsForRiddle = calculatePoints();
-        var div = document.querySelector('.points-display');
-        if (div) {
-            div.innerHTML = 'Punkte für dieses Rätsel: ' + pointsForRiddle;
-        }
     }
 
     // Berechnung der Punkte für das aktuelle Rätsel
@@ -254,11 +261,22 @@ document.addEventListener('DOMContentLoaded', function() {
                     // Pfeil hinzufügen
                     directionArrow = L.polylineDecorator(directionLine, {
                         patterns: [
-                            {offset: '100%', repeat: 0, symbol: L.Symbol.arrowHead({pixelSize: 15, polygon: false, pathOptions: {stroke: true, color: 'blue'}})}
+                            {
+                                offset: '100%',
+                                repeat: 0,
+                                symbol: L.Symbol.arrowHead({
+                                    pixelSize: 15,
+                                    polygon: false,
+                                    pathOptions: {stroke: true, color: 'blue', weight: 2}
+                                })
+                            }
                         ]
                     }).addTo(map);
 
                     map.fitBounds(directionLine.getBounds());
+
+                    console.log('Richtungs-Hinweis gezeichnet von [' + userLat + ', ' + userLon + '] zu [' + currentRiddle.latitude + ', ' + currentRiddle.longitude + '].'); // Debugging
+
                     updatePointsDisplay();
                 }, showError, {
                     enableHighAccuracy: true,
@@ -322,6 +340,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Vibrationsdauer basierend auf Entfernung
                 var vibrationDuration = calculateVibrationDuration(distance);
                 vibrateDevice(vibrationDuration);
+
+                console.log('Vibrationshinweis: Entfernung = ' + distance + ' Meter, Dauer = ' + vibrationDuration + ' ms'); // Debugging
             }, showError, {
                 enableHighAccuracy: true,
                 maximumAge: 0,
@@ -347,87 +367,111 @@ document.addEventListener('DOMContentLoaded', function() {
             // Entfernen von Hinweisen und Markierungen
             if (directionLine) {
                 map.removeLayer(directionLine);
+                directionLine = null;
             }
             if (directionArrow) {
                 map.removeLayer(directionArrow);
+                directionArrow = null;
             }
             if (radiusCircle) {
                 map.removeLayer(radiusCircle);
+                radiusCircle = null;
             }
         } else {
             alert('Keine weiteren Rätsel verfügbar.');
         }
     });
 
-    // Geolocation überwachen
+    // Event Listener für "Lösung anzeigen"-Button
+    var showSolutionButton = document.getElementById('showSolutionButton');
+    showSolutionButton.addEventListener('click', function() {
+        var answerText = document.getElementById('answerText');
+        answerText.innerText = currentRiddle.answer;
+        document.getElementById('riddleAnswer').style.display = 'block';
+        console.log('Lösung angezeigt:', currentRiddle.answer); // Debugging
+
+        // Optional: Punkte abziehen oder andere Logik implementieren
+        // Beispiel: Punkte reduzieren für das Anzeigen der Lösung
+        var penalty = 10; // Beispielhafte Strafe
+        points = Math.max(points - penalty, 0);
+        localStorage.setItem('points', points);
+        updatePointsDisplay();
+    });
+
+    // Funktion zur Überwachung der Position und Überprüfung der Nähe zum Schatz (optional, hier auskommentiert)
+    /*
     if (navigator.geolocation) {
-        navigator.geolocation.watchPosition(updatePosition, showError, {
-            enableHighAccuracy: true,
-            maximumAge: 0,
-            timeout: 5000,
-        });
+      navigator.geolocation.watchPosition(updatePosition, showError, {
+        enableHighAccuracy: true,
+        maximumAge: 0,
+        timeout: 5000,
+      });
     } else {
-        alert('Geolocation wird von Ihrem Browser nicht unterstützt.');
+      alert('Geolocation wird von Ihrem Browser nicht unterstützt.');
     }
 
     function updatePosition(position) {
-        var userLat = position.coords.latitude;
-        var userLon = position.coords.longitude;
+      var userLat = position.coords.latitude;
+      var userLon = position.coords.longitude;
 
-        // Aktualisieren des Benutzermarkers
-        if (userMarker) {
-            userMarker.setLatLng([userLat, userLon]);
+      // Aktualisieren des Benutzermarkers
+      if (userMarker) {
+        userMarker.setLatLng([userLat, userLon]);
+      } else {
+        userMarker = L.marker([userLat, userLon]).addTo(map);
+      }
+
+      // Überprüfung der Entfernung zum Schatz
+      var distance = getDistance(userLat, userLon, currentRiddle.latitude, currentRiddle.longitude);
+
+      if (distance < currentRiddle.proximity) {
+        // Schatz gefunden
+        // Punkte hinzufügen
+        var pointsEarned = calculatePoints();
+        points += pointsEarned;
+        localStorage.setItem('points', points);
+
+        // Rätsel als gelöst markieren
+        solvedRiddles.push(currentRiddle.id);
+        localStorage.setItem('solvedRiddles', JSON.stringify(solvedRiddles));
+
+        // Achievement hinzufügen
+        addAchievement(currentRiddle.achievement);
+
+        // Anzeige des Erfolgs
+        showRiddleSolvedMessage(pointsEarned);
+
+        // Entfernen von Hinweisen und Markierungen
+        if (directionLine) {
+          map.removeLayer(directionLine);
+          directionLine = null;
+        }
+        if (directionArrow) {
+          map.removeLayer(directionArrow);
+          directionArrow = null;
+        }
+        if (radiusCircle) {
+          map.removeLayer(radiusCircle);
+          radiusCircle = null;
+        }
+
+        // Nächstes Rätsel laden oder Meldung anzeigen
+        if (riddles.length > 1) {
+          // Entfernen des aktuellen Rätsels aus der Liste
+          riddles = riddles.filter(function(riddle) {
+            return riddle.id !== currentRiddle.id;
+          });
+          currentRiddle = getRandomRiddle();
+          displayRiddle();
+          addTreasureMarker();
         } else {
-            userMarker = L.marker([userLat, userLon]).addTo(map);
+          // Alle Rätsel gelöst
+          riddles = [];
+          showAllRiddlesSolvedMessage();
         }
-
-        // Überprüfung der Entfernung zum Schatz
-        var distance = getDistance(userLat, userLon, currentRiddle.latitude, currentRiddle.longitude);
-
-        if (distance < currentRiddle.proximity) {
-            // Schatz gefunden
-            // Punkte hinzufügen
-            var pointsEarned = calculatePoints();
-            points += pointsEarned;
-            localStorage.setItem('points', points);
-
-            // Rätsel als gelöst markieren
-            solvedRiddles.push(currentRiddle.id);
-            localStorage.setItem('solvedRiddles', JSON.stringify(solvedRiddles));
-
-            // Achievement hinzufügen
-            addAchievement(currentRiddle.achievement);
-
-            // Anzeige des Erfolgs
-            showRiddleSolvedMessage(pointsEarned);
-
-            // Entfernen von Hinweisen und Markierungen
-            if (directionLine) {
-                map.removeLayer(directionLine);
-            }
-            if (directionArrow) {
-                map.removeLayer(directionArrow);
-            }
-            if (radiusCircle) {
-                map.removeLayer(radiusCircle);
-            }
-
-            // Nächstes Rätsel laden oder Meldung anzeigen
-            if (riddles.length > 1) {
-                // Entfernen des aktuellen Rätsels aus der Liste
-                riddles = riddles.filter(function(riddle) {
-                    return riddle.id !== currentRiddle.id;
-                });
-                currentRiddle = getRandomRiddle();
-                displayRiddle();
-                addTreasureMarker();
-            } else {
-                // Alle Rätsel gelöst
-                riddles = [];
-                showAllRiddlesSolvedMessage();
-            }
-        }
+      }
     }
+    */
 
     function showError(error) {
         console.error('Fehler bei der Standortbestimmung:', error);
@@ -493,7 +537,7 @@ document.addEventListener('DOMContentLoaded', function() {
         <h2>Rätsel gelöst!</h2>
         <p>Du hast ${pointsEarned} Punkte erhalten.</p>
         ${currentRiddle.wikipedia ? `<p><a href="${currentRiddle.wikipedia}" target="_blank">Mehr über diesen Ort erfahren</a></p>` : ''}
-        <button id="continueButton">Weiter</button>
+        <button id="continueButton" class="btn btn-primary mt-3">Weiter</button>
       </div>
     `;
         document.body.appendChild(overlay);
@@ -512,7 +556,7 @@ document.addEventListener('DOMContentLoaded', function() {
       <div class="message-box">
         <h2>Alle Rätsel gelöst!</h2>
         <p>Herzlichen Glückwunsch, du hast alle Rätsel gelöst!</p>
-        <button id="goHomeButton">Zur Startseite</button>
+        <button id="goHomeButton" class="btn btn-success mt-3">Zur Startseite</button>
       </div>
     `;
         document.body.appendChild(overlay);
@@ -532,4 +576,3 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 });
-

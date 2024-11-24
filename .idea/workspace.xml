@@ -4,12 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="64d86377-39d9-4ee1-968a-5c4a93b5dd25" name="Changes" comment="Chnaged that the Buttons are on top of the map">
-      <change afterPath="$PROJECT_DIR$/Scripts/achievements.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/achievements.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" afterDir="false" />
+    <list default="true" id="64d86377-39d9-4ee1-968a-5c4a93b5dd25" name="Changes" comment="Working website">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Data/riddles.json" beforeDir="false" afterPath="$PROJECT_DIR$/Data/riddles.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Scripts/Api/maps.js" beforeDir="false" afterPath="$PROJECT_DIR$/Scripts/Api/maps.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Scripts/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/Scripts/main.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Styles/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/Styles/styles.css" afterDir="false" />
@@ -85,7 +81,7 @@
       <workItem from="1732441295650" duration="4222000" />
       <workItem from="1732445951311" duration="964000" />
       <workItem from="1732450621151" duration="915000" />
-      <workItem from="1732451557894" duration="4416000" />
+      <workItem from="1732451557894" duration="5878000" />
     </task>
     <task id="LOCAL-00001" summary="Added folder structure and implemented index.html">
       <option name="closed" value="true" />
@@ -143,7 +139,15 @@
       <option name="project" value="LOCAL" />
       <updated>1732446078379</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Working website">
+      <option name="closed" value="true" />
+      <created>1732456210776</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1732456210776</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -167,6 +171,7 @@
     <MESSAGE value="Added files and change in maps.js the var map" />
     <MESSAGE value="Changed karte.html so the map is fullscreen and changed the position of the ridels and hint" />
     <MESSAGE value="Chnaged that the Buttons are on top of the map" />
-    <option name="LAST_COMMIT_MESSAGE" value="Chnaged that the Buttons are on top of the map" />
+    <MESSAGE value="Working website" />
+    <option name="LAST_COMMIT_MESSAGE" value="Working website" />
   </component>
 </project>

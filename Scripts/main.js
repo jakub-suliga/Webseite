@@ -8,26 +8,38 @@ document.addEventListener('DOMContentLoaded', function() {
     updateStats();
 
     // Start-Button
-    const startButton = document.getElementById('startButton');
-    startButton.addEventListener('click', function() {
-        // Ausgewählte Kategorien speichern
-        const selectedCategories = [];
-        const checkboxes = document.querySelectorAll('input[name="category"]:checked');
-        checkboxes.forEach(function(checkbox) {
-            if (checkbox.value !== 'Alle') {
-                selectedCategories.push(checkbox.value);
-            }
-        });
-        localStorage.setItem('selectedCategories', JSON.stringify(selectedCategories));
+    var startButton = document.getElementById('startButton');
+    if (startButton) {
+        startButton.addEventListener('click', function() {
+            // Ausgewählte Kategorien speichern
+            var selectedCategories = [];
+            var checkboxes = document.querySelectorAll('input[name="category"]:checked');
+            checkboxes.forEach(function(checkbox) {
+                if (checkbox.value !== 'Alle') {
+                    selectedCategories.push(checkbox.value);
+                }
+            });
 
-        window.location.href = 'karte.html';
-    });
+            // Wenn 'Alle' ausgewählt ist oder keine spezifischen Kategorien, leere das Array
+            var alleCheckbox = document.querySelector('input[name="category"][value="Alle"]');
+            if (alleCheckbox && alleCheckbox.checked) {
+                selectedCategories = [];
+            }
+
+            localStorage.setItem('selectedCategories', JSON.stringify(selectedCategories));
+
+            // Weiterleitung zur Karte-Seite
+            window.location.href = 'karte.html';
+        });
+    } else {
+        console.error('Start-Button mit ID "startButton" wurde nicht gefunden.');
+    }
 });
 
 // Funktion zur Aktualisierung der Punkte und gelösten Rätsel
 function updateStats() {
-    const points = parseInt(localStorage.getItem('points')) || 0;
-    const solvedRiddles = JSON.parse(localStorage.getItem('solvedRiddles')) || [];
+    var points = parseInt(localStorage.getItem('points')) || 0;
+    var solvedRiddles = JSON.parse(localStorage.getItem('solvedRiddles')) || [];
 
     document.getElementById('totalPoints').innerText = points;
     document.getElementById('solvedRiddlesCount').innerText = solvedRiddles.length;
@@ -36,10 +48,10 @@ function updateStats() {
 // Funktion zum Abrufen des Wetters (mit Open-Meteo API)
 function getWeather() {
     // Koordinaten der Stadt (z.B. Karlsruhe)
-    const lat = 49.0069;
-    const lon = 8.4037;
+    var lat = 49.0069;
+    var lon = 8.4037;
 
-    const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true`;
+    var url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true`;
 
     fetch(url)
         .then(function(response) {
@@ -58,20 +70,22 @@ function getWeather() {
 
 // Funktion zum Anzeigen des Wetter-Icons
 function displayWeatherIcon(weatherData) {
-    const weatherCode = weatherData.current_weather.weathercode;
-    const temperature = weatherData.current_weather.temperature;
+    var weatherCode = weatherData.current_weather.weathercode;
+    var temperature = weatherData.current_weather.temperature;
 
     // Mapping von Wettercodes zu Icons
-    const weatherIconUrl = getWeatherIconUrl(weatherCode);
+    var weatherIconUrl = getWeatherIconUrl(weatherCode);
 
-    const weatherIconDiv = document.getElementById('weatherIcon');
-    const img = document.createElement('img');
+    var weatherIconDiv = document.getElementById('weatherIcon');
+    var img = document.createElement('img');
     img.src = weatherIconUrl;
     img.alt = 'Wetter Icon';
 
-    const tempText = document.createElement('span');
-    tempText.innerText = `${temperature}°C`;
+    var tempText = document.createElement('span');
+    tempText.innerText = ` ${temperature}°C`;
 
+    // Leeren des Divs, falls bereits ein Icon vorhanden ist
+    weatherIconDiv.innerHTML = '';
     weatherIconDiv.appendChild(img);
     weatherIconDiv.appendChild(tempText);
 }
@@ -81,9 +95,9 @@ function getWeatherIconUrl(weatherCode) {
     // Sie können Ihre eigenen Icons verwenden oder auf kostenlose Icon-Sets verlinken
     // Hier verwenden wir Platzhalter-Icons aus einer öffentlichen Quelle
 
-    const iconUrlBase = 'https://openweathermap.org/img/wn/';
+    var iconUrlBase = 'https://openweathermap.org/img/wn/';
 
-    const iconMap = {
+    var iconMap = {
         0: '01d',   // Klarer Himmel
         1: '02d',   // Überwiegend klar
         2: '03d',   // Teilweise bewölkt
@@ -114,6 +128,7 @@ function getWeatherIconUrl(weatherCode) {
         99: '11d'   // Gewitter mit starkem Hagel
     };
 
-    const iconCode = iconMap[weatherCode] || '01d'; // Standard-Icon, wenn kein Code gefunden wird
-    return `${iconUrlBase}${iconCode}@2x.png`;
+    var iconCode = iconMap[weatherCode] || '01d'; // Standard-Icon, wenn kein Code gefunden wird
+    var iconUrl = `${iconUrlBase}${iconCode}@2x.png`;
+    return iconUrl;
 }
