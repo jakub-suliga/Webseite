@@ -1,0 +1,26 @@
+{
+  "riddles": [
+    {
+      "id": 1,
+      "question": "Suche den Ort, an dem Züge kommen und gehen. Hier treffen sich Reisende aus aller Welt.",
+      "hint": "Es ist der Hauptverkehrsknotenpunkt der Stadt.",
+      "answer": "Karlsruhe Hauptbahnhof",
+      "latitude": 48.9937,
+      "longitude": 8.4006,
+      "proximity": 100,
+      "points": 100,
+      "badge": "Erster Fund"
+    },
+    {
+      "id": 2,
+      "question": "Finde das Schloss, von dem aus die Straßen strahlenförmig in alle Richtungen führen.",
+      "hint": "Ein historisches Gebäude im Zentrum von Karlsruhe.",
+      "answer": "Schloss Karlsruhe",
+      "latitude": 49.0140,
+      "longitude": 8.4043,
+      "proximity": 100,
+      "points": 150,
+      "badge": "Schlossentdecker"
+    }
+  ]
+}

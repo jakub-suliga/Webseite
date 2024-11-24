@@ -1,18 +1,38 @@
 <!DOCTYPE html>
 <html lang="de">
-    <head>
-        <!-- Für Mobilgeräte initialen Zoom abschalten -->
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <!-- Angaben für Suchmaschinen -->
-        <!-- Beschreibung -->
-        <meta name="description" content="Eine Seite über HTML und CSS.">
-        <!-- Stichwörter -->
-        <meta name="keywords" content="HTML, CSS, Javascript">
-        <title>
-            Responsive Websites - Techniken
-        </title>
-    </head>
-    <body>
+<head>
+    <meta charset="UTF-8">
+    <title>Interaktive Schatzsuche</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Bootstrap CSS für das responsive Design -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <!-- Eigene CSS-Datei -->
+    <link rel="stylesheet" href="Styles/styles.css">
+</head>
+<body>
+<header class="container text-center my-5">
+    <h1>Willkommen zur interaktiven Schatzsuche</h1>
+    <p>Erkunde die Stadt, löse Rätsel und finde versteckte Schätze!</p>
+</header>
 
-    </body>
+<main class="container text-center">
+    <section>
+        <h2>Wie funktioniert die Schatzsuche?</h2>
+        <p>Du erhältst ein Rätsel, das dich zu einem bestimmten Ort führt. Wenn du dich dem Schatz näherst, erhältst du Hinweise. Sammle Punkte und Abzeichen für gefundene Schätze!</p>
+    </section>
+
+    <section class="my-5">
+        <button id="startButton" class="btn btn-primary btn-lg">Schatzsuche starten</button>
+    </section>
+</main>
+
+<footer class="container text-center my-5">
+    <p>&copy; 2024 Interaktive Schatzsuche</p>
+</footer>
+
+<!-- JavaScript-Dateien -->
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="Scripts/main.js"></script>
+</body>
 </html>
+

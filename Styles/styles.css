@@ -1,0 +1,21 @@
+body {
+    font-family: Arial, sans-serif;
+}
+
+header, footer {
+    background-color: #f8f9fa;
+    padding: 20px;
+}
+
+#riddleSection, #pointsSection {
+    margin-bottom: 20px;
+}
+
+#map {
+    height: 500px;
+    width: 100%;
+}
+
+.badge {
+    font-size: 1em;
+}
