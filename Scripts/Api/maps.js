@@ -1,17 +1,11 @@
 // scripts/karte.js
 
-L.tileLayer = (png, param2) => {
-
-};
 let ready = $(document).ready(function() {
     // Initialisierung der Karte
-    let map;
-    let L;
-    map = L.map('map').setView([49.0069, 8.4037], 13); // Beispielkoordinaten für Karlsruhe
+    var map = L.map('map').setView([49.0069, 8.4037], 13); // Beispielkoordinaten für Karlsruhe
 
     // OpenStreetMap-Tiles einbinden
-    let addTo;
-    addTo = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '&copy; OpenStreetMap-Mitwirkende'
     }).addTo(map);
 
