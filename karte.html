@@ -21,11 +21,19 @@
   <p id="currentHint"></p>
 </div>
 
-<!-- Hinweis-Button -->
-<button id="hintButton" class="round-button">💡</button>
+<!-- Kombinierter Hinweis-Button -->
+<div id="hintButton" class="round-button">💡</div>
+<div id="hintMenu" class="hint-menu">
+  <button id="textHintButton">Text-Hinweis</button>
+  <button id="directionHintButton">Richtungs-Hinweis</button>
+  <button id="radiusHintButton">Radius-Hinweis</button>
+</div>
 
 <!-- Vibrationshinweis-Button -->
 <button id="vibrateButton" class="small-button">📳</button>
+
+<!-- Neues Rätsel Button -->
+<button id="newRiddleButton" class="small-button new-riddle-button">🔄</button>
 
 <!-- Leaflet JS für die Karte -->
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>

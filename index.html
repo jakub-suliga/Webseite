@@ -4,16 +4,23 @@
     <meta charset="UTF-8">
     <title>Interaktive Schatzsuche</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- Bootstrap CSS für das responsive Design -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
     <!-- Eigene CSS-Datei -->
     <link rel="stylesheet" href="Styles/styles.css">
 </head>
 <body>
+<!-- Wetter-Icon -->
+<div id="weatherIcon" class="weather-icon"></div>
+
 <header class="container text-center my-5">
     <h1>Willkommen zur interaktiven Schatzsuche</h1>
     <p>Erkunde die Stadt, löse Rätsel und finde versteckte Schätze!</p>
 </header>
+
+<!-- Anzeige der Punkte und gelösten Rätsel -->
+<div class="stats">
+    <p>Gesammelte Punkte: <span id="totalPoints">0</span></p>
+    <p>Gelöste Rätsel: <span id="solvedRiddlesCount">0</span></p>
+</div>
 
 <main class="container text-center">
     <section>
@@ -21,8 +28,40 @@
         <p>Du erhältst ein Rätsel, das dich zu einem bestimmten Ort führt. Wenn du dich dem Schatz näherst, erhältst du Hinweise. Sammle Punkte und Abzeichen für gefundene Schätze!</p>
     </section>
 
+    <!-- Erklärung der Hinweise -->
+    <section class="hint-explanation">
+        <h3>Hinweise</h3>
+        <p>Während des Spiels stehen dir verschiedene Hinweise zur Verfügung:</p>
+        <ul>
+            <li><strong>Text-Hinweis:</strong> Gibt dir zusätzliche Informationen zum Rätsel.</li>
+            <li><strong>Richtungs-Hinweis:</strong> Zeigt dir die Richtung zum Ziel auf der Karte an.</li>
+            <li><strong>Radius-Hinweis:</strong> Zeichnet einen Kreis um den Zielort, der dir einen Anhaltspunkt gibt.</li>
+            <li><strong>Vibrations-Hinweis:</strong> Lässt dein Gerät vibrieren; die Dauer hängt von deiner Entfernung zum Ziel ab.</li>
+        </ul>
+        <p>Beachte, dass die Nutzung von Hinweisen deine Punktzahl verringert!</p>
+    </section>
+
+    <!-- Kategorieauswahl -->
+    <section class="category-selection my-5">
+        <h3>Wähle die Kategorien aus, die du spielen möchtest:</h3>
+        <form id="categoryForm">
+            <label><input type="checkbox" name="category" value="Historische Gebäude"> Historische Gebäude</label><br>
+            <label><input type="checkbox" name="category" value="Parks und Natur"> Parks und Natur</label><br>
+            <label><input type="checkbox" name="category" value="Wissenschaft und Bildung"> Wissenschaft und Bildung</label><br>
+            <label><input type="checkbox" name="category" value="Verkehrsknotenpunkte"> Verkehrsknotenpunkte</label><br>
+            <label><input type="checkbox" name="category" value="Religiöse Stätten"> Religiöse Stätten</label><br>
+            <label><input type="checkbox" name="category" value="Sonstige Orte"> Sonstige Orte</label><br>
+            <label><input type="checkbox" name="category" value="Alle" checked> Alle Kategorien</label>
+        </form>
+    </section>
+
     <section class="my-5">
         <button id="startButton" class="btn btn-primary btn-lg">Schatzsuche starten</button>
+    </section>
+
+    <!-- Link zur Achievements-Seite -->
+    <section class="my-5">
+        <a href="achievements.html" class="btn btn-secondary">Meine Achievements</a>
     </section>
 </main>
 
@@ -31,8 +70,16 @@
 </footer>
 
 <!-- JavaScript-Dateien -->
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<script src="Scripts/main.js"></script>
+<!-- Leaflet JS für die Karte -->
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+<!-- Leaflet.PolylineDecorator für Pfeile -->
+<script src="https://unpkg.com/leaflet-polylinedecorator@1.6.0/dist/leaflet.polylineDecorator.js"></script>
+
+<!-- Eigene Skripte -->
+<script src="Scripts/Api/maps.js"></script>
+
+
 </body>
 </html>
 

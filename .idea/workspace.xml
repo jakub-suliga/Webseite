@@ -4,7 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="64d86377-39d9-4ee1-968a-5c4a93b5dd25" name="Changes" comment="Changed karte.html so the map is fullscreen and changed the position of the ridels and hint" />
+    <list default="true" id="64d86377-39d9-4ee1-968a-5c4a93b5dd25" name="Changes" comment="Chnaged that the Buttons are on top of the map">
+      <change afterPath="$PROJECT_DIR$/Scripts/achievements.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/achievements.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Data/riddles.json" beforeDir="false" afterPath="$PROJECT_DIR$/Data/riddles.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Scripts/Api/maps.js" beforeDir="false" afterPath="$PROJECT_DIR$/Scripts/Api/maps.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Scripts/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/Scripts/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Styles/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/Styles/styles.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/karte.html" beforeDir="false" afterPath="$PROJECT_DIR$/karte.html" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -14,8 +25,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="CSS File" />
-        <option value="JavaScript File" />
         <option value="HTML File" />
+        <option value="JavaScript File" />
       </list>
     </option>
   </component>
@@ -39,6 +50,7 @@
     &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
@@ -47,13 +59,14 @@
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-js-predefined-d6986cc7102b-5c90d61e3bab-JavaScript-WS-242.23726.96" />
+        <option value="bundled-js-predefined-d6986cc7102b-e768b9ed790e-JavaScript-WS-243.21565.180" />
       </set>
     </attachedChunks>
   </component>
@@ -70,6 +83,9 @@
       <workItem from="1731099626828" duration="171000" />
       <workItem from="1732195646314" duration="2016000" />
       <workItem from="1732441295650" duration="4222000" />
+      <workItem from="1732445951311" duration="964000" />
+      <workItem from="1732450621151" duration="915000" />
+      <workItem from="1732451557894" duration="4416000" />
     </task>
     <task id="LOCAL-00001" summary="Added folder structure and implemented index.html">
       <option name="closed" value="true" />
@@ -119,7 +135,15 @@
       <option name="project" value="LOCAL" />
       <updated>1732445740213</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Chnaged that the Buttons are on top of the map">
+      <option name="closed" value="true" />
+      <created>1732446078379</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1732446078379</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -142,6 +166,7 @@
     <MESSAGE value="Added files and added a website" />
     <MESSAGE value="Added files and change in maps.js the var map" />
     <MESSAGE value="Changed karte.html so the map is fullscreen and changed the position of the ridels and hint" />
-    <option name="LAST_COMMIT_MESSAGE" value="Changed karte.html so the map is fullscreen and changed the position of the ridels and hint" />
+    <MESSAGE value="Chnaged that the Buttons are on top of the map" />
+    <option name="LAST_COMMIT_MESSAGE" value="Chnaged that the Buttons are on top of the map" />
   </component>
 </project>

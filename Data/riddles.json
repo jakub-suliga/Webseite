@@ -2,24 +2,453 @@
   "riddles": [
     {
       "id": 1,
-      "question": "Suche den Ort, an dem Züge kommen und gehen. Hier treffen sich Reisende aus aller Welt.",
-      "hint1": "Es ist der Hauptverkehrsknotenpunkt der Stadt.",
-      "hint2": "Hier findest du viele Gleise und Züge.",
-      "hint3": "Es ist der Hauptbahnhof von Karlsruhe.",
-      "latitude": 48.9937,
-      "longitude": 8.4006,
+      "city": "Karlsruhe",
+      "category": "Historische Gebäude",
+      "question": "Ich bin das Herz der Stadt, von dem aus die Straßen wie Sonnenstrahlen in alle Richtungen führen. In mir findest du ein Museum und einen Turm mit Aussichtsplattform. Wer bin ich?",
+      "answer": "Schloss Karlsruhe",
+      "latitude": 49.0140,
+      "longitude": 8.4043,
+      "hints": [
+        "Ich wurde im 18. Jahrhundert erbaut und bin das Wahrzeichen der Stadt.",
+        "Mein Park lädt zum Spazieren und Verweilen ein.",
+        "Mein Turm bietet einen Blick über ganz Karlsruhe."
+      ],
+      "wikipedia": "https://de.wikipedia.org/wiki/Schloss_Karlsruhe",
+      "achievement": "Schlosskenner",
+      "points": 100,
       "proximity": 100
     },
     {
       "id": 2,
-      "question": "Finde das Schloss, von dem aus die Straßen strahlenförmig in alle Richtungen führen.",
-      "hint1": "Ein historisches Gebäude im Zentrum von Karlsruhe.",
-      "hint2": "Hier residierte einst der Markgraf von Baden.",
-      "hint3": "Es ist das Schloss Karlsruhe.",
+      "city": "Karlsruhe",
+      "category": "Parks und Natur",
+      "question": "An meinem Ort wachsen Pflanzen aus aller Welt. Ich liege neben dem Schloss und biete Gewächshäuser mit exotischen Pflanzen. Welcher Ort bin ich?",
+      "answer": "Botanischer Garten Karlsruhe",
+      "latitude": 49.0149,
+      "longitude": 8.4033,
+      "hints": [
+        "Ich wurde im 19. Jahrhundert von Heinrich Hübsch gestaltet.",
+        "Ich bin ein Ort der Ruhe mitten in der Stadt.",
+        "Meine Gewächshäuser beherbergen tropische und subtropische Pflanzen."
+      ],
+      "wikipedia": "https://de.wikipedia.org/wiki/Botanischer_Garten_Karlsruhe",
+      "achievement": "Pflanzenentdecker",
+      "points": 100,
+      "proximity": 100
+    },
+    {
+      "id": 3,
+      "city": "Karlsruhe",
+      "category": "Historische Gebäude",
+      "question": "Ich bin ein einzigartiges Bauwerk auf dem Marktplatz, und unter mir ruht der Gründer der Stadt. Wer bin ich?",
+      "answer": "Karlsruher Pyramide",
+      "latitude": 49.0097,
+      "longitude": 8.4036,
+      "hints": [
+        "Ich bin eine rote Sandsteinpyramide im Zentrum von Karlsruhe.",
+        "Ich wurde über der Gruft von Markgraf Karl Wilhelm errichtet.",
+        "Ich bin ein Wahrzeichen der Stadt und stehe auf dem Marktplatz."
+      ],
+      "wikipedia": "https://de.wikipedia.org/wiki/Karlsruher_Pyramide",
+      "achievement": "Pyramidenforscher",
+      "points": 100,
+      "proximity": 100
+    },
+    {
+      "id": 4,
+      "city": "Karlsruhe",
+      "category": "Wissenschaft und Bildung",
+      "question": "Ich bin ein weltweit einzigartiges Kulturinstitut, das Kunst, Medien und Technologie verbindet. In mir findest du Ausstellungen, Aufführungen und Forschungsinstitute. Wer bin ich?",
+      "answer": "ZKM | Zentrum für Kunst und Medien Karlsruhe",
+      "latitude": 49.0014,
+      "longitude": 8.3833,
+      "hints": [
+        "Ich befinde mich in einem ehemaligen Industriebau, der Munitionsfabrik.",
+        "Ich werde oft als 'elektronisches oder digitales Bauhaus' bezeichnet.",
+        "Mein Name steht für Innovation in Kunst und Medien."
+      ],
+      "wikipedia": "https://de.wikipedia.org/wiki/Zentrum_für_Kunst_und_Medien_Karlsruhe",
+      "achievement": "Medienexperte",
+      "points": 100,
+      "proximity": 100
+    },
+    {
+      "id": 5,
+      "city": "Karlsruhe",
+      "category": "Wissenschaft und Bildung",
+      "question": "Ich beherberge eine der bedeutendsten Kunstsammlungen Deutschlands mit Werken vom Mittelalter bis zur Gegenwart. Wer bin ich?",
+      "answer": "Staatliche Kunsthalle Karlsruhe",
+      "latitude": 49.0095,
+      "longitude": 8.4070,
+      "hints": [
+        "Ich wurde im 19. Jahrhundert gegründet.",
+        "Ich besitze eine umfangreiche Sammlung von Gemälden und Skulpturen.",
+        "Mein Gebäude ist ein Beispiel klassizistischer Architektur."
+      ],
+      "wikipedia": "https://de.wikipedia.org/wiki/Staatliche_Kunsthalle_Karlsruhe",
+      "achievement": "Kunstkenner",
+      "points": 100,
+      "proximity": 100
+    },
+    {
+      "id": 6,
+      "city": "Karlsruhe",
+      "category": "Parks und Natur",
+      "question": "An meinem Ort kannst du Tiere aus aller Welt sehen und durch wunderschöne Gärten spazieren. Eine Gondolettafahrt auf dem See ist ein besonderes Erlebnis. Welcher Ort bin ich?",
+      "answer": "Zoologischer Stadtgarten Karlsruhe",
+      "latitude": 48.9930,
+      "longitude": 8.4019,
+      "hints": [
+        "Ich bin einer der ältesten Zoos in Deutschland.",
+        "Ich kombiniere Zoo und botanischen Garten.",
+        "Meine Flamingos und Eisbären sind besonders beliebt."
+      ],
+      "wikipedia": "https://de.wikipedia.org/wiki/Zoologischer_Stadtgarten_Karlsruhe",
+      "achievement": "Tierfreund",
+      "points": 100,
+      "proximity": 100
+    },
+    {
+      "id": 7,
+      "city": "Karlsruhe",
+      "category": "Parks und Natur",
+      "question": "Ich bin ein Berg am Rande der Stadt mit einer Burgruine auf meinem Gipfel. Von hier aus hast du einen fantastischen Blick über Karlsruhe. Wer bin ich?",
+      "answer": "Turmberg Durlach",
+      "latitude": 49.0039,
+      "longitude": 8.4656,
+      "hints": [
+        "Du kannst mich mit einer Standseilbahn erreichen.",
+        "Ich bin ein beliebtes Ausflugsziel für Wanderer und Familien.",
+        "Mein Name bedeutet 'Berg mit Turm'."
+      ],
+      "wikipedia": "https://de.wikipedia.org/wiki/Turmberg",
+      "achievement": "Aussichtsliebhaber",
+      "points": 100,
+      "proximity": 100
+    },
+    {
+      "id": 8,
+      "city": "Karlsruhe",
+      "category": "Verkehrsknotenpunkte",
+      "question": "Ich bin das Zentrum der Stadt, umgeben von Geschäften und Cafés. Hier findest du eine Pyramide, die ein Wahrzeichen von Karlsruhe ist. Wer bin ich?",
+      "answer": "Marktplatz Karlsruhe",
+      "latitude": 49.0097,
+      "longitude": 8.4036,
+      "hints": [
+        "Unter meiner Pyramide liegt der Gründer der Stadt begraben.",
+        "Ich bin ein beliebter Treffpunkt für Einheimische und Touristen.",
+        "Hier findet auch der Weihnachtsmarkt statt."
+      ],
+      "wikipedia": "https://de.wikipedia.org/wiki/Marktplatz_(Karlsruhe)",
+      "achievement": "Stadtentdecker",
+      "points": 100,
+      "proximity": 100
+    },
+    {
+      "id": 9,
+      "city": "Karlsruhe",
+      "category": "Religiöse Stätten",
+      "question": "Ich bin ein Gotteshaus im Herzen der Stadt, mit klassizistischer Architektur und einem beeindruckenden Innenraum. Wer bin ich?",
+      "answer": "Evangelische Stadtkirche Karlsruhe",
+      "latitude": 49.0095,
+      "longitude": 8.4049,
+      "hints": [
+        "Ich wurde im 19. Jahrhundert von Friedrich Weinbrenner erbaut.",
+        "Mein Turm ist 61 Meter hoch.",
+        "Ich bin bekannt für meine Orgelkonzerte."
+      ],
+      "wikipedia": "https://de.wikipedia.org/wiki/Evangelische_Stadtkirche_Karlsruhe",
+      "achievement": "Kulturliebhaber",
+      "points": 100,
+      "proximity": 100
+    },
+    {
+      "id": 10,
+      "city": "Karlsruhe",
+      "category": "Verkehrsknotenpunkte",
+      "question": "Ich bin ein modernes Einkaufszentrum im Herzen von Karlsruhe mit über 130 Geschäften. Mein Name stammt von einem historischen Stadttor. Wer bin ich?",
+      "answer": "Ettlinger Tor Karlsruhe",
+      "latitude": 49.0039,
+      "longitude": 8.4000,
+      "hints": [
+        "Ich wurde 2005 eröffnet.",
+        "Mein Name erinnert an ein altes Stadttor, das einst hier stand.",
+        "Ich bin das größte innerstädtische Einkaufszentrum in Süddeutschland."
+      ],
+      "wikipedia": "https://de.wikipedia.org/wiki/Ettlinger_Tor_Karlsruhe",
+      "achievement": "Shopping-Experte",
+      "points": 100,
+      "proximity": 100
+    },
+    {
+      "id": 11,
+      "city": "Karlsruhe",
+      "category": "Parks und Natur",
+      "question": "Ich bin eine große Grünanlage mit Hügeln, Seen und einem bekannten Festival. Hier kannst du entspannen und Veranstaltungen besuchen. Welcher Ort bin ich?",
+      "answer": "Günther-Klotz-Anlage",
+      "latitude": 48.9967,
+      "longitude": 8.3812,
+      "hints": [
+        "Ich bin Heimat des 'Das Fest', eines der größten Open-Air-Festivals in Deutschland.",
+        "Ich bin nach einem ehemaligen Bürgermeister von Karlsruhe benannt.",
+        "Meine Hügel bieten einen schönen Blick über die Anlage."
+      ],
+      "wikipedia": "https://de.wikipedia.org/wiki/Günther-Klotz-Anlage",
+      "achievement": "Freizeitgenießer",
+      "points": 100,
+      "proximity": 100
+    },
+    {
+      "id": 12,
+      "city": "Karlsruhe",
+      "category": "Wissenschaft und Bildung",
+      "question": "Ich bin das höchste deutsche Gericht in Zivilsachen und gehöre zur rechtsprechenden Gewalt. Mein Sitz ist in Karlsruhe. Wer bin ich?",
+      "answer": "Bundesgerichtshof",
+      "latitude": 49.0069,
+      "longitude": 8.3995,
+      "hints": [
+        "Ich wurde 1950 gegründet.",
+        "Mein Gebäude ist ein ehemaliges Residenzschloss.",
+        "Ich bin nicht zu verwechseln mit dem Bundesverfassungsgericht."
+      ],
+      "wikipedia": "https://de.wikipedia.org/wiki/Bundesgerichtshof",
+      "achievement": "Rechtskenner",
+      "points": 100,
+      "proximity": 100
+    },
+    {
+      "id": 13,
+      "city": "Karlsruhe",
+      "category": "Wissenschaft und Bildung",
+      "question": "Ich bin ein Museum im Schloss Karlsruhe und zeige die Kulturgeschichte von der Urzeit bis zur Gegenwart. Wer bin ich?",
+      "answer": "Badisches Landesmuseum",
       "latitude": 49.0140,
       "longitude": 8.4043,
+      "hints": [
+        "Ich befinde mich im Schloss Karlsruhe.",
+        "Meine Sammlung umfasst Exponate aus der Vor- und Frühgeschichte.",
+        "Ich biete auch Ausstellungen zu Archäologie und Kunst."
+      ],
+      "wikipedia": "https://de.wikipedia.org/wiki/Badisches_Landesmuseum",
+      "achievement": "Geschichtskenner",
+      "points": 100,
+      "proximity": 100
+    },
+    {
+      "id": 14,
+      "city": "Karlsruhe",
+      "category": "Historische Gebäude",
+      "question": "Ich bin der älteste Stadtteil von Karlsruhe mit malerischen Gassen und Fachwerkhäusern. Wer bin ich?",
+      "answer": "Durlach Altstadt",
+      "latitude": 49.0043,
+      "longitude": 8.4672,
+      "hints": [
+        "Ich war einst eine eigenständige Stadt.",
+        "Ich bin bekannt für meinen Wochenmarkt und traditionelle Feste.",
+        "In meinem Zentrum steht die Karlsburg."
+      ],
+      "wikipedia": "https://de.wikipedia.org/wiki/Durlach",
+      "achievement": "Altstadt-Entdecker",
+      "points": 100,
+      "proximity": 100
+    },
+    {
+      "id": 15,
+      "city": "Karlsruhe",
+      "category": "Historische Gebäude",
+      "question": "Ich bin ein historisches Gebäude in Karlsruhe, das heute als Kulturzentrum mit Bibliothek und Museum dient. Wer bin ich?",
+      "answer": "Prinz-Max-Palais",
+      "latitude": 49.0133,
+      "longitude": 8.3952,
+      "hints": [
+        "Ich wurde nach Prinz Max von Baden benannt.",
+        "Ich beherberge das Stadtmuseum Karlsruhe.",
+        "Mein Gebäude ist ein Beispiel für Neorenaissance-Architektur."
+      ],
+      "wikipedia": "https://de.wikipedia.org/wiki/Prinz-Max-Palais",
+      "achievement": "Kulturfreund",
+      "points": 100,
+      "proximity": 100
+    },
+    {
+      "id": 16,
+      "city": "Karlsruhe",
+      "category": "Sonstige Orte",
+      "question": "Ich bin die letzte Keramikmanufaktur Deutschlands, gegründet 1901. Meine Produkte schmücken viele Orte in Karlsruhe. Wer bin ich?",
+      "answer": "Majolika Manufaktur Karlsruhe",
+      "latitude": 49.0098,
+      "longitude": 8.3946,
+      "hints": [
+        "Ich bin bekannt für meine blau-weißen Keramikarbeiten.",
+        "Ich liege am Rande des Hardtwalds.",
+        "In meinem Museum kannst du Werke berühmter Künstler sehen."
+      ],
+      "wikipedia": "https://de.wikipedia.org/wiki/Staatliche_Majolika_Manufaktur_Karlsruhe",
+      "achievement": "Keramikliebhaber",
+      "points": 100,
+      "proximity": 100
+    },
+    {
+      "id": 17,
+      "city": "Karlsruhe",
+      "category": "Wissenschaft und Bildung",
+      "question": "Ich bin eine renommierte Universität und Forschungseinrichtung, bekannt für Technik und Naturwissenschaften. Wer bin ich?",
+      "answer": "Karlsruher Institut für Technologie",
+      "latitude": 49.0119,
+      "longitude": 8.4120,
+      "hints": [
+        "Ich entstand 2009 durch die Fusion von Universität und Forschungszentrum.",
+        "Mein Motto ist 'Die Forschungsuniversität in der Helmholtz-Gemeinschaft'.",
+        "Ich bin eine der größten Forschungseinrichtungen Deutschlands."
+      ],
+      "wikipedia": "https://de.wikipedia.org/wiki/Karlsruher_Institut_für_Technologie",
+      "achievement": "Wissenschaftsfan",
+      "points": 100,
+      "proximity": 100
+    },
+    {
+      "id": 18,
+      "city": "Karlsruhe",
+      "category": "Wissenschaft und Bildung",
+      "question": "In meinen Hallen kannst du Dinosaurier treffen und mehr über die Natur erfahren. Ich liege zentral in der Stadt und biete Ausstellungen zu Tieren und Geologie. Wer bin ich?",
+      "answer": "Staatliches Museum für Naturkunde Karlsruhe",
+      "latitude": 49.0091,
+      "longitude": 8.4037,
+      "hints": [
+        "Ich bin eines der größten Naturkundemuseen in Deutschland.",
+        "Meine Dauerausstellung umfasst Themen von der Urzeit bis zur Gegenwart.",
+        "Ich habe ein Vivarium mit lebenden Tieren."
+      ],
+      "wikipedia": "https://de.wikipedia.org/wiki/Staatliches_Museum_für_Naturkunde_Karlsruhe",
+      "achievement": "Naturforscher",
+      "points": 100,
+      "proximity": 100
+    },
+    {
+      "id": 19,
+      "city": "Karlsruhe",
+      "category": "Religiöse Stätten",
+      "question": "Ich bin das älteste Kirchengebäude der Stadt, versteckt zwischen den modernen Gebäuden des Zentrums. Wer bin ich?",
+      "answer": "Kleine Kirche Karlsruhe",
+      "latitude": 49.0090,
+      "longitude": 8.4042,
+      "hints": [
+        "Ich wurde im 18. Jahrhundert erbaut.",
+        "Ich liege direkt neben dem Marktplatz.",
+        "Mein schlichter Baustil unterscheidet mich von anderen Kirchen."
+      ],
+      "wikipedia": "https://de.wikipedia.org/wiki/Kleine_Kirche_(Karlsruhe)",
+      "achievement": "Geschichtsfreund",
+      "points": 100,
+      "proximity": 100
+    },
+    {
+      "id": 20,
+      "city": "Karlsruhe",
+      "category": "Verkehrsknotenpunkte",
+      "question": "Ich bin ein zentraler Platz in Karlsruhe, benannt nach einem Kontinent. Hier treffen sich viele Straßenbahnlinien. Wer bin ich?",
+      "answer": "Europaplatz Karlsruhe",
+      "latitude": 49.0070,
+      "longitude": 8.4000,
+      "hints": [
+        "Ich war früher als 'Ludwigsplatz' bekannt.",
+        "Ich bin ein wichtiger Knotenpunkt für den öffentlichen Nahverkehr.",
+        "Rund um mich gibt es viele Einkaufsmöglichkeiten."
+      ],
+      "wikipedia": "https://de.wikipedia.org/wiki/Europaplatz_(Karlsruhe)",
+      "achievement": "Stadtzentrum-Kenner",
+      "points": 100,
+      "proximity": 100
+    },
+    {
+      "id": 21,
+      "city": "Stuttgart",
+      "category": "Sonstige Orte",
+      "question": "Ich bin der erste Fernsehturm der Welt, erbaut aus Stahlbeton, und biete eine grandiose Aussicht über Stuttgart. Wer bin ich?",
+      "answer": "Fernsehturm Stuttgart",
+      "latitude": 48.7563,
+      "longitude": 9.1916,
+      "hints": [
+        "Ich wurde 1956 eröffnet.",
+        "Ich bin 217 Meter hoch.",
+        "Ich stehe auf dem Hohen Bopser im Süden der Stadt."
+      ],
+      "wikipedia": "https://de.wikipedia.org/wiki/Fernsehturm_Stuttgart",
+      "achievement": "Höhenbezwinger",
+      "points": 100,
+      "proximity": 100
+    },
+    {
+      "id": 22,
+      "city": "Stuttgart",
+      "category": "Wissenschaft und Bildung",
+      "question": "In mir wird die Geschichte eines weltberühmten Automobilherstellers lebendig. Auf neun Ebenen zeige ich über 160 Fahrzeuge. Wer bin ich?",
+      "answer": "Mercedes-Benz Museum",
+      "latitude": 48.7881,
+      "longitude": 9.2332,
+      "hints": [
+        "Ich wurde 2006 eröffnet.",
+        "Meine Architektur ist von der Doppelhelix inspiriert.",
+        "Ich liege neben der Mercedes-Benz Arena."
+      ],
+      "wikipedia": "https://de.wikipedia.org/wiki/Mercedes-Benz_Museum",
+      "achievement": "Automobilenthusiast",
+      "points": 100,
+      "proximity": 100
+    },
+    {
+      "id": 23,
+      "city": "Stuttgart",
+      "category": "Wissenschaft und Bildung",
+      "question": "Ich zeige die Geschichte einer legendären Sportwagenmarke mit über 80 ausgestellten Fahrzeugen. Wer bin ich?",
+      "answer": "Porsche Museum",
+      "latitude": 48.8345,
+      "longitude": 9.1531,
+      "hints": [
+        "Ich wurde 2009 eröffnet.",
+        "Mein Gebäude schwebt scheinbar über dem Boden.",
+        "Ich befinde mich im Stadtteil Zuffenhausen."
+      ],
+      "wikipedia": "https://de.wikipedia.org/wiki/Porsche-Museum",
+      "achievement": "Sportwagenfan",
+      "points": 100,
+      "proximity": 100
+    },
+    {
+      "id": 24,
+      "city": "Stuttgart",
+      "category": "Verkehrsknotenpunkte",
+      "question": "Ich bin der größte Platz in Stuttgart, umgeben von historischen Gebäuden und einem Schloss. Hier trifft man sich zum Verweilen. Wer bin ich?",
+      "answer": "Schlossplatz Stuttgart",
+      "latitude": 48.7785,
+      "longitude": 9.1799,
+      "hints": [
+        "In meiner Mitte steht die Jubiläumssäule.",
+        "Ich werde von Neuem und Altem Schloss flankiert.",
+        "Hier finden oft Veranstaltungen und Konzerte statt."
+      ],
+      "wikipedia": "https://de.wikipedia.org/wiki/Schlossplatz_(Stuttgart)",
+      "achievement": "Platzkenner",
+      "points": 100,
+      "proximity": 100
+    },
+    {
+      "id": 25,
+      "city": "Stuttgart",
+      "category": "Parks und Natur",
+      "question": "Ich bin ein zoologisch-botanischer Garten im maurischen Stil, der einzige seiner Art in Deutschland. Wer bin ich?",
+      "answer": "Wilhelma",
+      "latitude": 48.8062,
+      "longitude": 9.2037,
+      "hints": [
+        "Ich wurde im 19. Jahrhundert als königlicher Privatgarten angelegt.",
+        "Mein Name leitet sich vom König Wilhelm I. von Württemberg ab.",
+        "Ich beherberge sowohl Tiere als auch exotische Pflanzen."
+      ],
+      "wikipedia": "https://de.wikipedia.org/wiki/Wilhelma",
+      "achievement": "Natur- und Tierfreund",
+      "points": 100,
       "proximity": 100
     }
   ]
 }
-

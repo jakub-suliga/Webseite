@@ -1,8 +1,95 @@
+/* Allgemeine Stile */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* Header und Footer */
+header, footer {
+    background-color: #f8f9fa;
+    padding: 20px;
+}
+
+header h1, footer p {
+    margin: 0;
+}
+
+/* Hauptinhalt auf der Startseite */
+main.container {
+    padding: 20px;
+}
+
+main h2 {
+    margin-top: 40px;
+}
+
+/* Buttons auf der Startseite */
+.btn {
+    display: inline-block;
+    font-weight: 400;
+    color: #ffffff;
+    text-align: center;
+    vertical-align: middle;
+    user-select: none;
+    background-color: #007bff;
+    border: 1px solid transparent;
+    padding: 0.75rem 1.25rem;
+    font-size: 1.25rem;
+    line-height: 1.5;
+    border-radius: 0.3rem;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background-color: #0056b3;
+}
+
+.btn-secondary {
+    background-color: #6c757d;
+    margin-top: 10px;
+}
+
+.btn-secondary:hover {
+    background-color: #5a6268;
+}
+
+/* Wetter-Icon */
+.weather-icon {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.weather-icon img {
+    width: 50px;
+    height: 50px;
+}
+
+/* Anzeige der Punkte und gelösten Rätsel */
+.stats {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.stats p {
+    margin: 5px 0;
+    font-size: 1.2em;
+}
+
+/* Achievements-Seite */
+.achievement {
+    background-color: #f8f9fa;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    font-size: 1.2em;
+}
+
 /* Vollbildkarte */
 html, body {
     height: 100%;
-    margin: 0;
-    padding: 0;
 }
 
 #map {
@@ -11,7 +98,7 @@ html, body {
     position: absolute;
     top: 0;
     left: 0;
-    z-index: 1; /* Karte liegt unter den anderen Elementen */
+    z-index: 1;
 }
 
 /* Rätselcontainer */
@@ -25,14 +112,19 @@ html, body {
     border-radius: 10px;
     text-align: center;
     max-width: 80%;
-    z-index: 2; /* Rätselcontainer über der Karte */
+    z-index: 2;
 }
 
-/* Hinweis-Button */
-.round-button {
+/* Hinweistext */
+#currentHint {
+    margin-top: 5px;
+    font-style: italic;
+}
+
+/* Buttons auf der Kartenseite */
+.round-button, .small-button {
     position: absolute;
     bottom: 20px;
-    right: 20px;
     width: 60px;
     height: 60px;
     background-color: #007bff;
@@ -41,35 +133,113 @@ html, body {
     border: none;
     font-size: 24px;
     cursor: pointer;
-    z-index: 2; /* Button über der Karte */
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.round-button:active {
+.round-button:active, .small-button:active {
     background-color: #0056b3;
 }
 
-/* Vibrationshinweis-Button */
+#hintButton {
+    right: 20px;
+}
+
 .small-button {
-    position: absolute;
-    bottom: 20px;
-    left: 20px;
     width: 50px;
     height: 50px;
-    background-color: #28a745;
-    color: white;
-    border-radius: 50%;
-    border: none;
     font-size: 20px;
-    cursor: pointer;
-    z-index: 2; /* Button über der Karte */
+    left: 20px;
+    background-color: #28a745;
 }
 
 .small-button:active {
     background-color: #1e7e34;
 }
 
-/* Hinweistext */
-#currentHint {
-    margin-top: 5px;
-    font-style: italic;
+.new-riddle-button {
+    left: 20px;
+    bottom: 80px;
+}
+
+/* Menü für die Hinweise */
+.hint-menu {
+    display: none;
+    position: absolute;
+    bottom: 90px;
+    right: 20px;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 10px;
+    padding: 10px;
+    z-index: 2;
+}
+
+.hint-menu.show {
+    display: block;
+}
+
+.hint-menu button {
+    display: block;
+    width: 100%;
+    margin-bottom: 5px;
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
+
+.hint-menu button:disabled {
+    background-color: gray;
+}
+
+/* Deaktivierte Buttons */
+button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Overlay für Erfolgsmeldungen */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.7);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.message-box {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.message-box h2 {
+    margin-top: 0;
+}
+
+/* Responsives Design */
+@media (max-width: 768px) {
+    #riddleContainer {
+        max-width: 90%;
+        font-size: 0.9em;
+    }
+
+    .round-button, .small-button {
+        width: 50px;
+        height: 50px;
+        font-size: 20px;
+    }
+
+    #hintButton {
+        right: 20px;
+    }
 }
