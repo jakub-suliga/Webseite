@@ -303,14 +303,14 @@ footer.container {
 /* Responsive Anpassung für kleinere Bildschirme */
 @media (max-width: 768px) {
     .background-text {
-        font-size: 2.7em;
+        font-size: 2.5em;
         right: 10px;
     }
 }
 
 @media (max-width: 480px) {
     .background-text {
-        font-size: 1em;
+        font-size: 0.5em;
         right: 5px;
     }
 }
