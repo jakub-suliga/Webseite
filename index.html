@@ -7,68 +7,31 @@
     <link rel="stylesheet" href="Styles/styles.css">
 </head>
 <body>
+    <!-- Hintergrundbild -->
+    <div class="background-image"></div>
 
-<div id="weatherIcon" class="weather-icon"></div>
+    <main class="container text-center my-5">
+        <!-- Start-Button oben zentriert -->
+        <section class="my-5">
+            <button id="startButton" class="btn btn-primary btn-lg" aria-label="Schatzsuche starten">Schatzsuche starten</button>
+        </section>
 
-<header class="container text-center my-5">
-    <h1>Willkommen zur interaktiven Schatzsuche</h1>
-    <p>Erkunde die Stadt, löse Rätsel und finde versteckte Schätze!</p>
-</header>
+        <!-- Link zur Einstellungsseite -->
+        <section class="my-5">
+            <a href="settings.html" class="btn btn-secondary" aria-label="Einstellungen">Einstellungen</a>
+        </section>
 
-<!-- Anzeige der Punkte und gelösten Rätsel -->
-<div class="stats">
-    <p>Gesammelte Punkte: <span id="totalPoints">0</span></p>
-    <p>Gelöste Rätsel: <span id="solvedRiddlesCount">0</span></p>
-</div>
+        <!-- Weitere Inhalte -->
+        <section class="my-5">
+            <a href="achievements.html" class="btn btn-secondary" aria-label="Meine Achievements">Meine Achievements</a>
+        </section>
+    </main>
 
-<main class="container text-center">
-    <section>
-        <h2>Wie funktioniert die Schatzsuche?</h2>
-        <p>Du erhältst ein Rätsel, das dich zu einem bestimmten Ort führt. Wenn du dich dem Schatz näherst, erhältst du Hinweise. Sammle Punkte und Abzeichen für gefundene Schätze!</p>
-    </section>
+    <footer class="container text-center my-5" role="contentinfo">
+        <p>&copy; 2024 Interaktive Schatzsuche</p>
+    </footer>
 
-    <!-- Erklärung der Hinweise -->
-    <section class="hint-explanation">
-        <h3>Hinweise</h3>
-        <p>Während des Spiels stehen dir verschiedene Hinweise zur Verfügung:</p>
-        <ul>
-            <li><strong>Text-Hinweis:</strong> Gibt dir zusätzliche Informationen zum Rätsel.</li>
-            <li><strong>Richtungs-Hinweis:</strong> Zeigt dir die Richtung zum Ziel auf der Karte an.</li>
-            <li><strong>Radius-Hinweis:</strong> Zeichnet einen Kreis um den Zielort, der dir einen Anhaltspunkt gibt.</li>
-            <li><strong>Vibrations-Hinweis:</strong> Lässt dein Gerät vibrieren; die Dauer hängt von deiner Entfernung zum Ziel ab.</li>
-        </ul>
-        <p>Beachte, dass die Nutzung von Hinweisen deine Punktzahl verringert!</p>
-    </section>
-
-    <!-- Kategorieauswahl -->
-    <section class="category-selection my-5">
-        <h3>Wähle die Kategorien aus, die du spielen möchtest:</h3>
-        <form id="categoryForm">
-            <label><input type="checkbox" name="category" value="Historische Gebäude" aria-label="Historische Gebäude"> Historische Gebäude</label><br>
-            <label><input type="checkbox" name="category" value="Parks und Natur" aria-label="Parks und Natur"> Parks und Natur</label><br>
-            <label><input type="checkbox" name="category" value="Wissenschaft und Bildung" aria-label="Wissenschaft und Bildung"> Wissenschaft und Bildung</label><br>
-            <label><input type="checkbox" name="category" value="Verkehrsknotenpunkte" aria-label="Verkehrsknotenpunkte"> Verkehrsknotenpunkte</label><br>
-            <label><input type="checkbox" name="category" value="Religiöse Stätten" aria-label="Religiöse Stätten"> Religiöse Stätten</label><br>
-            <label><input type="checkbox" name="category" value="Sonstige Orte" aria-label="Sonstige Orte"> Sonstige Orte</label><br>
-            <label><input type="checkbox" name="category" value="Alle" checked aria-label="Alle Kategorien"> Alle Kategorien</label>
-        </form>
-    </section>
-
-    <section class="my-5">
-        <button id="startButton" class="btn btn-primary btn-lg" aria-label="Schatzsuche starten">Schatzsuche starten</button>
-    </section>
-
-    <!-- Link zur Achievements-Seite -->
-    <section class="my-5">
-        <a href="achievements.html" class="btn btn-secondary" aria-label="Meine Achievements">Meine Achievements</a>
-    </section>
-</main>
-
-<footer class="container text-center my-5" role="contentinfo">
-    <p>&copy; 2024 Interaktive Schatzsuche</p>
-</footer>
-
-<!-- JavaScript-Dateien -->
-<script src="Scripts/main.js"></script>
+    <!-- JavaScript-Dateien -->
+    <script src="Scripts/main.js"></script>
 </body>
 </html>

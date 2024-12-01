@@ -256,3 +256,13 @@ button:disabled {
         right: 20px;
     }
 }
+.background-image {
+    background-image: url('Images/dein-bild.jpg'); /* Ersetze 'dein-bild.jpg' durch deinen Bildnamen */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    z-index: -1;
+}
