@@ -1,42 +1,14 @@
 
-/* Anpassung des Rätselcontainers */
-#riddleContainer {
-    font-size: 1rem; /* Verkleinern des Schriftgrads */
+/* Global Styles */
+body, html {
+    height: 100%;
+    margin: 0;
+    overflow-x: hidden;
 }
 
-/* Sicherstellen, dass die Karte den gesamten Hintergrund einnimmt */
+/* Karte */
 #map {
     height: 100vh;
-    width: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-}
-
-/* Wetter-Icon */
-.weather-icon {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-}
-
-.weather-icon img {
-    width: 50px;
-    height: 50px;
-}
-
-
-/* Achievements-Seite */
-.achievement {
-    background-color: #f8f9fa;
-    padding: 10px;
-    margin-bottom: 10px;
-    border-radius: 5px;
-    font-size: 1.2em;
-}
-
-#map {
-    height: 100%;
     width: 100%;
     position: absolute;
     top: 0;
@@ -56,12 +28,34 @@
     text-align: center;
     max-width: 80%;
     z-index: 2;
+    font-size: 1rem; /* Verkleinern des Schriftgrads */
 }
 
 /* Hinweistext */
 #currentHint {
     margin-top: 5px;
     font-style: italic;
+}
+
+/* Wetter-Icon */
+.weather-icon {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.weather-icon img {
+    width: 50px;
+    height: 50px;
+}
+
+/* Achievements-Seite */
+.achievement {
+    background-color: #f8f9fa;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    font-size: 1.2em;
 }
 
 /* Buttons auf der Kartenseite */
@@ -169,58 +163,31 @@ button:disabled {
     margin-top: 0;
 }
 
-/* Responsives Design */
-@media (max-width: 768px) {
-    #riddleContainer {
-        max-width: 90%;
-        font-size: 0.9em;
-    }
-
-    .round-button, .small-button {
-        width: 50px;
-        height: 50px;
-        font-size: 20px;
-    }
-
-    #hintButton {
-        right: 20px;
-    }
-}
-/* Stellt sicher, dass der Body und HTML die volle Höhe einnehmen */
-body, html {
-    height: 100%;
-    margin: 0;
-    overflow-x: hidden;
-    
-    /* Entferne padding-top, da die Navbar jetzt scrollt */
-}
-
-/* Hintergrund-Container fixieren */
+/* Hintergrund-Container */
 .background-container {
-    /* Entferne die feste Positionierung */
     position: relative;
     width: 100%;
-    height: 100vh; /* Vollständige Fensterhöhe */
+    height: 100vh;
     background-image: url("../Images/background.png");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    z-index: -1; /* Hintergrund hinter anderem Inhalt */
+    z-index: -1;
 }
 
-/* Hauptinhalt ohne Mindesthöhe */
+/* Hauptinhalt */
 .content {
-    padding: 20px; /* Beispiel für Innenabstand */
+    padding: 20px;
     background-color: black;
     color: white;
 }
 
-/* Footer bleibt am Ende der Seite */
+/* Footer */
 footer.container {
-    /* Optional: Styling für den Footer */
     background-color: #f8f9fa;
-    min-height: 100vh;
 }
+
+/* Hintergrundbild */
 .background-image {
     position: absolute;
     top: 50%;
@@ -234,8 +201,9 @@ footer.container {
     z-index: -1;
 }
 
+/* Navbar */
 .navbar {
-    position: fixed; /* Entferne dies, um die Navbar scrollen zu lassen */
+    position: absolute;
     width: 100%;
     height: 60px; /* Höhe der Navbar */
     display: flex;
@@ -290,8 +258,8 @@ footer.container {
 /* Hintergrund-Text Styling */
 .background-text {
     position: absolute;
-    top: 50%;
-    left: 15%; /* Abstand vom rechten Rand */
+    top: 55%;
+    left: 10%; /* Abstand vom rechten Rand */
     transform: translateY(-50%);
     color: white;
     font-size: 250%;
@@ -300,3 +268,16 @@ footer.container {
     white-space: nowrap;
 }
 
+/* Responsives Design */
+@media (max-width: 768px) {
+    #riddleContainer {
+        max-width: 90%;
+        font-size: 0.9em;
+    }
+
+    .round-button, .small-button {
+        width: 50px;
+        height: 50px;
+        font-size: 20px;
+    }
+}
