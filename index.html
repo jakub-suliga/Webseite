@@ -5,7 +5,7 @@
     <title>Interaktive Schatzsuche</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Eigene CSS-Datei -->
-    <link rel="stylesheet" href="styles/styles.css">
+    <link rel="stylesheet" href="Styles/styles.css">
 </head>
 <body>
 <!-- Wetter-Icon -->
@@ -45,27 +45,27 @@
     <section class="category-selection my-5">
         <h3>Wähle die Kategorien aus, die du spielen möchtest:</h3>
         <form id="categoryForm">
-            <label><input type="checkbox" name="category" value="Historische Gebäude"> Historische Gebäude</label><br>
-            <label><input type="checkbox" name="category" value="Parks und Natur"> Parks und Natur</label><br>
-            <label><input type="checkbox" name="category" value="Wissenschaft und Bildung"> Wissenschaft und Bildung</label><br>
-            <label><input type="checkbox" name="category" value="Verkehrsknotenpunkte"> Verkehrsknotenpunkte</label><br>
-            <label><input type="checkbox" name="category" value="Religiöse Stätten"> Religiöse Stätten</label><br>
-            <label><input type="checkbox" name="category" value="Sonstige Orte"> Sonstige Orte</label><br>
-            <label><input type="checkbox" name="category" value="Alle" checked> Alle Kategorien</label>
+            <label><input type="checkbox" name="category" value="Historische Gebäude" aria-label="Historische Gebäude"> Historische Gebäude</label><br>
+            <label><input type="checkbox" name="category" value="Parks und Natur" aria-label="Parks und Natur"> Parks und Natur</label><br>
+            <label><input type="checkbox" name="category" value="Wissenschaft und Bildung" aria-label="Wissenschaft und Bildung"> Wissenschaft und Bildung</label><br>
+            <label><input type="checkbox" name="category" value="Verkehrsknotenpunkte" aria-label="Verkehrsknotenpunkte"> Verkehrsknotenpunkte</label><br>
+            <label><input type="checkbox" name="category" value="Religiöse Stätten" aria-label="Religiöse Stätten"> Religiöse Stätten</label><br>
+            <label><input type="checkbox" name="category" value="Sonstige Orte" aria-label="Sonstige Orte"> Sonstige Orte</label><br>
+            <label><input type="checkbox" name="category" value="Alle" checked aria-label="Alle Kategorien"> Alle Kategorien</label>
         </form>
     </section>
 
     <section class="my-5">
-        <button id="startButton" class="btn btn-primary btn-lg">Schatzsuche starten</button>
+        <button id="startButton" class="btn btn-primary btn-lg" aria-label="Schatzsuche starten">Schatzsuche starten</button>
     </section>
 
     <!-- Link zur Achievements-Seite -->
     <section class="my-5">
-        <a href="achievements.html" class="btn btn-secondary">Meine Achievements</a>
+        <a href="achievements.html" class="btn btn-secondary" aria-label="Meine Achievements">Meine Achievements</a>
     </section>
 </main>
 
-<footer class="container text-center my-5">
+<footer class="container text-center my-5" role="contentinfo">
     <p>&copy; 2024 Interaktive Schatzsuche</p>
 </footer>
 
