@@ -9,204 +9,53 @@
   <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 
   <!-- Eigene CSS-Datei -->
-  <link rel="stylesheet" href="styles/styles.css">
+  <link rel="stylesheet" href="Styles/styles.css">
 
   <!-- Optional: Bootstrap CSS für Styling (falls verwendet) -->
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-
-  <style>
-    /* Stellen Sie sicher, dass die Karte den gesamten verfügbaren Raum einnimmt */
-    html, body {
-      height: 100%;
-      margin: 0;
-      padding: 0;
-    }
-
-    #map {
-      height: 100%;
-      width: 100%;
-      position: absolute;
-      top: 0;
-      left: 0;
-    }
-
-    /* Stil für den Rätselcontainer */
-    #riddleContainer {
-      position: absolute;
-      top: 10px;
-      left: 50%;
-      transform: translateX(-50%);
-      background-color: rgba(248, 249, 250, 0.9);
-      padding: 15px 20px;
-      border-radius: 8px;
-      max-width: 90%;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.3);
-      z-index: 1000;
-    }
-
-    /* Stil für die Hinweismenü */
-    .hint-menu {
-      display: none;
-      position: absolute;
-      top: 80px;
-      right: 20px;
-      background-color: white;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      padding: 10px;
-      z-index: 1000;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.3);
-    }
-
-    .hint-menu.show {
-      display: block;
-    }
-
-    /* Stil für die runden Buttons */
-    .round-button {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      width: 60px;
-      height: 60px;
-      background-color: #007bff;
-      color: white;
-      border: none;
-      border-radius: 50%;
-      font-size: 24px;
-      cursor: pointer;
-      z-index: 1000;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.3);
-    }
-
-    .small-button {
-      position: fixed;
-      bottom: 100px;
-      right: 20px;
-      width: 40px;
-      height: 40px;
-      background-color: #28a745;
-      color: white;
-      border: none;
-      border-radius: 50%;
-      font-size: 18px;
-      cursor: pointer;
-      z-index: 1000;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.3);
-    }
-
-    .new-riddle-button {
-      bottom: 60px;
-      background-color: #ffc107;
-    }
-
-    /* Stil für das Overlay */
-    .overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0,0,0,0.7);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 2000;
-    }
-
-    .message-box {
-      background: white;
-      padding: 30px;
-      border-radius: 8px;
-      text-align: center;
-      max-width: 90%;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.3);
-    }
-
-    .points-display {
-      background: rgba(255, 255, 255, 0.8);
-      padding: 10px;
-      border-radius: 8px;
-      font-weight: bold;
-      position: absolute;
-      top: 10px;
-      right: 20px;
-      z-index: 1000;
-    }
-
-    /* Anpassung des Rätseltexts */
-    #currentRiddle {
-      font-size: 1rem; /* Verkleinert von wahrscheinlich größerem Wert */
-    }
-
-    /* Responsive Anpassungen */
-    @media (max-width: 768px) {
-      #riddleContainer {
-        width: 90%;
-        left: 5%;
-        transform: none;
-      }
-
-      .hint-menu {
-        top: 100px;
-        right: 10px;
-      }
-
-      .round-button {
-        width: 50px;
-        height: 50px;
-        font-size: 20px;
-      }
-
-      .small-button {
-        width: 35px;
-        height: 35px;
-        font-size: 16px;
-      }
-    }
-  </style>
 </head>
 <body>
-<!-- Karte -->
-<div id="map"></div>
+  <!-- Karte -->
+  <div id="map"></div>
 
-<!-- Punkteanzeige -->
-<div class="points-display">
-  Punkte: <span id="pointsCount">0</span>
-</div>
+  <!-- Punkteanzeige -->
+  <div class="points-display">
+    Punkte: <span id="pointsCount">0</span>
+  </div>
 
-<!-- Aktuelles Rätsel -->
-<div id="riddleContainer" class="container">
-  <h2 id="currentRiddle">Lade Rätsel...</h2>
-  <p id="currentHint"></p>
-  <button id="showSolutionButton" class="btn btn-info mt-3">Lösung anzeigen</button>
-  <p id="riddleAnswer" style="display: none; font-weight: bold; margin-top: 10px;">Antwort: <span id="answerText"></span></p>
-</div>
+  <!-- Aktuelles Rätsel -->
+  <div id="riddleContainer" class="container">
+    <h2 id="currentRiddle">Lade Rätsel...</h2>
+    <p id="currentHint"></p>
+    <button id="showSolutionButton" class="btn btn-info mt-3">Lösung anzeigen</button>
+    <p id="riddleAnswer">Antwort: <span id="answerText"></span></p>
+  </div>
 
-<!-- Kombinierter Hinweis-Button -->
-<button id="hintButton" class="round-button">💡</button>
-<div id="hintMenu" class="hint-menu">
-  <button id="textHintButton" class="btn btn-secondary btn-sm mb-2">Text-Hinweis</button><br>
-  <button id="directionHintButton" class="btn btn-secondary btn-sm mb-2">Richtungs-Hinweis</button><br>
-  <button id="radiusHintButton" class="btn btn-secondary btn-sm">Radius-Hinweis</button>
-</div>
+  <!-- Kombinierter Hinweis-Button -->
+  <button id="hintButton" class="round-button">💡</button>
+  <div id="hintMenu" class="hint-menu">
+    <button id="textHintButton" class="btn btn-secondary btn-sm mb-2">Text-Hinweis</button><br>
+    <button id="directionHintButton" class="btn btn-secondary btn-sm mb-2">Richtungs-Hinweis</button><br>
+    <button id="radiusHintButton" class="btn btn-secondary btn-sm">Radius-Hinweis</button>
+  </div>
 
-<!-- Vibrationshinweis-Button -->
-<button id="vibrateButton" class="small-button" title="Vibrationshinweis">📳</button>
+  <!-- Vibrationshinweis-Button -->
+  <button id="vibrateButton" class="small-button" title="Vibrationshinweis">📳</button>
 
-<!-- Neues Rätsel Button -->
-<button id="newRiddleButton" class="small-button new-riddle-button" title="Neues Rätsel">🔄</button>
+  <!-- Neues Rätsel Button -->
+  <button id="newRiddleButton" class="small-button new-riddle-button" title="Neues Rätsel">🔄</button>
 
-<!-- Leaflet JS für die Karte -->
-<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <!-- Leaflet JS für die Karte -->
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 
-<!-- Leaflet.PolylineDecorator für Pfeile -->
-<script src="https://unpkg.com/leaflet-polylinedecorator@1.6.0/dist/leaflet.polylineDecorator.js"></script>
+  <!-- Leaflet.PolylineDecorator für Pfeile -->
+  <script src="https://unpkg.com/leaflet-polylinedecorator@1.6.0/dist/leaflet.polylineDecorator.js"></script>
 
-<!-- Eigene Skripte -->
-<script src="Scripts/Api/maps.js"></script>
+  <!-- Eigene Skripte -->
+  <script src="Scripts/Api/maps.js"></script>
 </body>
 </html>
+
 
 
 

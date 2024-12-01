@@ -1,8 +1,8 @@
-
 /* Global Styles */
-body, html {
+html, body {
     height: 100%;
     margin: 0;
+    padding: 0;
     overflow-x: hidden;
 }
 
@@ -16,25 +16,47 @@ body, html {
     z-index: 1;
 }
 
+/* Punkteanzeige */
+.points-display {
+    background: rgba(255, 255, 255, 0.8);
+    padding: 10px;
+    border-radius: 8px;
+    font-weight: bold;
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    z-index: 1000;
+}
+
 /* Rätselcontainer */
 #riddleContainer {
     position: absolute;
     top: 10px;
     left: 50%;
     transform: translateX(-50%);
-    background-color: rgba(255, 255, 255, 0.9);
-    padding: 10px 15px;
+    background-color: rgba(248, 249, 250, 0.9);
+    padding: 15px 20px;
     border-radius: 10px;
-    text-align: center;
     max-width: 80%;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
     z-index: 2;
+    text-align: center;
     font-size: 1rem; /* Verkleinern des Schriftgrads */
 }
 
-/* Hinweistext */
+#currentRiddle {
+    font-size: 1rem;
+}
+
 #currentHint {
     margin-top: 5px;
     font-style: italic;
+}
+
+#riddleAnswer {
+    display: none;
+    font-weight: bold;
+    margin-top: 10px;
 }
 
 /* Wetter-Icon */
@@ -58,50 +80,56 @@ body, html {
     font-size: 1.2em;
 }
 
-/* Buttons auf der Kartenseite */
+/* Buttons */
 .round-button, .small-button {
-    position: absolute;
-    bottom: 20px;
-    width: 60px;
-    height: 60px;
+    position: fixed;
     background-color: #007bff;
     color: white;
-    border-radius: 50%;
     border: none;
-    font-size: 24px;
+    border-radius: 50%;
     cursor: pointer;
-    z-index: 2;
+    z-index: 1000;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.round-button:active, .small-button:active {
-    background-color: #0056b3;
-}
-
-#hintButton {
+.round-button {
+    bottom: 20px;
     right: 20px;
+    width: 60px;
+    height: 60px;
+    font-size: 24px;
 }
 
 .small-button {
     width: 50px;
     height: 50px;
     font-size: 20px;
-    left: 20px;
+}
+
+.small-button#vibrateButton {
+    bottom: 100px;
+    right: 20px;
     background-color: #28a745;
 }
 
-.small-button:active {
+.small-button#vibrateButton:active {
     background-color: #1e7e34;
 }
 
-.new-riddle-button {
-    left: 20px;
+.small-button#newRiddleButton {
     bottom: 80px;
+    right: 20px;
+    background-color: #ffc107;
 }
 
-/* Menü für die Hinweise */
+.round-button:active, .small-button:active {
+    background-color: #0056b3;
+}
+
+/* Hinweis-Menü */
 .hint-menu {
     display: none;
     position: absolute;
@@ -154,9 +182,11 @@ button:disabled {
 
 .message-box {
     background-color: white;
-    padding: 20px;
+    padding: 30px;
     border-radius: 10px;
     text-align: center;
+    max-width: 90%;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
 }
 
 .message-box h2 {
@@ -255,7 +285,7 @@ footer.container {
     background-color: #333;
 }
 
-/* Hintergrund-Text Styling */
+  /* Hintergrund-Text Styling */
 .background-text {
     position: absolute;
     top: 55%;
@@ -267,12 +297,13 @@ footer.container {
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
     white-space: nowrap;
 }
-
-/* Responsives Design */
+  /* Responsives Design */
 @media (max-width: 768px) {
     #riddleContainer {
         max-width: 90%;
         font-size: 0.9em;
+        left: 5%;
+        transform: none;
     }
 
     .round-button, .small-button {
@@ -280,6 +311,18 @@ footer.container {
         height: 50px;
         font-size: 20px;
     }
+
+    .small-button {
+        width: 35px;
+        height: 35px;
+        font-size: 16px;
+    }
+
+    .hint-menu {
+        bottom: 100px;
+        right: 10px;
+    }
+
     .background-text {
         font-size: 200%;
     }
