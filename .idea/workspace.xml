@@ -5,12 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="64d86377-39d9-4ee1-968a-5c4a93b5dd25" name="Changes" comment="Working website">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Scripts/Api/maps.js" beforeDir="false" afterPath="$PROJECT_DIR$/Scripts/Api/maps.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Scripts/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/Scripts/main.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Styles/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/Styles/styles.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/karte.html" beforeDir="false" afterPath="$PROJECT_DIR$/karte.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -82,6 +78,7 @@
       <workItem from="1732445951311" duration="964000" />
       <workItem from="1732450621151" duration="915000" />
       <workItem from="1732451557894" duration="5878000" />
+      <workItem from="1732544472895" duration="1563000" />
     </task>
     <task id="LOCAL-00001" summary="Added folder structure and implemented index.html">
       <option name="closed" value="true" />
