@@ -280,4 +280,7 @@ footer.container {
         height: 50px;
         font-size: 20px;
     }
+    .background-text {
+        font-size: 200%;
+    }
 }
