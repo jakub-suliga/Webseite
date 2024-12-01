@@ -294,7 +294,7 @@ footer.container {
     left: 10%; /* Abstand vom rechten Rand */
     transform: translateY(-50%);
     color: white;
-    font-size: 4em;
+    font-size: 3em;
     font-weight: bold;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
     white-space: nowrap;
@@ -303,14 +303,14 @@ footer.container {
 /* Responsive Anpassung für kleinere Bildschirme */
 @media (max-width: 768px) {
     .background-text {
-        font-size: 2.5em;
+        font-size: 2em;
         right: 10px;
     }
 }
 
 @media (max-width: 480px) {
     .background-text {
-        font-size: 0.5em;
+        font-size: 1em;
         right: 5px;
     }
 }
