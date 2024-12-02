@@ -20,6 +20,7 @@ document.addEventListener('DOMContentLoaded', function() {
     var totalRiddlesCount = 0;
     var selectedCategories = JSON.parse(localStorage.getItem('selectedCategories')) || [];
     var currentCity = null;
+    var treasureMarker = null;
 
     // Initialisierung der Karte
     var map = L.map('map').setView([49.0069, 8.4037], 18); // Karlsruhe als Standard
@@ -28,6 +29,15 @@ document.addEventListener('DOMContentLoaded', function() {
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '&copy; OpenStreetMap-Mitwirkende'
     }).addTo(map);
+
+    // Initialisierung der Punkteanzeige
+    var pointsDisplay = L.control({ position: 'topright' });
+
+    pointsDisplay.onAdd = function(map) {
+        var div = L.DomUtil.create('div', 'points-display');
+        div.innerHTML = 'Punkte: ' + points;
+        return div;
+    };
 
     // Punkteanzeige auf der Karte aktualisieren
     function updatePointsDisplay() {
@@ -102,9 +112,10 @@ document.addEventListener('DOMContentLoaded', function() {
         return null; // Stadt nicht gefunden
     }
 
+    
     // Funktion zum Laden der Rätsel
     function loadRiddles() {
-        fetch('data/riddles.json')
+        fetch("Data/riddles.json")
             .then(function(response) {
                 if (!response.ok) {
                     throw new Error('Netzwerkantwort war nicht ok');
@@ -134,7 +145,6 @@ document.addEventListener('DOMContentLoaded', function() {
                     currentRiddle = getRandomRiddle();
                     displayRiddle();
                     pointsDisplay.addTo(map);
-                    addTreasureMarker();
                 } else {
                     alert('Es gibt keine verfügbaren Rätsel für Ihren Standort und die ausgewählten Kategorien.');
                     window.location.href = 'index.html';
@@ -181,20 +191,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Funktion zum Hinzufügen des Schatz-Markers
     function addTreasureMarker() {
-        if (currentRiddle.marker) {
-            map.removeLayer(currentRiddle.marker);
+        if (treasureMarker) {
+            map.removeLayer(treasureMarker);
         }
-        currentRiddle.marker = L.marker([currentRiddle.latitude, currentRiddle.longitude], {icon: treasureIcon()}).addTo(map).bindPopup("Schatz").openPopup();
-    }
-
-    // Funktion zum Erstellen eines Schatz-Icons
-    function treasureIcon() {
-        return L.icon({
-            iconUrl: 'https://cdn-icons-png.flaticon.com/512/727/727245.png', // Beispiel-Icon-URL
-            iconSize: [32, 32],
-            iconAnchor: [16, 32],
-            popupAnchor: [0, -32]
-        });
+        treasureMarker = L.marker([currentRiddle.latitude, currentRiddle.longitude]).addTo(map);
+        treasureMarker.bindPopup('Schatz gefunden!');
     }
 
     // Berechnung der Punkte für das aktuelle Rätsel
@@ -395,6 +396,7 @@ document.addEventListener('DOMContentLoaded', function() {
         var penalty = 10; // Beispielhafte Strafe
         points = Math.max(points - penalty, 0);
         localStorage.setItem('points', points);
+        addTreasureMarker();
         updatePointsDisplay();
     });
 
