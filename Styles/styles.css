@@ -231,27 +231,25 @@ footer.container {
     z-index: -1;
 }
 
-/* Navbar */
+/* Navbar-Styling */
 .navbar {
-    position: absolute;
     width: 100%;
-    height: 60px; /* Höhe der Navbar */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: rgba(0, 0, 0, 0.5); /* Halbtransparentes Schwarz */
-    z-index: 10; /* Über dem Hintergrundbild */
+    height: 60px;
+    background: rgba(0, 0, 0, 0.5);
+    position: absolute; /* Ermöglicht absolute Positionierung der Kinder */
+    z-index: 10;
 }
 
-/* Play Button Styling */
+/* Play-Button Styling */
 .navbar-button.play-button {
     position: absolute;
     left: 50%;
+    top: 20%;
     transform: translateX(-50%);
     background-color: black;
     color: white;
     text-decoration: none;
-    padding: 10px 20px;
+    padding: 10px 20px; /* Abstand um den Text */
     border: none;
     border-radius: 5px;
     font-size: 16px;
@@ -259,24 +257,21 @@ footer.container {
     transition: background-color 0.3s;
 }
 
-.navbar-button.play-button:hover {
-    background-color: #333;
-}
-
-/* Settings Button Styling */
+/* Einstellungen-Button Styling */
 .navbar-button.settings-button {
     position: absolute;
     right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
     background-color: black;
     border: none;
     border-radius: 5px;
     padding: 10px;
     cursor: pointer;
-    transition: background-color 0.3s;
 }
 
 .navbar-button.settings-button img {
-    width: 24px; /* Größe des Icons */
+    width: 24px;
     height: 24px;
     filter: invert(100%); /* Optional: Icon-Farbe anpassen */
 }
@@ -285,7 +280,36 @@ footer.container {
     background-color: #333;
 }
 
-  /* Hintergrund-Text Styling */
+/* Dropdown-Inhalt */
+.navbar-button .dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 100%; /* Positioniert das Dropdown direkt unter dem Button */
+    background-color: black;
+    min-width: 160px;
+    z-index: 1;
+}
+
+/* Dropdown anzeigen bei Hover über den Settings-Button */
+.navbar-button.settings-button:hover .dropdown-content {
+    display: block;
+}
+
+/* Links im Dropdown */
+.navbar-button .dropdown-content a {
+    color: white;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+/* Hover-Effekt für Dropdown-Links */
+.navbar-button .dropdown-content a:hover {
+    background-color: #333;
+}
+
+/* Hintergrund-Text Styling */
 .background-text {
     position: absolute;
     top: 55%;
@@ -326,4 +350,36 @@ footer.container {
     .background-text {
         font-size: 200%;
     }
+}
+
+#gameInfo {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    color: black;
+    font-size: 18px;
+    z-index: 999;
+}
+
+#timer, #round {
+    margin: 5px 0;
+}
+
+#continueButton {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    padding: 10px 20px;
+    font-size: 16px;
+}
+
+#endGameOptions {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: black;
+    padding: 20px;
+    text-align: center;
+    z-index: 1000;
 }

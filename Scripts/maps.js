@@ -1,7 +1,4 @@
-// scripts/karte.js
-
 document.addEventListener('DOMContentLoaded', function() {
-    // Variablen
     var riddles = [];
     var solvedRiddles = JSON.parse(localStorage.getItem('solvedRiddles')) || [];
     var points = parseInt(localStorage.getItem('points')) || 0;
@@ -22,8 +19,35 @@ document.addEventListener('DOMContentLoaded', function() {
     var currentCity = null;
     var treasureMarker = null;
 
-    // Initialisierung der Karte
-    var map = L.map('map').setView([49.0069, 8.4037], 18); // Karlsruhe als Standard
+    var round = 1;
+    var maxRounds = 3;
+    var roundTimer = null;
+    var roundDuration = 5 * 60 * 1000; // 5 Minuten in Millisekunden
+
+    // Initialisiere die Karte
+    var map = L.map('map');
+
+    // Überprüfe, ob Geolocation unterstützt wird
+    if (navigator.geolocation) {
+        // Versuche, die aktuelle Position des Geräts zu ermitteln
+        navigator.geolocation.getCurrentPosition(function(position) {
+            var lat = position.coords.latitude;
+            var lon = position.coords.longitude;
+            // Zentriere die Karte auf die aktuelle Position
+            map.setView([lat, lon], 18);
+
+            // Starte das Spiel erst, nachdem die Position erfolgreich ermittelt wurde
+            loadRiddles(); // Funktion zum Laden der Rätsel
+        }, function(error) {
+            // Fehlerbehandlung, falls die Position nicht ermittelt werden kann
+            alert('Um dieses Spiel zu spielen, muss der Standortzugriff erlaubt sein.');
+            window.location.href = 'index.html'; // Optional: Zurück zur Startseite
+        });
+    } else {
+        // Geolocation wird nicht unterstützt
+        alert('Geolocation wird von Ihrem Browser nicht unterstützt. Dieses Spiel kann nicht gespielt werden.');
+        window.location.href = 'index.html'; // Optional: Zurück zur Startseite
+    }
 
     // OpenStreetMap-Tiles einbinden
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -112,7 +136,7 @@ document.addEventListener('DOMContentLoaded', function() {
         return null; // Stadt nicht gefunden
     }
 
-    
+
     // Funktion zum Laden der Rätsel
     function loadRiddles() {
         fetch("Data/riddles.json")
@@ -400,81 +424,6 @@ document.addEventListener('DOMContentLoaded', function() {
         updatePointsDisplay();
     });
 
-    // Funktion zur Überwachung der Position und Überprüfung der Nähe zum Schatz (optional, hier auskommentiert)
-    /*
-    if (navigator.geolocation) {
-      navigator.geolocation.watchPosition(updatePosition, showError, {
-        enableHighAccuracy: true,
-        maximumAge: 0,
-        timeout: 5000,
-      });
-    } else {
-      alert('Geolocation wird von Ihrem Browser nicht unterstützt.');
-    }
-
-    function updatePosition(position) {
-      var userLat = position.coords.latitude;
-      var userLon = position.coords.longitude;
-
-      // Aktualisieren des Benutzermarkers
-      if (userMarker) {
-        userMarker.setLatLng([userLat, userLon]);
-      } else {
-        userMarker = L.marker([userLat, userLon]).addTo(map);
-      }
-
-      // Überprüfung der Entfernung zum Schatz
-      var distance = getDistance(userLat, userLon, currentRiddle.latitude, currentRiddle.longitude);
-
-      if (distance < currentRiddle.proximity) {
-        // Schatz gefunden
-        // Punkte hinzufügen
-        var pointsEarned = calculatePoints();
-        points += pointsEarned;
-        localStorage.setItem('points', points);
-
-        // Rätsel als gelöst markieren
-        solvedRiddles.push(currentRiddle.id);
-        localStorage.setItem('solvedRiddles', JSON.stringify(solvedRiddles));
-
-        // Achievement hinzufügen
-        addAchievement(currentRiddle.achievement);
-
-        // Anzeige des Erfolgs
-        showRiddleSolvedMessage(pointsEarned);
-
-        // Entfernen von Hinweisen und Markierungen
-        if (directionLine) {
-          map.removeLayer(directionLine);
-          directionLine = null;
-        }
-        if (directionArrow) {
-          map.removeLayer(directionArrow);
-          directionArrow = null;
-        }
-        if (radiusCircle) {
-          map.removeLayer(radiusCircle);
-          radiusCircle = null;
-        }
-
-        // Nächstes Rätsel laden oder Meldung anzeigen
-        if (riddles.length > 1) {
-          // Entfernen des aktuellen Rätsels aus der Liste
-          riddles = riddles.filter(function(riddle) {
-            return riddle.id !== currentRiddle.id;
-          });
-          currentRiddle = getRandomRiddle();
-          displayRiddle();
-          addTreasureMarker();
-        } else {
-          // Alle Rätsel gelöst
-          riddles = [];
-          showAllRiddlesSolvedMessage();
-        }
-      }
-    }
-    */
-
     function showError(error) {
         console.error('Fehler bei der Standortbestimmung:', error);
     }
@@ -577,4 +526,141 @@ document.addEventListener('DOMContentLoaded', function() {
             localStorage.setItem('achievements', JSON.stringify(achievements));
         }
     }
+
+    // Funktion zum Starten einer Runde
+    function startRound() {
+        if (round > maxRounds) {
+            endGame();
+            return;
+        }
+
+        // Starte das nächste Rätsel
+        loadNextRiddle();
+
+        // Starte den Timer
+        startTimer();
+
+        // Aktualisiere das Runden-UI
+        updateRoundUI();
+    }
+
+    // Funktion zum Starten des Timers
+    function startTimer() {
+        var timeLeft = roundDuration;
+        updateTimerDisplay(timeLeft);
+
+        roundTimer = setInterval(function() {
+            timeLeft -= 1000;
+            updateTimerDisplay(timeLeft);
+
+            if (timeLeft <= 0) {
+                clearInterval(roundTimer);
+                timerEnded();
+            }
+        }, 1000);
+    }
+
+    // Funktion zum Aktualisieren der Timeranzeige
+    function updateTimerDisplay(time) {
+        var timerElement = document.getElementById('timer');
+        if (timerElement) {
+            var minutes = Math.floor(time / 60000);
+            var seconds = ((time % 60000) / 1000).toFixed(0);
+            timerElement.innerText = minutes + ':' + (seconds < 10 ? '0' : '') + seconds;
+        }
+    }
+
+    // Funktion, die aufgerufen wird, wenn der Timer endet
+    function timerEnded() {
+        // Zeige die Lösung an
+        showSolution();
+
+        // Berechne Punkte basierend auf der Entfernung
+        calculatePoints();
+
+        // Zeige den "Weiter"-Button
+        showContinueButton();
+    }
+
+    // Funktion zur Punktberechnung
+    function calculatePoints() {
+        navigator.geolocation.getCurrentPosition(function(position) {
+            var userLat = position.coords.latitude;
+            var userLon = position.coords.longitude;
+
+            var treasureLat = currentRiddle.latitude;
+            var treasureLon = currentRiddle.longitude;
+
+            // Berechne die Entfernung in Kilometern
+            var distance = getDistanceFromLatLonInKm(userLat, userLon, treasureLat, treasureLon);
+
+            // Punktevergabe (Beispielberechnung)
+            var pointsEarned = Math.max(0, 100 - distance * 10); // Weniger Punkte bei größerer Entfernung
+            points += Math.round(pointsEarned);
+            updatePointsDisplay();
+        });
+    }
+
+    // Haversine-Formel zur Berechnung der Distanz
+    function getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2) {
+        var R = 6371; // Radius der Erde in km
+        var dLat = deg2rad(lat2 - lat1);
+        var dLon = deg2rad(lat2 - lon1);
+        var a =
+            Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+            Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) *
+            Math.sin(dLon / 2) * Math.sin(dLon / 2);
+        var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+        var d = R * c;
+        return d;
+    }
+
+    function deg2rad(deg) {
+        return deg * (Math.PI / 180);
+    }
+
+    // Funktion zum Anzeigen des "Weiter"-Buttons
+    function showContinueButton() {
+        var continueButton = document.getElementById('continueButton');
+        if (continueButton) {
+            continueButton.style.display = 'block';
+            continueButton.addEventListener('click', function() {
+                // Nächste Runde starten
+                continueButton.style.display = 'none';
+                round++;
+                startRound();
+            });
+        }
+    }
+
+    // Funktion zum Beenden des Spiels
+    function endGame() {
+        alert('Spiel beendet! Du hast insgesamt ' + points + ' Punkte erreicht.');
+        // Zeige Optionen für neues Spiel oder zur Startseite
+        showEndGameOptions();
+    }
+
+    // Funktion zum Laden des nächsten Rätsels
+    function loadNextRiddle() {
+        // Deine bestehende Logik zum Laden eines Rätsels
+    }
+
+    // Funktion zum Aktualisieren des Runden-UI
+    function updateRoundUI() {
+        var roundElement = document.getElementById('round');
+        if (roundElement) {
+            roundElement.innerText = 'Runde: ' + round + ' / ' + maxRounds;
+        }
+    }
+
+    // Funktion zum Anzeigen der Endgame-Optionen
+    function showEndGameOptions() {
+        var endGameOptions = document.getElementById('endGameOptions');
+        if (endGameOptions) {
+            endGameOptions.style.display = 'block';
+        }
+    }
+
+    // Starte das Spiel
+    startRound();
 });
