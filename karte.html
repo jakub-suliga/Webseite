@@ -1,3 +1,4 @@
+<!-- karte.html -->
 <!DOCTYPE html>
 <html lang="de">
 <head>
@@ -19,47 +20,37 @@
   <div id="map"></div>
 
   <!-- Punkteanzeige -->
-  <div class="points-display">
-    Punkte: <span id="pointsCount">0</span>
+  <!-- Wird durch JavaScript hinzugefügt -->
+
+  <!-- Spielinformationen -->
+  <div id="gameInfo" class="game-info">
+    <div id="timer">5:00</div>
+    <div id="round">Runde: 1 / X</div>
   </div>
 
   <!-- Aktuelles Rätsel -->
   <div id="riddleContainer" class="container">
     <h2 id="currentRiddle">Lade Rätsel...</h2>
     <p id="currentHint"></p>
-    <button id="showSolutionButton" class="btn btn-info mt-3">Lösung anzeigen</button>
-    <p id="riddleAnswer">Antwort: <span id="answerText"></span></p>
+    <button id="logLocationButton" class="btn btn-info mt-3">Standort einloggen</button>
+    <p id="riddleAnswer" style="display:none;">Antwort: <span id="answerText"></span></p>
   </div>
 
-  <!-- Anzeige für Timer und Runden -->
-  <div id="gameInfo">
-    <div id="timer">5:00</div>
-    <div id="round">Runde: 1 / 3</div>
-</div>
+  <!-- Button zum Fortfahren -->
+  <button id="continueButton" class="btn btn-primary" style="display:none;">Weiter</button>
 
-<!-- Button zum Fortfahren -->
-<button id="continueButton" style="display:none;">Weiter</button>
-
-<!-- Endgame-Optionen -->
-<div id="endGameOptions" style="display:none;">
-    <p>Spiel beendet! Du hast insgesamt <span id="totalPoints"></span> Punkte erreicht.</p>
-    <button onclick="location.reload();">Neues Spiel</button>
-    <button onclick="window.location.href='index.html';">Zur Startseite</button>
-</div>
+  <!-- Endgame-Optionen (werden im JS behandelt) -->
 
   <!-- Kombinierter Hinweis-Button -->
   <button id="hintButton" class="round-button">💡</button>
   <div id="hintMenu" class="hint-menu">
     <button id="textHintButton" class="btn btn-secondary btn-sm mb-2">Text-Hinweis</button><br>
     <button id="directionHintButton" class="btn btn-secondary btn-sm mb-2">Richtungs-Hinweis</button><br>
-    <button id="radiusHintButton" class="btn btn-secondary btn-sm">Radius-Hinweis</button>
+    <button id="radiusHintButton" class="btn btn-secondary btn-sm mb-2">Radius-Hinweis</button><br>
+    <button id="vibrateHintButton" class="btn btn-secondary btn-sm">Vibrations-Hinweis</button>
   </div>
 
-  <!-- Vibrationshinweis-Button -->
-  <button id="vibrateButton" class="small-button" title="Vibrationshinweis">📳</button>
-
-  <!-- Neues Rätsel Button -->
-  <button id="newRiddleButton" class="small-button new-riddle-button" title="Neues Rätsel">🔄</button>
+  <!-- Entfernt: Vibrationshinweis-Button und Neues Rätsel Button -->
 
   <!-- Leaflet JS für die Karte -->
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
@@ -71,8 +62,3 @@
   <script src="Scripts/maps.js"></script>
 </body>
 </html>
-
-
-
-
-
