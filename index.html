@@ -12,32 +12,39 @@
     <link rel="stylesheet" href="Styles/styles.css">
 </head>
 <body class="index-page">
+    <!-- Navbar -->
+    <nav class="navbar">
+        <!-- Startseite-Button (optional) -->
+        <a href="index.html" class="navbar-button">Startseite</a>
+        <!-- Einstellungen-Button mit Dropdown -->
+        <div class="navbar-button settings-button">
+            <img src="Images/profile-svgrepo-com.svg" alt="Einstellungen">
+            <div class="dropdown-content">
+                <a href="settings.html">Einstellungen</a>
+                <a href="achievements.html">Erfolge</a>
+            </div>
+        </div>
+    </nav>
+
     <!-- Hintergrund-Container -->
     <div class="background-container">
-        <!-- Navbar -->
-        <nav class="navbar">
-            <!-- Startseite-Button (optional) -->
-            <a href="index.html" class="navbar-button">Startseite</a>
-            <!-- Einstellungen-Button mit Dropdown -->
-            <div class="navbar-button settings-button">
-                <img src="Images/profile-svgrepo-com.svg" alt="Einstellungen">
-                <div class="dropdown-content">
-                    <a href="settings.html">Einstellungen</a>
-                    <a href="achievements.html">Erfolge</a>
-                </div>
-            </div>
-        </nav>
-
         <!-- Hintergrund-Text -->
         <div class="background-text">
             Willkommen zur<br>Interaktiven Schatzsuche!
         </div>
 
         <!-- Play-Button -->
-        <a href="game.html" class="navbar-button play-button">Spiel starten</a>
+        <a href="karte.html" class="navbar-button play-button">Spiel starten</a>
     </div>
 
-    <!-- Eigene Skripte (falls erforderlich) -->
-     <script src="Scripts/main.js"></script> 
+    <!-- Zusätzlicher Einführungstext -->
+    <div class="intro-text">
+        <p>Entdecke verborgene Schätze in deiner Umgebung, löse spannende Rätsel und sammle wertvolle Punkte. 
+        Bist du bereit für das Abenteuer?</p>
+    </div>
+
+    <!-- Weitere Inhalte, falls vorhanden -->
 </body>
 </html>
+
+

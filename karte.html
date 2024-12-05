@@ -10,23 +10,14 @@
   <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 
   <!-- Eigene CSS-Datei -->
-  <link rel="stylesheet" href="Styles/styles.css">
+  <link rel="stylesheet" href="Styles/karte.css">
 
   <!-- Optional: Bootstrap CSS für Styling (falls verwendet) -->
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
   <!-- Karte -->
-  <div id="map"></div>
-
-  <!-- Punkteanzeige -->
-  <!-- Wird durch JavaScript hinzugefügt -->
-
-  <!-- Spielinformationen -->
-  <div id="gameInfo" class="game-info">
-    <div id="timer">5:00</div>
-    <div id="round">Runde: 1 / X</div>
-  </div>
+  <div id="map"></div>  
 
   <!-- Aktuelles Rätsel -->
   <div id="riddleContainer" class="container">
@@ -50,6 +41,13 @@
     <button id="radiusHintButton" class="btn btn-secondary btn-sm mb-2">Radius-Hinweis</button><br>
     <button id="vibrateHintButton" class="btn btn-secondary btn-sm">Vibrations-Hinweis</button>
   </div>
+
+  <!-- Game Stats -->
+  <div id="gameStats">
+    <div id="timer">Zeit: 00:00</div>
+    <div id="round">Runde: 1</div>
+    <div id="points">Punkte: 0</div>
+</div>
 
   <!-- Nachrichten-Modal -->
   <div id="messageModal" class="modal">

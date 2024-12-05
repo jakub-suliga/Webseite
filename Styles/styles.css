@@ -6,8 +6,8 @@
     --primary-color-dark: #0056b3;
     --secondary-color: #666;
     --background-color: #000; /* Schwarz */
-    --background-color-light: #000; /* Hintergrund bleibt schwarz */
-    --background-color-lighter: #111; /* Etwas helleres Schwarz für Kontraste */
+    --background-color-light: #111; /* Etwas helleres Schwarz */
+    --background-color-lighter: #222; /* Noch helleres Schwarz */
     --text-color: #fff; /* Weiß */
     --text-color-secondary: #ddd;
     --text-color-muted: #bbb;
@@ -21,7 +21,6 @@
 
 /* Global Styles */
 html, body {
-    height: 100%;
     margin: 0;
     padding: 0;
     overflow-x: hidden;
@@ -29,14 +28,15 @@ html, body {
     background-color: var(--background-color);
 }
 
-/* Map Styles */
-#map {
-    position: absolute;
-    top: 0;
-    left: 0;
+/* Hintergrund-Container */
+.background-container {
     width: 100%;
-    height: 100vh;
-    z-index: 1;
+    min-height: 100vh;
+    background-image: url("../Images/background.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
 }
 
 /* Navbar Styling */
@@ -45,7 +45,7 @@ html, body {
     top: 0;
     width: 100%;
     height: 60px;
-    background-color: rgba(0, 0, 0, 0.9); /* Dunkleres Schwarz für die Navbar */
+    background-color: rgba(0, 0, 0, 0.9);
     z-index: 10;
     display: flex;
     align-items: center;
@@ -56,23 +56,6 @@ html, body {
     color: var(--text-color);
     padding: 14px 20px;
     text-decoration: none;
-}
-
-.navbar-button.play-button {
-    position: absolute;
-    left: 50%;
-    top: 20%;
-    transform: translateX(-50%);
-    padding: 10px 20px;
-    background-color: var(--background-color-lighter);
-    border: none;
-    border-radius: var(--border-radius-base);
-    font-size: var(--font-size-base);
-    cursor: pointer;
-}
-
-.navbar-button.play-button:hover {
-    background-color: #333;
 }
 
 .settings-button {
@@ -111,227 +94,64 @@ html, body {
     background-color: #333;
 }
 
-/* Punkteanzeige */
-.points-display {
-    position: absolute;
-    top: 10px;
-    right: 20px;
-    padding: 10px;
-    background-color: var(--background-color-lighter);
-    border: 1px solid var(--border-color);
-    border-radius: 8px;
-    font-weight: bold;
-    z-index: 1000;
-    color: var(--text-color);
-}
-
-/* Spielinformationen */
-.game-info {
-    position: fixed;
-    top: 70px;
-    left: 10px;
-    background-color: var(--background-color-lighter);
-    border: 1px solid var(--border-color);
-    padding: 5px;
-    border-radius: var(--border-radius-base);
-    z-index: 1000;
-    color: var(--text-color);
-}
-
-#gameInfo div {
-    margin-bottom: 5px;
-}
-
-#timer,
-#round {
-    margin: 5px 0;
-}
-
-/* Riddle Container */
-#riddleContainer {
-    position: absolute;
-    top: 80px; /* Unterhalb der Navbar */
-    left: 50%;
-    transform: translateX(-50%);
-    max-width: 80%;
-    padding: 15px 20px;
-    background-color: var(--background-color-lighter);
-    border-radius: var(--border-radius-large);
-    box-shadow: 0 2px 6px rgba(255,255,255,0.3);
-    text-align: center;
-    font-size: var(--font-size-base);
-    z-index: 2;
-    color: var(--text-color);
-}
-
-#currentRiddle {
-    font-size: var(--font-size-base);
-}
-
-#currentHint {
-    margin-top: 5px;
-    font-style: italic;
-}
-
-#riddleAnswer {
-    display: none;
-    font-weight: bold;
-    margin-top: 10px;
-}
-
-/* Buttons */
-button {
-    cursor: pointer;
-}
-
-button:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-}
-
-/* Hinweis-Button */
-.round-button {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    width: 60px;
-    height: 60px;
-    font-size: 30px;
-    background-color: var(--primary-color);
-    color: var(--text-color);
-    border: none;
-    border-radius: 50%;
-    z-index: 1000;
-    box-shadow: 0 2px 6px rgba(255,255,255,0.3);
-}
-
-.round-button:active {
-    background-color: var(--primary-color-dark);
-}
-
-/* Hint Menu */
-.hint-menu {
-    display: none;
-    position: fixed;
-    bottom: 90px;
-    right: 20px;
-    padding: 10px;
-    background-color: var(--background-color-lighter);
-    border-radius: var(--border-radius-large);
-    z-index: 1000;
-}
-
-.hint-menu.show {
-    display: block;
-}
-
-.hint-menu button {
-    display: block;
-    width: 100%;
-    margin-bottom: 5px;
-    padding: 10px;
-    background-color: var(--primary-color);
-    color: var(--text-color);
-    border: none;
-    border-radius: var(--border-radius-base);
-}
-
-.hint-menu button:disabled {
-    background-color: gray;
-}
-
-/* "Standort einloggen" Button */
-#logLocationContainer {
-    text-align: center;
-}
-
-#logLocationButton {
-    margin: 0 auto;
-}
-
-/* Weiter-Button */
-#continueButton {
-    position: fixed;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    padding: 10px 20px;
-    font-size: var(--font-size-base);
-    z-index: 1000;
-}
-
-/* Entferne Map Zoom Controls */
-.leaflet-control-zoom {
-    display: none;
-}
-
-/* Modal Styles */
-.modal {
-    display: none; /* Hidden by default */
-    position: fixed;
-    z-index: 1001;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0,0,0,0.9); /* Dunklerer schwarzer Hintergrund */
-}
-
-.modal-content {
-    background-color: var(--background-color-lighter);
-    margin: 15% auto;
-    padding: 20px;
-    border: 1px solid var(--border-color);
-    width: 80%;
-    max-width: 500px;
-    text-align: center;
-    color: var(--text-color);
-}
-
-.modal-content button {
-    margin: 10px;
-    background-color: var(--primary-color);
-    color: var(--text-color);
-    border: none;
-    padding: 10px 20px;
-    border-radius: var(--border-radius-base);
-}
-
-.modal-content button:hover {
-    background-color: var(--primary-color-dark);
-}
-
-/* Hintergrund-Container */
-.background-container {
-    position: relative;
-    width: 100%;
-    height: 100vh;
-    background-image: url("../Images/background.png");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    z-index: -1;
-}
-
 /* Hintergrund-Text Styling */
 .background-text {
     position: absolute;
-    top: 55%;
-    left: 10%;
-    transform: translateY(-50%);
+    top: 40%; /* Anpassung nach Bedarf */
+    left: 50%;
+    transform: translate(-50%, -50%);
     color: var(--text-color);
     font-size: 2.5em;
     font-weight: bold;
+    text-align: center;
     text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.7);
-    white-space: nowrap;
 }
 
-/* Achievements Page */
+/* Play-Button */
+.navbar-button.play-button {
+    position: absolute;
+    left: 50%;
+    top: 70%; /* Anpassung nach Bedarf */
+    transform: translateX(-50%);
+    padding: 10px 20px;
+    background-color: var(--background-color-lighter);
+    border: none;
+    border-radius: var(--border-radius-base);
+    font-size: var(--font-size-base);
+    cursor: pointer;
+    text-align: center;
+}
+
+.navbar-button.play-button:hover {
+    background-color: #333;
+}
+
+/* Einführungstext Styling */
+.intro-text {
+    margin: 20px auto;
+    padding: 20px;
+    max-width: 800px;
+    color: var(--text-color);
+    font-size: 1.2em;
+    text-align: center;
+    background-color: var(--background-color-lighter);
+    border-radius: var(--border-radius-base);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+/* Hintergrundfarbe für andere Seiten */
+body.other-page {
+    background-color: var(--background-color);
+    color: var(--text-color);
+}
+
+/* Container-Styles für andere Seiten */
 .container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 20px;
+    background-color: transparent; /* Hintergrund transparent, um die schwarze Hintergrundfarbe des Body zu zeigen */
+    color: var(--text-color);
 }
 
 /* Statistiken */
@@ -422,26 +242,15 @@ footer.container {
 
 /* Responsives Design */
 @media (max-width: 768px) {
-    #riddleContainer {
-        left: 5%;
-        transform: none;
-        max-width: 90%;
-        font-size: var(--font-size-small);
-    }
-
-    .round-button {
-        width: 50px;
-        height: 50px;
-        font-size: 20px;
-    }
-
-    .hint-menu {
-        bottom: 100px;
-        right: 10px;
-    }
-
     .background-text {
         font-size: 2em;
+        top: 35%; /* Anpassung für kleinere Bildschirme */
+    }
+
+    .navbar-button.play-button {
+        font-size: var(--font-size-small);
+        padding: 8px 16px;
+        top: 60%; /* Anpassung für kleinere Bildschirme */
     }
 
     .stat-section {
@@ -451,16 +260,15 @@ footer.container {
     .achievement {
         flex: 1 1 calc(100% - 20px);
     }
+
+    .intro-text {
+        font-size: 1em;
+        margin: 15px 10px;
+        padding: 15px;
+    }
 }
 
 /* Weitere Anpassungen */
 body, html {
     overflow-x: hidden;
-}
-
-#gameInfo {
-    position: fixed;
-    top: 10px;
-    left: 10px;
-    z-index: 999;
 }

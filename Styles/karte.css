@@ -1,0 +1,309 @@
+/* karte.css */
+
+/* CSS-Variablen */
+:root {
+    --primary-color: #007bff;
+    --primary-color-dark: #0056b3;
+    --secondary-color: #666;
+    --background-color: #fff; /* Weißer Hintergrund */
+    --text-color: #000; /* Schwarzer Text */
+    --text-color-secondary: #333;
+    --text-color-muted: #555;
+    --border-color: #ccc;
+    --font-size-base: 16px;
+    --font-size-large: 1.25em;
+    --font-size-small: 0.9em;
+    --border-radius-base: 5px;
+    --border-radius-large: 10px;
+}
+
+/* Global Styles */
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    color: var(--text-color);
+    background-color: var(--background-color);
+    font-family: Arial, sans-serif;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+/* Navbar Styling */
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 60px;
+    background-color: var(--primary-color);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.navbar-button {
+    color: #fff;
+    padding: 14px 20px;
+    text-decoration: none;
+}
+
+.settings-button {
+    position: relative;
+    margin-left: auto;
+}
+
+.settings-button img {
+    width: 30px;
+    height: 30px;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 100%;
+    min-width: 160px;
+    background-color: #f1f1f1;
+    z-index: 1001;
+}
+
+.settings-button:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown-content a {
+    display: block;
+    padding: 12px 16px;
+    color: var(--text-color);
+    text-decoration: none;
+}
+
+.dropdown-content a:hover {
+    background-color: #ddd;
+}
+
+/* Map Styles */
+#map {
+    position: absolute;
+    top: 0; /* Karte beginnt ganz oben */
+    left: 0;
+    width: 100%;
+    height: 100%; /* Karte füllt den gesamten Bildschirm */
+    z-index: 1;
+}
+
+/* Rätsel-Container */
+#riddleContainer {
+    position: fixed;
+    top: 70px; /* Unterhalb der Navbar */
+    left: 50%;
+    transform: translateX(-50%);
+    max-width: 80%;
+    padding: 15px 20px;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: var(--border-radius-large);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+    text-align: center;
+    font-size: var(--font-size-base);
+    z-index: 1000;
+    color: var(--text-color);
+}
+
+#currentRiddle {
+    font-size: var(--font-size-base);
+}
+
+#currentHint {
+    margin-top: 5px;
+    font-style: italic;
+}
+
+#riddleAnswer {
+    display: none;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+/* "Standort einloggen" Button innerhalb des Rätsel-Containers */
+#logLocationButton {
+    margin-top: 15px;
+    padding: 10px 20px;
+    background-color: var(--primary-color);
+    color: #fff;
+    border: none;
+    border-radius: var(--border-radius-base);
+    font-size: var(--font-size-base);
+    cursor: pointer;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#logLocationButton:disabled {
+    background-color: gray;
+    cursor: not-allowed;
+}
+
+/* Game Stats (Zeit, Runde, Punkte) */
+#gameStats {
+    position: fixed;
+    bottom: 20px; /* Position unten links */
+    left: 20px;
+    background-color: rgba(255, 255, 255, 0.9);
+    border: 1px solid var(--border-color);
+    padding: 10px;
+    border-radius: var(--border-radius-base);
+    z-index: 1000;
+    color: var(--text-color);
+    font-size: var(--font-size-base);
+}
+
+#gameStats div {
+    margin-bottom: 5px;
+}
+
+/* Hinweis-Button */
+.round-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 60px;
+    height: 60px;
+    font-size: 30px;
+    background-color: var(--primary-color);
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    z-index: 1000;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+}
+
+/* Hint Menu */
+.hint-menu {
+    display: none;
+    position: fixed;
+    bottom: 90px;
+    right: 20px;
+    padding: 10px;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: var(--border-radius-large);
+    z-index: 1000;
+}
+
+.hint-menu.show {
+    display: block;
+}
+
+.hint-menu button {
+    display: block;
+    width: 100%;
+    margin-bottom: 5px;
+    padding: 10px;
+    background-color: var(--primary-color);
+    color: #fff;
+    border: none;
+    border-radius: var(--border-radius-base);
+}
+
+.hint-menu button:disabled {
+    background-color: gray;
+    cursor: not-allowed;
+}
+
+/* Weiter-Button */
+#continueButton {
+    position: fixed;
+    bottom: 90px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 10px 20px;
+    background-color: var(--primary-color);
+    color: #fff;
+    border: none;
+    border-radius: var(--border-radius-base);
+    font-size: var(--font-size-base);
+    z-index: 1000;
+    cursor: pointer;
+}
+
+/* Modal Styles */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed;
+    z-index: 1001;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.5); /* Halbtransparenter Hintergrund */
+}
+
+.modal-content {
+    background-color: #fff;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid var(--border-color);
+    width: 80%;
+    max-width: 500px;
+    text-align: center;
+    color: var(--text-color);
+    border-radius: var(--border-radius-base);
+}
+
+.modal-content button {
+    margin: 10px;
+    background-color: var(--primary-color);
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: var(--border-radius-base);
+    cursor: pointer;
+}
+
+.modal-content button:hover {
+    background-color: var(--primary-color-dark);
+}
+
+/* Entfernen der Zoom Controls (falls Leaflet verwendet wird) */
+.leaflet-control-zoom {
+    display: none;
+}
+
+/* Responsives Design */
+@media (max-width: 768px) {
+    #riddleContainer {
+        max-width: 90%;
+        font-size: var(--font-size-small);
+    }
+
+    .round-button {
+        width: 50px;
+        height: 50px;
+        font-size: 20px;
+    }
+
+    .hint-menu {
+        bottom: 70px;
+        right: 10px;
+    }
+
+    #logLocationButton {
+        font-size: var(--font-size-small);
+        padding: 8px 16px;
+    }
+
+    #continueButton {
+        bottom: 70px;
+    }
+
+    #gameStats {
+        font-size: var(--font-size-small);
+        padding: 8px;
+    }
+}
+
