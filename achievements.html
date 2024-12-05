@@ -1,63 +1,71 @@
-<!-- achievements.html -->
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <!-- ... (Ihr bestehender Code) -->
+    <meta charset="UTF-8">
+    <title>Erfolge - Interaktive Schatzsuche</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS für Styling -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <!-- Eigene CSS-Datei -->
+    <link rel="stylesheet" href="Styles/styles.css">
 </head>
 <body>
-  <!-- ... (Ihr bestehender Code) -->
+    <!-- Navbar -->
+    <nav class="navbar">
+        <a href="index.html" class="navbar-button">Startseite</a>
+        <!-- Einstellungen-Button mit Dropdown -->
+        <div class="navbar-button settings-button">
+            <img src="Images/profile-svgrepo-com.svg" alt="Einstellungen">
+            <div class="dropdown-content">
+                <a href="settings.html">Einstellungen</a>
+                <a href="achievements.html">Erfolge</a>
+            </div>
+        </div>
+    </nav>
 
-  <div class="container">
-    <h2>Statistiken</h2>
-    <p>Gesamte erspielte Punkte: <span id="totalPoints"></span></p>
-    <p>Anzahl der gespielten Spiele: <span id="gamesPlayed"></span></p>
-    <p>Durchschnittliche Punkte pro Spiel: <span id="averagePointsPerGame"></span></p>
-    <p>Durchschnittliche Punkte pro Runde: <span id="averagePointsPerRound"></span></p>
-    <p>Durchschnittliche Entfernung zum Ziel: <span id="averageDistance"></span> km</p>
+    <!-- Hauptinhalt -->
+    <div class="container">
+        <!-- Statistiken -->
+        <div class="statistics">
+            <div class="stat-section">
+                <h2>Allgemeine Statistiken</h2>
+                <p>Gesamte erspielte Punkte: <span id="totalPoints"></span></p>
+                <p>Anzahl der gespielten Spiele: <span id="gamesPlayed"></span></p>
+                <p>Durchschnittliche Punkte pro Spiel: <span id="averagePointsPerGame"></span></p>
+                <p>Durchschnittliche Punkte pro Runde: <span id="averagePointsPerRound"></span></p>
+                <p>Durchschnittliche Entfernung zum Ziel: <span id="averageDistance"></span> km</p>
+            </div>
+            <div class="stat-section">
+                <h2>Hinweisnutzung</h2>
+                <p>Verwendete Hinweise insgesamt: <span id="totalHintsUsed"></span></p>
+                <p>Text-Hinweise: <span id="totalTextHints"></span></p>
+                <p>Richtungs-Hinweise: <span id="totalDirectionHints"></span></p>
+                <p>Radius-Hinweise: <span id="totalRadiusHints"></span></p>
+                <p>Vibrations-Hinweise: <span id="totalVibrateHints"></span></p>
+            </div>
+        </div>
 
-    <h3>Verwendete Hinweise</h3>
-    <p>Text-Hinweise: <span id="totalTextHints"></span></p>
-    <p>Richtungs-Hinweise: <span id="totalDirectionHints"></span></p>
-    <p>Radius-Hinweise: <span id="totalRadiusHints"></span></p>
-    <p>Vibrations-Hinweise: <span id="totalVibrateHints"></span></p>
-
-    <h3>Gespielte Kategorien</h3>
+        <!-- Gespielte Kategorien -->
+        <!-- Gespielte Kategorien -->
+<div class="categories-played">
+    <h2>Kategorien</h2>
     <ul id="categoriesPlayedList"></ul>
-  </div>
+</div>
 
-  <!-- Skript zum Laden der Statistiken -->
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const totalPoints = localStorage.getItem('totalPoints') || 0;
-      const gamesPlayed = localStorage.getItem('gamesPlayed') || 0;
-      const totalHintsUsed = JSON.parse(localStorage.getItem('totalHintsUsed')) || { text: 0, direction: 0, radius: 0, vibrate: 0 };
-      const categoriesPlayed = JSON.parse(localStorage.getItem('categoriesPlayed')) || [];
 
-      document.getElementById('totalPoints').innerText = totalPoints;
-      document.getElementById('gamesPlayed').innerText = gamesPlayed;
+        <!-- Achievements -->
+        <div class="achievements">
+            <h2>Erfolge</h2>
+            <div class="achievement-list" id="achievementList">
+                <!-- Achievements werden hier dynamisch eingefügt -->
+            </div>
+        </div>
+    </div>
 
-      const averagePointsPerGame = gamesPlayed > 0 ? (totalPoints / gamesPlayed).toFixed(2) : 0;
-      document.getElementById('averagePointsPerGame').innerText = averagePointsPerGame;
-
-      // Durchschnittliche Punkte pro Runde und Entfernung zum Ziel
-      // Diese Werte müssen Sie entsprechend berechnen und im localStorage speichern
-      // Für dieses Beispiel setzen wir sie auf 0
-      document.getElementById('averagePointsPerRound').innerText = 'Wird noch berechnet';
-      document.getElementById('averageDistance').innerText = 'Wird noch berechnet';
-
-      document.getElementById('totalTextHints').innerText = totalHintsUsed.text;
-      document.getElementById('totalDirectionHints').innerText = totalHintsUsed.direction;
-      document.getElementById('totalRadiusHints').innerText = totalHintsUsed.radius;
-      document.getElementById('totalVibrateHints').innerText = totalHintsUsed.vibrate;
-
-      const categoriesList = document.getElementById('categoriesPlayedList');
-      categoriesPlayed.forEach((category) => {
-        const li = document.createElement('li');
-        li.innerText = category;
-        categoriesList.appendChild(li);
-      });
-    });
-  </script>
+    <!-- Eigene Skripte -->
+    <script src="Scripts/achievements.js"></script>
 </body>
 </html>
 

@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let radiusCircle = null;
     let hintsAvailable = [];
     let selectedCategories = JSON.parse(localStorage.getItem('selectedCategories')) || [];
-    let categoriesPlayed = JSON.parse(localStorage.getItem('categoriesPlayed')) || [];
+    let categoriesPlayedData = JSON.parse(localStorage.getItem('categoriesPlayedData')) || {};
     let currentCity = null;
     let treasureMarker = null;
     let solutionLine = null;
@@ -64,6 +64,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const cityBoundaries = {
         Karlsruhe: { latMin: 48.9, latMax: 49.1, lonMin: 8.3, lonMax: 8.6 },
         Stuttgart: { latMin: 48.72, latMax: 48.83, lonMin: 9.08, lonMax: 9.27 },
+        // Weitere Städte können hier hinzugefügt werden
     };
 
     // Start der Geolokalisierung
@@ -277,9 +278,13 @@ document.addEventListener('DOMContentLoaded', () => {
         enableHintButtons();
 
         // Gespielte Kategorie speichern
-        if (!categoriesPlayed.includes(currentRiddle.category)) {
-            categoriesPlayed.push(currentRiddle.category);
-            localStorage.setItem('categoriesPlayed', JSON.stringify(categoriesPlayed));
+        if (currentRiddle.category) {
+            if (categoriesPlayedData[currentRiddle.category]) {
+                categoriesPlayedData[currentRiddle.category]++;
+            } else {
+                categoriesPlayedData[currentRiddle.category] = 1;
+            }
+            localStorage.setItem('categoriesPlayedData', JSON.stringify(categoriesPlayedData));
         }
 
         // "Standort einloggen" Button anzeigen
@@ -358,6 +363,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 totalHintsUsed.radius += hintsUsed.radius;
                 totalHintsUsed.vibrate += hintsUsed.vibrate;
                 localStorage.setItem('totalHintsUsed', JSON.stringify(totalHintsUsed));
+
+                // Gesamtzahl der gespielten Runden aktualisieren
+                let totalRoundsPlayed = parseInt(localStorage.getItem('totalRoundsPlayed')) || 0;
+                totalRoundsPlayed++;
+                localStorage.setItem('totalRoundsPlayed', totalRoundsPlayed);
+
+                // Gesamtentfernung aktualisieren
+                let storedTotalDistance = parseFloat(localStorage.getItem('totalDistance')) || 0;
+                storedTotalDistance += distance;
+                localStorage.setItem('totalDistance', storedTotalDistance);
 
                 showSolution();
 
@@ -858,6 +873,7 @@ Durchschnittliche Punkte pro Runde: ${avgPointsPerRound}`;
         showSolutionButton.style.display = 'none';
     }
 });
+
 
 
 

@@ -1,45 +1,43 @@
-<!-- index.html -->
 <!DOCTYPE html>
 <html lang="de">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Interaktive Schatzsuche</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS für Styling -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <!-- Eigene CSS-Datei -->
     <link rel="stylesheet" href="Styles/styles.css">
 </head>
-<body>
-    <!-- Navbar -->
-    <nav class="navbar">
-        <a href="karte.html" class="navbar-button play-button">Play</a>
-        <!-- Einstellungen-Button mit Dropdown -->
-        <div class="navbar-button settings-button">
-            <img src="Images/profile-svgrepo-com.svg" alt="Einstellungen">
-            <div class="dropdown-content">
-                <a href="settings.html">Einstellungen</a>
-                <a href="achievements.html">Erfolge</a>
-            </div>
-        </div>
-    </nav>
-
+<body class="index-page">
     <!-- Hintergrund-Container -->
     <div class="background-container">
+        <!-- Navbar -->
+        <nav class="navbar">
+            <!-- Startseite-Button (optional) -->
+            <a href="index.html" class="navbar-button">Startseite</a>
+            <!-- Einstellungen-Button mit Dropdown -->
+            <div class="navbar-button settings-button">
+                <img src="Images/profile-svgrepo-com.svg" alt="Einstellungen">
+                <div class="dropdown-content">
+                    <a href="settings.html">Einstellungen</a>
+                    <a href="achievements.html">Erfolge</a>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Hintergrund-Text -->
         <div class="background-text">
-            Finde den <br> nächsten Schatz
+            Willkommen zur<br>Interaktiven Schatzsuche!
         </div>
+
+        <!-- Play-Button -->
+        <a href="game.html" class="navbar-button play-button">Spiel starten</a>
     </div>
 
-    <!-- Hauptinhalt -->
-    <div class="content">
-        <h1>Willkommen zur Interaktiven Schatzsuche</h1>
-        <p>Erlebe ein spannendes Abenteuer!</p>
-        <p>
-            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor...
-        </p>
-        <!-- Start-Button -->
-        <a href="karte.html" class="btn btn-primary">Spiel Starten</a>
-    </div>
-
-    <!-- JavaScript-Dateien -->
-    <script src="Scripts/main.js"></script>
+    <!-- Eigene Skripte (falls erforderlich) -->
+     <script src="Scripts/main.js"></script> 
 </body>
 </html>
