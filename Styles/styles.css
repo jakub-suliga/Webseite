@@ -39,44 +39,67 @@ html, body {
     position: relative;
 }
 
-/* Navbar Styling */
+/* Navbar-Styling */
 .navbar {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    height: 60px;
-    background-color: rgba(0, 0, 0, 0.9);
-    z-index: 10;
     display: flex;
-    align-items: center;
-    padding: 5px;
+    align-items: center;          /* Vertikale Zentrierung der Elemente */
+    justify-content: space-between; /* Verteilung der Elemente */
+    background: rgba(0, 0, 0, 0.5);
+    height: 60px;
+    padding: 0 20px;
 }
 
+/* Gemeinsame Stildefinition für Navbar-Buttons */
 .navbar-button {
-    color: var(--text-color);
-    padding: 14px 20px;
+    color: white;
     text-decoration: none;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+}
+
+/* Zurück-Button spezifisch */
+.back-button {
+    font-size: 24px; /* Größe des Pfeils anpassen */
+}
+
+/* Play-Button spezifisch */
+.play-button {
+    background-color: black;
+    padding: 10px 20px;
+    border-radius: 5px;
+}
+
+.play-button:hover {
+    background-color: #333;
+}
+
+/* Einstellungen-Button spezifisch */
+.settings-button img {
+    width: 24px;
+    height: 24px;
+    filter: invert(100%);
+}
+
+.settings-button:hover img {
+    filter: invert(80%);
+}
+
+/* Icon Buttons */
+.navbar-button img {
+    width: 24px;
+    height: 24px;
+    filter: invert(100%);
+    cursor: pointer;
+}
+
+.navbar-button:hover img {
+    filter: invert(80%);
 }
 
 .settings-button {
     position: relative;
     margin-left: auto;
-}
-
-.settings-button img {
-    width: 30px;
-    height: 30px;
-    filter: invert(100%); /* Icon-Farbe anpassen */
-}
-
-.dropdown-content {
-    display: none;
-    position: absolute;
-    right: 0;
-    top: 100%;
-    min-width: 160px;
-    background-color: var(--background-color-lighter);
-    z-index: 11;
 }
 
 .settings-button:hover .dropdown-content {
@@ -111,7 +134,6 @@ html, body {
 .navbar-button.play-button {
     position: absolute;
     left: 50%;
-    top: 70%; /* Anpassung nach Bedarf */
     transform: translateX(-50%);
     padding: 10px 20px;
     background-color: var(--background-color-lighter);
@@ -120,6 +142,10 @@ html, body {
     font-size: var(--font-size-base);
     cursor: pointer;
     text-align: center;
+    -webkit-border-radius: var(--border-radius-base);
+    -moz-border-radius: var(--border-radius-base);
+    -ms-border-radius: var(--border-radius-base);
+    -o-border-radius: var(--border-radius-base);
 }
 
 .navbar-button.play-button:hover {
@@ -271,4 +297,20 @@ footer.container {
 /* Weitere Anpassungen */
 body, html {
     overflow-x: hidden;
+}
+
+/* Rechte Seite der Navbar */
+.navbar-right {
+    position: absolute;
+    right: 20px;
+    display: flex;
+    align-items: center;
+}
+
+/* Stil für die Seitenüberschrift */
+.page-title {
+    text-align: center;
+    font-size: 2.5em; /* Schriftgröße anpassen */
+    margin-top: 20px; /* Optional: Abstand nach oben */
+    color: var(--text-color); /* Verwende die vorhandene Textfarbe */
 }
