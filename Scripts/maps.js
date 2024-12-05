@@ -221,10 +221,10 @@ document.addEventListener('DOMContentLoaded', () => {
         </ul>
         <p><strong>Hinweise:</strong></p>
         <ul>
-            <li><strong>Text-Hinweis:</strong> Gibt dir einen zusätzlichen schriftlichen Hinweis.</li>
-            <li><strong>Richtungs-Hinweis:</strong> Zeigt dir eine ungefähre Richtung zum Ziel.</li>
-            <li><strong>Radius-Hinweis:</strong> Zeigt einen Bereich, in dem sich das Ziel befindet.</li>
-            <li><strong>Vibrations-Hinweis:</strong> Das Gerät vibriert stärker, je näher du dem Ziel bist.</li>
+            <li><strong>Text-Tipp:</strong> Gibt dir einen zusätzlichen schriftlichen Hinweis.</li>
+            <li><strong>Richtungs-Tipp:</strong> Zeigt dir eine ungefähre Richtung zum Ziel.</li>
+            <li><strong>Radius-Tipp:</strong> Zeigt einen Bereich, in dem sich das Ziel befindet.</li>
+            <li><strong>Vibrations-Tipp:</strong> Das Gerät vibriert stärker, je näher du dem Ziel bist.</li>
         </ul>
         <p>Viel Spaß bei der Schatzsuche!</p>
         `;
