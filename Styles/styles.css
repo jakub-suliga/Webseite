@@ -392,3 +392,133 @@ footer.container {
         font-size: 2em;
     }
 }
+
+.container {
+    position: relative;
+    top: 60px;
+    max-width: 600px;
+    margin: 0 auto;
+    z-index: 999;
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 20px;
+    border-radius: 10px;
+}
+
+/* Punkteanzeige */
+.points-display {
+    background-color: white;
+    border: 1px solid black;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+/* Spielinformationen */
+.game-info {
+    position: fixed;
+    top: 70px;
+    left: 10px;
+    background-color: white;
+    border: 1px solid black;
+    padding: 5px;
+    border-radius: 5px;
+    z-index: 1000;
+}
+
+#gameInfo div {
+    margin-bottom: 5px;
+}
+
+/* Hinweis-Button */
+.round-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 60px;
+    height: 60px;
+    font-size: 30px;
+    border-radius: 50%;
+    z-index: 1000;
+}
+
+.hint-menu {
+    display: none;
+    position: fixed;
+    bottom: 90px;
+    right: 20px;
+    z-index: 1000;
+}
+
+.hint-menu.show {
+    display: block;
+}
+
+/* "Standort einloggen" Button zentrieren */
+#logLocationContainer {
+    text-align: center;
+}
+
+#logLocationButton {
+    margin: 0 auto;
+}
+
+/* Entferne Map Zoom Controls */
+.leaflet-control-zoom {
+    display: none;
+}
+
+/* Modal Styles */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed;
+    z-index: 1001;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4); /* Schwarzer Hintergrund mit Transparenz */
+}
+
+.modal-content {
+    background-color: white;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid black;
+    width: 80%;
+    max-width: 400px;
+    text-align: center;
+}
+
+.modal-content button {
+    margin: 10px;
+}
+/* styles.css */
+
+/* ... (Ihr bestehender Code) */
+
+/* Modal Styles */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed;
+    z-index: 1001;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4); /* Schwarzer Hintergrund mit Transparenz */
+}
+
+.modal-content {
+    background-color: white;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid black;
+    width: 80%;
+    max-width: 500px;
+    text-align: center;
+}
+
+.modal-content button {
+    margin: 10px;
+}

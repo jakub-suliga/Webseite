@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let points = 0;
     let currentRiddle = {};
     let hintsUsed = { text: 0, direction: 0, radius: 0, vibrate: 0 };
+    let totalHintsUsed = JSON.parse(localStorage.getItem('totalHintsUsed')) || { text: 0, direction: 0, radius: 0, vibrate: 0 };
     const maxHints = 3;
     let userMarker = null;
     let directionLine = null;
@@ -13,6 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let radiusCircle = null;
     let hintsAvailable = [];
     let selectedCategories = JSON.parse(localStorage.getItem('selectedCategories')) || [];
+    let categoriesPlayed = JSON.parse(localStorage.getItem('categoriesPlayed')) || [];
     let currentCity = null;
     let treasureMarker = null;
     let solutionLine = null;
@@ -21,6 +23,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let round = 1;
     let totalDistance = 0;
+    let totalPoints = parseInt(localStorage.getItem('totalPoints'), 10) || 0;
+    let gamesPlayed = parseInt(localStorage.getItem('gamesPlayed'), 10) || 0;
     let roundTimer = null;
 
     // Einstellungen aus dem localStorage laden
@@ -31,8 +35,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // Berechnung der Rundenzeit in Millisekunden
     const roundDuration = gameTime * 60 * 1000;
 
-    // Initialisiere die Karte
-    const map = L.map('map');
+    // Initialisiere die Karte ohne Zoom-Steuerelemente
+    const map = L.map('map', { zoomControl: false });
 
     // OpenStreetMap-Tiles einbinden
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -83,20 +87,23 @@ document.addEventListener('DOMContentLoaded', () => {
                     // Start watching the user's position every 1 second
                     startWatchingPosition();
                 } else {
-                    alert('Es gibt keine Rätsel für Ihren aktuellen Standort.');
-                    window.location.href = 'index.html';
+                    showMessage('Es gibt keine Rätsel für Ihren aktuellen Standort.', () => {
+                        window.location.href = 'index.html';
+                    });
                 }
             },
             (error) => {
                 console.error('Fehler bei der Standortbestimmung:', error);
-                alert('Um dieses Spiel zu spielen, muss der Standortzugriff erlaubt sein.');
-                window.location.href = 'index.html';
+                showMessage('Um dieses Spiel zu spielen, muss der Standortzugriff erlaubt sein.', () => {
+                    window.location.href = 'index.html';
+                });
             },
             { enableHighAccuracy: true, maximumAge: 0, timeout: 5000 }
         );
     } else {
-        alert('Geolocation wird von Ihrem Browser nicht unterstützt.');
-        window.location.href = 'index.html';
+        showMessage('Geolocation wird von Ihrem Browser nicht unterstützt.', () => {
+            window.location.href = 'index.html';
+        });
     }
 
     // Position alle 1 Sekunde aktualisieren
@@ -123,8 +130,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 );
             }, 1000); // Aktualisierung alle 1 Sekunde
         } else {
-            alert('Geolocation wird von Ihrem Browser nicht unterstützt.');
-            window.location.href = 'index.html';
+            showMessage('Geolocation wird von Ihrem Browser nicht unterstützt.', () => {
+                window.location.href = 'index.html';
+            });
         }
     }
 
@@ -177,12 +185,19 @@ document.addEventListener('DOMContentLoaded', () => {
                 console.log(`Rätsel nach Entfernung: ${riddles.length}`);
 
                 if (riddles.length > 0) {
-                    startRound();
+                    // Überprüfen, ob es das erste Spiel ist
+                    if (!localStorage.getItem('hasPlayedBefore')) {
+                        showInstructions();
+                    } else {
+                        startRound();
+                    }
                 } else {
-                    alert(
-                        'Es gibt keine verfügbaren Rätsel innerhalb der eingestellten Entfernung für Ihren Standort und die ausgewählten Kategorien.'
+                    showMessage(
+                        'Es gibt keine verfügbaren Rätsel innerhalb der eingestellten Entfernung für Ihren Standort und die ausgewählten Kategorien.',
+                        () => {
+                            window.location.href = 'index.html';
+                        }
                     );
-                    window.location.href = 'index.html';
                 }
             })
             .catch((error) => {
@@ -190,6 +205,32 @@ document.addEventListener('DOMContentLoaded', () => {
                 document.getElementById('currentRiddle').innerText =
                     'Fehler beim Laden der Rätsel.';
             });
+    }
+
+    function showInstructions() {
+        const instructions = `
+        <h3>Willkommen zur Schatzsuche!</h3>
+        <p>In diesem Spiel erhältst du Rätsel, die du lösen musst, indem du Orte in deiner Umgebung besuchst.</p>
+        <p><strong>So funktioniert's:</strong></p>
+        <ul>
+            <li>Du erhältst ein Rätsel, das dich zu einem bestimmten Ort führt.</li>
+            <li>Nutze die Hinweise, wenn du Hilfe brauchst. Jeder Hinweis kostet Punkte.</li>
+            <li>Wenn du glaubst, am richtigen Ort zu sein, klicke auf "Standort einloggen".</li>
+            <li>Je näher du am Ziel bist, desto mehr Punkte erhältst du!</li>
+        </ul>
+        <p><strong>Hinweise:</strong></p>
+        <ul>
+            <li><strong>Text-Hinweis:</strong> Gibt dir einen zusätzlichen schriftlichen Hinweis.</li>
+            <li><strong>Richtungs-Hinweis:</strong> Zeigt dir eine ungefähre Richtung zum Ziel.</li>
+            <li><strong>Radius-Hinweis:</strong> Zeigt einen Bereich, in dem sich das Ziel befindet.</li>
+            <li><strong>Vibrations-Hinweis:</strong> Das Gerät vibriert stärker, je näher du dem Ziel bist.</li>
+        </ul>
+        <p>Viel Spaß bei der Schatzsuche!</p>
+        `;
+        showCustomMessage(instructions, 'Spiel starten', () => {
+            localStorage.setItem('hasPlayedBefore', 'true');
+            startRound();
+        });
     }
 
     function startRound() {
@@ -234,6 +275,12 @@ document.addEventListener('DOMContentLoaded', () => {
         hintsAvailable = [...currentRiddle.hints];
         updatePointsDisplay();
         enableHintButtons();
+
+        // Gespielte Kategorie speichern
+        if (!categoriesPlayed.includes(currentRiddle.category)) {
+            categoriesPlayed.push(currentRiddle.category);
+            localStorage.setItem('categoriesPlayed', JSON.stringify(categoriesPlayed));
+        }
 
         // "Standort einloggen" Button anzeigen
         const logLocationButton = document.getElementById('logLocationButton');
@@ -293,8 +340,24 @@ document.addEventListener('DOMContentLoaded', () => {
                 totalDistance += distance;
 
                 const pointsEarned = Math.max(0, 100 - distance * 10);
-                points += Math.round(pointsEarned);
+
+                // Abzug für verwendete Hinweise
+                const hintPenalty = (hintsUsed.text + hintsUsed.direction + hintsUsed.radius + hintsUsed.vibrate) * 5;
+                const finalPoints = Math.max(pointsEarned - hintPenalty, 0);
+
+                points += Math.round(finalPoints);
                 updatePointsDisplay();
+
+                // Gesamte Punkte aktualisieren
+                totalPoints += Math.round(finalPoints);
+                localStorage.setItem('totalPoints', totalPoints);
+
+                // Hinweise zur Gesamtstatistik hinzufügen
+                totalHintsUsed.text += hintsUsed.text;
+                totalHintsUsed.direction += hintsUsed.direction;
+                totalHintsUsed.radius += hintsUsed.radius;
+                totalHintsUsed.vibrate += hintsUsed.vibrate;
+                localStorage.setItem('totalHintsUsed', JSON.stringify(totalHintsUsed));
 
                 showSolution();
 
@@ -362,7 +425,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const continueButton = document.getElementById('continueButton');
         if (continueButton) {
             continueButton.style.display = 'block';
-            continueButton.addEventListener('click', () => {
+            continueButton.onclick = () => {
                 continueButton.style.display = 'none';
 
                 // Marker und Linie entfernen
@@ -384,15 +447,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 round++;
                 startRound();
-            });
+            };
         }
     }
 
     function endGame() {
         // Durchschnittliche Entfernung berechnen
         const avgDistance = (totalDistance / maxRounds).toFixed(2);
-        alert(`Spiel beendet! Du hast insgesamt ${points} Punkte erreicht.
-Durchschnittliche Entfernung zum Ziel: ${avgDistance} km`);
+        const avgPointsPerRound = (points / maxRounds).toFixed(2);
+
+        const message = `Spiel beendet! Du hast insgesamt ${points} Punkte erreicht.
+Durchschnittliche Entfernung zum Ziel: ${avgDistance} km
+Durchschnittliche Punkte pro Runde: ${avgPointsPerRound}`;
 
         // Geolokalisierung stoppen
         if (positionUpdateInterval !== null) {
@@ -401,10 +467,47 @@ Durchschnittliche Entfernung zum Ziel: ${avgDistance} km`);
         }
 
         // Statistiken speichern
+        gamesPlayed += 1;
+        localStorage.setItem('gamesPlayed', gamesPlayed);
         localStorage.setItem('points', points);
 
-        // Weiterleitung zur Statistikseite
-        window.location.href = 'achievements.html';
+        // Zeige die Endnachricht
+        showEndGameMessage(message);
+    }
+
+    function resetGame() {
+        // Variablen zurücksetzen
+        round = 1;
+        points = 0;
+        totalDistance = 0;
+        riddles = []; // Rätsel neu laden
+        solvedRiddles = [];
+        localStorage.setItem('solvedRiddles', JSON.stringify(solvedRiddles));
+
+        // Karten-Elemente entfernen
+        clearMapHints();
+        if (treasureMarker) {
+            map.removeLayer(treasureMarker);
+            treasureMarker = null;
+        }
+        if (solutionLine) {
+            map.removeLayer(solutionLine);
+            solutionLine = null;
+        }
+        if (solutionArrow) {
+            map.removeLayer(solutionArrow);
+            solutionArrow = null;
+        }
+
+        // Anzeigen aktualisieren
+        updatePointsDisplay();
+        updateRoundUI();
+
+        // Position erneut beobachten
+        startWatchingPosition();
+
+        // Rätsel neu laden und neue Runde starten
+        loadRiddles();
     }
 
     function updateRoundUI() {
@@ -680,10 +783,81 @@ Durchschnittliche Entfernung zum Ziel: ${avgDistance} km`);
         });
     }
 
+    // Funktion zum Anzeigen von Nachrichten im Modal
+    function showMessage(message, callback) {
+        const modal = document.getElementById('messageModal');
+        const modalMessage = document.getElementById('modalMessage');
+        const modalButton1 = document.getElementById('modalButton1');
+        const modalButton2 = document.getElementById('modalButton2');
+
+        modalMessage.innerHTML = message;
+        modal.style.display = 'block';
+
+        // Verstecke den zweiten Button standardmäßig
+        modalButton2.style.display = 'none';
+
+        modalButton1.innerText = 'OK';
+        modalButton1.onclick = () => {
+            modal.style.display = 'none';
+            if (callback) {
+                callback();
+            }
+        };
+    }
+
+    // Funktion zum Anzeigen von benutzerdefinierten Nachrichten mit Buttontext
+    function showCustomMessage(message, buttonText, callback) {
+        const modal = document.getElementById('messageModal');
+        const modalMessage = document.getElementById('modalMessage');
+        const modalButton1 = document.getElementById('modalButton1');
+        const modalButton2 = document.getElementById('modalButton2');
+
+        modalMessage.innerHTML = message;
+        modal.style.display = 'block';
+
+        // Verstecke den zweiten Button standardmäßig
+        modalButton2.style.display = 'none';
+
+        modalButton1.innerText = buttonText;
+        modalButton1.onclick = () => {
+            modal.style.display = 'none';
+            if (callback) {
+                callback();
+            }
+        };
+    }
+
+    // Funktion zum Anzeigen der Endnachricht mit zwei Buttons
+    function showEndGameMessage(message) {
+        const modal = document.getElementById('messageModal');
+        const modalMessage = document.getElementById('modalMessage');
+        const modalButton1 = document.getElementById('modalButton1');
+        const modalButton2 = document.getElementById('modalButton2');
+
+        modalMessage.innerText = message;
+        modal.style.display = 'block';
+
+        modalButton1.innerText = 'Zur Startseite';
+        modalButton2.innerText = 'Neues Spiel';
+        modalButton2.style.display = 'inline-block';
+
+        modalButton1.onclick = () => {
+            modal.style.display = 'none';
+            window.location.href = 'index.html';
+        };
+
+        modalButton2.onclick = () => {
+            modal.style.display = 'none';
+            resetGame();
+        };
+    }
+
     // Entferne den "Show Solution" Button (falls vorhanden)
     const showSolutionButton = document.getElementById('showSolutionButton');
     if (showSolutionButton) {
         showSolutionButton.style.display = 'none';
     }
 });
+
+
 

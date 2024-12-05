@@ -1,53 +1,64 @@
+<!-- achievements.html -->
 <!DOCTYPE html>
 <html lang="de">
 <head>
-    <meta charset="UTF-8">
-    <title>Meine Achievements - Interaktive Schatzsuche</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- Eigene CSS-Datei -->
-    <link rel="stylesheet" href="Styles/styles.css">
+  <!-- ... (Ihr bestehender Code) -->
 </head>
 <body>
-<header class="container text-center my-5">
-    <h1>Meine Achievements</h1>
-</header>
+  <!-- ... (Ihr bestehender Code) -->
 
-<main class="container">
-    <div id="achievementsContainer">
-        <div class="achievement1">
-            <img src="Images/achievement1.png" alt="Achievement 1">
-            <h3>Achievement 1</h3>
-            <p>Erreicht am: 01.01.2021</p>
-        </div>
-        <div class="achievement2">
-            <img src="Images/achievement2.png" alt="Achievement 2">
-            <h3>Achievement 2</h3>
-            <p>Erreicht am: 01.01.2021</p>
-        </div>
-        <div class="achievement3">
-            <img src="Images/achievement3.png" alt="Achievement 3">
-            <h3>Achievement 3</h3>
-            <p>Erreicht am: 01.01.2021</p>
-        </div>
-        <div class="achievement4">
-            <img src="Images/achievement4.png" alt="Achievement 4">
-            <h3>Achievement 4</h3>
-            <p>Erreicht am: 01.01.2021</p>
-        </div>
-        <div class="achievement5">
-            <img src="Images/achievement5.png" alt="Achievement 5">
-            <h3>Achievement 5</h3>
-            <p>Erreicht am: 01.01.2021</p>
-        </div>
-    </div>
-</main>
+  <div class="container">
+    <h2>Statistiken</h2>
+    <p>Gesamte erspielte Punkte: <span id="totalPoints"></span></p>
+    <p>Anzahl der gespielten Spiele: <span id="gamesPlayed"></span></p>
+    <p>Durchschnittliche Punkte pro Spiel: <span id="averagePointsPerGame"></span></p>
+    <p>Durchschnittliche Punkte pro Runde: <span id="averagePointsPerRound"></span></p>
+    <p>Durchschnittliche Entfernung zum Ziel: <span id="averageDistance"></span> km</p>
 
-<footer class="container text-center my-5">
-    <a href="index.html" class="btn btn-primary">Zurück zur Startseite</a>
-</footer>
+    <h3>Verwendete Hinweise</h3>
+    <p>Text-Hinweise: <span id="totalTextHints"></span></p>
+    <p>Richtungs-Hinweise: <span id="totalDirectionHints"></span></p>
+    <p>Radius-Hinweise: <span id="totalRadiusHints"></span></p>
+    <p>Vibrations-Hinweise: <span id="totalVibrateHints"></span></p>
 
-<!-- JavaScript-Dateien -->
-<script src="Scripts/achievements.js"></script>
+    <h3>Gespielte Kategorien</h3>
+    <ul id="categoriesPlayedList"></ul>
+  </div>
+
+  <!-- Skript zum Laden der Statistiken -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const totalPoints = localStorage.getItem('totalPoints') || 0;
+      const gamesPlayed = localStorage.getItem('gamesPlayed') || 0;
+      const totalHintsUsed = JSON.parse(localStorage.getItem('totalHintsUsed')) || { text: 0, direction: 0, radius: 0, vibrate: 0 };
+      const categoriesPlayed = JSON.parse(localStorage.getItem('categoriesPlayed')) || [];
+
+      document.getElementById('totalPoints').innerText = totalPoints;
+      document.getElementById('gamesPlayed').innerText = gamesPlayed;
+
+      const averagePointsPerGame = gamesPlayed > 0 ? (totalPoints / gamesPlayed).toFixed(2) : 0;
+      document.getElementById('averagePointsPerGame').innerText = averagePointsPerGame;
+
+      // Durchschnittliche Punkte pro Runde und Entfernung zum Ziel
+      // Diese Werte müssen Sie entsprechend berechnen und im localStorage speichern
+      // Für dieses Beispiel setzen wir sie auf 0
+      document.getElementById('averagePointsPerRound').innerText = 'Wird noch berechnet';
+      document.getElementById('averageDistance').innerText = 'Wird noch berechnet';
+
+      document.getElementById('totalTextHints').innerText = totalHintsUsed.text;
+      document.getElementById('totalDirectionHints').innerText = totalHintsUsed.direction;
+      document.getElementById('totalRadiusHints').innerText = totalHintsUsed.radius;
+      document.getElementById('totalVibrateHints').innerText = totalHintsUsed.vibrate;
+
+      const categoriesList = document.getElementById('categoriesPlayedList');
+      categoriesPlayed.forEach((category) => {
+        const li = document.createElement('li');
+        li.innerText = category;
+        categoriesList.appendChild(li);
+      });
+    });
+  </script>
 </body>
 </html>
+
 
