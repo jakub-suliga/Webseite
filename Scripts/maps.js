@@ -1,7 +1,9 @@
 // Scripts/maps.js
 
 document.addEventListener('DOMContentLoaded', () => {
-    // Holds all riddles that match current filters
+    // Holds all riddles initially loaded from JSON
+    let allRiddles = [];
+    // Holds currently available riddles after filtering
     let riddles = [];
     // Holds all solved riddle IDs
     let solvedRiddles = JSON.parse(localStorage.getItem('solvedRiddles')) || [];
@@ -73,108 +75,17 @@ document.addEventListener('DOMContentLoaded', () => {
     const tutorialCloseButton = tutorialBox ? document.getElementById('tutorialCloseButton') : null;
     const tutorialCheckbox = tutorialBox ? document.getElementById('showTutorialCheckbox') : null;
 
-    // Check if geolocation is available
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(
-            position => {
-                const userLat = position.coords.latitude;
-                const userLon = position.coords.longitude;
-                currentCity = getCurrentCity(userLat, userLon);
-
-                if (currentCity) {
-                    map.setView([userLat, userLon], 18);
-                    userMarker = L.marker([userLat, userLon])
-                        .addTo(map)
-                        .bindPopup('Your position')
-                        .openPopup();
-
-                    loadRiddles();
-                    startWatchingPosition();
-                } else {
-                    showMessage('No riddles available at your current location.', () => {
-                        window.location.href = 'index.html';
-                    });
-                }
-            },
-            error => {
-                console.error('Geolocation error:', error);
-                showMessage('Location access is required to play.', () => {
-                    window.location.href = 'index.html';
-                });
-            },
-            { enableHighAccuracy: true, maximumAge: 0, timeout: 2000 }
-        );
-    } else {
-        showMessage('Geolocation is not supported by your browser.', () => {
-            window.location.href = 'index.html';
-        });
-    }
-
-    if (hintButton) {
-        hintButton.addEventListener('click', () => hintMenu.classList.toggle('show'));
-    }
-
-    if (logLocationButton) {
-        logLocationButton.addEventListener('click', () => {
-            clearInterval(roundTimer);
-            logPlayerLocation();
-        });
-    }
-
-    if (textHintButton) textHintButton.addEventListener('click', handleTextHint);
-    if (directionHintButton) directionHintButton.addEventListener('click', handleDirectionHint);
-    if (radiusHintButton) radiusHintButton.addEventListener('click', handleRadiusHint);
-
-    // Listen for device orientation to update fan direction
-    window.addEventListener('deviceorientation', (event) => {
-        const alpha = event.alpha; 
-        if (alpha !== null && userMarker) {
-            currentHeading = alpha * Math.PI / 180;
-            updateDeviceOrientationFan();
-        }
-    });
-
-    // Return the city based on user coordinates; only Karlsruhe is relevant now
-    function getCurrentCity(lat, lon) {
-        const bounds = cityBoundaries.Karlsruhe;
-        if (lat >= bounds.latMin && lat <= bounds.latMax && lon >= bounds.lonMin && lon <= bounds.lonMax) {
-            return 'Karlsruhe';
-        }
-        return null;
-    }
-
-    // Load riddles from JSON and filter them based on current location and solved status
-    function loadRiddles() {
-        fetch('Data/riddles.json')
+    // Load all riddles once
+    function initialLoadOfRiddles() {
+        return fetch('Data/riddles.json')
             .then(response => {
                 if (!response.ok) throw new Error('Network response was not ok');
                 return response.json();
             })
             .then(data => {
-                riddles = data.riddles
-                    .filter(r => !solvedRiddles.includes(r.id));
-
-                if (userMarker) {
-                    riddles = riddles.filter(r => {
-                        const dist = getDistance(userMarker.getLatLng().lat, userMarker.getLatLng().lng, r.latitude, r.longitude) / 1000;
-                        return dist <= maxDistance;
-                    });
-                }
-
-                const showTutorial = localStorage.getItem('showTutorial') === null || JSON.parse(localStorage.getItem('showTutorial')) === true;
-
-                if (riddles.length > 0) {
-                    if (round === 1 && showTutorial) {
-                        showInstructions();
-                    } else {
-                        startRound();
-                    }
-                } else {
-                    showMessage(
-                        'No riddles available within the set distance.',
-                        () => { window.location.href = 'index.html'; }
-                    );
-                }
+                // Store all riddles without filtering
+                allRiddles = data.riddles;
+                
             })
             .catch(error => {
                 console.error('Error loading riddles:', error);
@@ -182,7 +93,26 @@ document.addEventListener('DOMContentLoaded', () => {
             });
     }
 
-    // Show tutorial instructions if needed
+    // Filter riddles based on current position, solved, and distance
+    function filterRiddles() {
+        if (!allRiddles) return;
+        let userLat = null;
+        let userLon = null;
+        if (userMarker) {
+            userLat = userMarker.getLatLng().lat;
+            userLon = userMarker.getLatLng().lng;
+        }
+
+        riddles = allRiddles
+            .filter(r => !solvedRiddles.includes(r.id))
+            .filter(r => {
+                if (userLat === null || userLon === null) return true;
+                const dist = getDistance(userLat, userLon, r.latitude, r.longitude) / 1000;
+                return dist <= maxDistance;
+            });
+    }
+
+    // Show tutorial if needed, otherwise start round
     function showInstructions() {
         if (!tutorialBox || !tutorialContent || !tutorialCloseButton || !tutorialCheckbox) {
             startRound();
@@ -194,7 +124,7 @@ document.addEventListener('DOMContentLoaded', () => {
         <p>You will receive riddles leading you to real-world locations.</p>
         <p><strong>How it works:</strong></p>
         <ul>
-            <li>You get a riddle hinting at a specific place.</li>
+            <li>You get a riddle hinting at a specific place in Karlsruhe.</li>
             <li>Use hints if needed, each costs 100 points.</li>
             <li>The closer you are when logging your position, the more points you earn.</li>
             <li>Click "Log Location" when you believe you are at the correct spot.</li>
@@ -203,7 +133,7 @@ document.addEventListener('DOMContentLoaded', () => {
         <p><strong>Hints:</strong></p>
         <ul>
             <li><strong>Text Hint:</strong> Additional textual clues.</li>
-            <li><strong>Direction Hint:</strong> A sector showing the approximate direction.</li>
+            <li><strong>Direction Hint:</strong> A sector showing approximate direction.</li>
             <li><strong>Radius Hint:</strong> A circle showing the approximate area.</li>
         </ul>
         <p>Have fun!</p>
@@ -260,9 +190,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         enableHintButtons();
 
-        if (logLocationButton) {
-            logLocationButton.style.display = 'block';
-        }
+        if (logLocationButton) logLocationButton.style.display = 'block';
         if (continueButton) continueButton.style.display = 'none';
     }
 
@@ -441,6 +369,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 hintMenu.classList.remove('show');
             }
 
+            // After pressing continue, we only re-check position and filter riddles again
             navigator.geolocation.getCurrentPosition(position => {
                 const userLat = position.coords.latitude;
                 const userLon = position.coords.longitude;
@@ -448,8 +377,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     userMarker.setLatLng([userLat, userLon]);
                 }
 
-                // Reload riddles based on new position
-                loadRiddles();
+                // Instead of loading from JSON again, just re-filter existing allRiddles
+                filterRiddles();
                 round++;
                 startRound();
             }, showError, { enableHighAccuracy: true, maximumAge: 0, timeout: 5000 });
@@ -493,7 +422,7 @@ Average points per round: ${avgPointsPerRound}`;
         updatePointsDisplay();
         updateRoundUI();
         startWatchingPosition();
-        loadRiddles();
+        filterRiddles();
     }
 
     // Update UI elements for rounds and points
@@ -756,4 +685,73 @@ Average points per round: ${avgPointsPerRound}`;
             weight: 1
         }).addTo(map);
     }
+
+    // Begin initialization
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+            position => {
+                const userLat = position.coords.latitude;
+                const userLon = position.coords.longitude;
+                
+                    map.setView([userLat, userLon], 18);
+                    userMarker = L.marker([userLat, userLon])
+                        .addTo(map)
+                        .bindPopup('Your Position')
+                        .openPopup();
+
+                    initialLoadOfRiddles().then(() => {
+                        filterRiddles();
+                        startWatchingPosition();
+                        const showTutorial = localStorage.getItem('showTutorial') === null || JSON.parse(localStorage.getItem('showTutorial')) === true;
+                        
+                        if (riddles.length > 0) {
+                            if (round === 1 && showTutorial) {
+                                showInstructions();
+                            } else {
+                                startRound();
+                            }
+                        } else {
+                            showMessage('No riddles available at your current location.', () => {
+                                window.location.href = 'index.html';
+                            });
+                        }
+                    });
+                
+            },
+            error => {
+                console.error('Geolocation error:', error);
+                showMessage('Location access is required to play.', () => {
+                    window.location.href = 'index.html';
+                });
+            },
+            { enableHighAccuracy: true, maximumAge: 0, timeout: 2000 }
+        );
+    } else {
+        showMessage('Geolocation is not supported by your browser.', () => {
+            window.location.href = 'index.html';
+        });
+    }
+    if (hintButton) {
+        hintButton.addEventListener('click', () => hintMenu.classList.toggle('show'));
+    }
+
+    if (logLocationButton) {
+        logLocationButton.addEventListener('click', () => {
+            clearInterval(roundTimer);
+            logPlayerLocation();
+        });
+    }
+
+    if (textHintButton) textHintButton.addEventListener('click', handleTextHint);
+    if (directionHintButton) directionHintButton.addEventListener('click', handleDirectionHint);
+    if (radiusHintButton) radiusHintButton.addEventListener('click', handleRadiusHint);
+
+    // Listen for device orientation to update fan direction
+    window.addEventListener('deviceorientation', (event) => {
+        const alpha = event.alpha; 
+        if (alpha !== null && userMarker) {
+            currentHeading = alpha * Math.PI / 180;
+            updateDeviceOrientationFan();
+        }
+    });
 });
