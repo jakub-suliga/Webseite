@@ -105,7 +105,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     window.location.href = 'index.html';
                 });
             },
-            { enableHighAccuracy: true, maximumAge: 0, timeout: 5000 }
+            { enableHighAccuracy: true, maximumAge: 0, timeout: 2000 }
         );
     } else {
         showMessage('Geolocation wird von Ihrem Browser nicht unterstützt.', () => {
@@ -322,73 +322,75 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function logPlayerLocation() {
-        navigator.geolocation.getCurrentPosition(
-            position => {
-                const userLat = position.coords.latitude;
-                const userLon = position.coords.longitude;
-                const treasureLat = currentRiddle.latitude;
-                const treasureLon = currentRiddle.longitude;
-
-                const distance = getDistance(userLat, userLon, treasureLat, treasureLon);
-
-                let basePoints = 1000 - ((hintsUsed.text + hintsUsed.direction + hintsUsed.radius + hintsUsed.vibrate) * 100);
-                if (basePoints < 0) basePoints = 0;
-
-                let finalPoints = 0;
-                if (distance < 0.5) {
-                    finalPoints = 0;
-                } else if (distance <= 50) {
-                    finalPoints = basePoints;
-                } else {
-                    const maxDistForPoints = 500;
-                    if (distance >= maxDistForPoints) {
-                        finalPoints = 0;
-                    } else {
-                        const factor = 1 - ((distance - 50) / (maxDistForPoints - 50));
-                        finalPoints = Math.max(0, Math.floor(basePoints * factor));
-                    }
-                }
-
-                points += finalPoints;
-                updatePointsDisplay();
-
-                totalPoints += finalPoints;
-                localStorage.setItem('totalPoints', totalPoints);
-
-                totalHintsUsed.text += hintsUsed.text;
-                totalHintsUsed.direction += hintsUsed.direction;
-                totalHintsUsed.radius += hintsUsed.radius;
-                totalHintsUsed.vibrate += hintsUsed.vibrate;
-                localStorage.setItem('totalHintsUsed', JSON.stringify(totalHintsUsed));
-
-                let totalRoundsPlayed = parseInt(localStorage.getItem('totalRoundsPlayed'), 10) || 0;
-                totalRoundsPlayed++;
-                localStorage.setItem('totalRoundsPlayed', totalRoundsPlayed);
-
-                let storedTotalDistance = parseFloat(localStorage.getItem('totalDistance')) || 0;
-                storedTotalDistance += (distance / 1000);
-                localStorage.setItem('totalDistance', storedTotalDistance);
-
-                showSolution(userLat, userLon, treasureLat, treasureLon);
-                if (logLocationButton) logLocationButton.style.display = 'none';
-                if (continueButton) continueButton.style.display = 'block';
-
-                if (roundPointsEl) {
-                    roundPointsEl.innerText = `Rundenpunkte: ${finalPoints}`;
-                }
-
-                // Nach Standort einloggen: Hint-Buttons deaktivieren
-                disableAllHintButtons();
-
-                // Wenn das Hint-Menü noch offen ist, schließe es
-                if (hintMenu && hintMenu.classList.contains('show')) {
-                    hintMenu.classList.remove('show');
-                }
-            },
-            showError,
-            { enableHighAccuracy: true, maximumAge: 0, timeout: 5000 }
-        );
+        // Prüfen, ob bereits eine bekannte Nutzerposition vorhanden ist
+        if (!userMarker) {
+            console.error('Keine bekannte Nutzerposition vorhanden. Kann Standort nicht einloggen.');
+            showMessage('Standortbestimmung nicht möglich.', () => {});
+            return;
+        }
+    
+        const userLat = userMarker.getLatLng().lat;
+        const userLon = userMarker.getLatLng().lng;
+        const treasureLat = currentRiddle.latitude;
+        const treasureLon = currentRiddle.longitude;
+    
+        const distance = getDistance(userLat, userLon, treasureLat, treasureLon);
+    
+        let basePoints = 1000 - ((hintsUsed.text + hintsUsed.direction + hintsUsed.radius + hintsUsed.vibrate) * 100);
+        if (basePoints < 0) basePoints = 0;
+    
+        let finalPoints = 0;
+        if (distance < 0.5) {
+            finalPoints = 0;
+        } else if (distance <= 50) {
+            finalPoints = basePoints;
+        } else {
+            const maxDistForPoints = 500;
+            if (distance >= maxDistForPoints) {
+                finalPoints = 0;
+            } else {
+                const factor = 1 - ((distance - 50) / (maxDistForPoints - 50));
+                finalPoints = Math.max(0, Math.floor(basePoints * factor));
+            }
+        }
+    
+        points += finalPoints;
+        updatePointsDisplay();
+    
+        totalPoints += finalPoints;
+        localStorage.setItem('totalPoints', totalPoints);
+    
+        totalHintsUsed.text += hintsUsed.text;
+        totalHintsUsed.direction += hintsUsed.direction;
+        totalHintsUsed.radius += hintsUsed.radius;
+        totalHintsUsed.vibrate += hintsUsed.vibrate;
+        localStorage.setItem('totalHintsUsed', JSON.stringify(totalHintsUsed));
+    
+        let totalRoundsPlayed = parseInt(localStorage.getItem('totalRoundsPlayed'), 10) || 0;
+        totalRoundsPlayed++;
+        localStorage.setItem('totalRoundsPlayed', totalRoundsPlayed);
+    
+        let storedTotalDistance = parseFloat(localStorage.getItem('totalDistance')) || 0;
+        storedTotalDistance += (distance / 1000);
+        localStorage.setItem('totalDistance', storedTotalDistance);
+    
+        showSolution(userLat, userLon, treasureLat, treasureLon);
+        if (logLocationButton) logLocationButton.style.display = 'none';
+        if (continueButton) continueButton.style.display = 'block';
+    
+        if (roundPointsEl) {
+            roundPointsEl.innerText = `Rundenpunkte: ${finalPoints}`;
+        }
+    
+        // Nach Standort einloggen: Hint-Buttons deaktivieren
+        disableAllHintButtons();
+    
+        // Wenn das Hint-Menü noch offen ist, schließe es
+        if (hintMenu && hintMenu.classList.contains('show')) {
+            hintMenu.classList.remove('show');
+        }
     }
+    
 
     function disableAllHintButtons() {
         [textHintButton, directionHintButton, radiusHintButton, vibrateHintButton].forEach(btn => {
