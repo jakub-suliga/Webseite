@@ -1,60 +1,65 @@
-<!-- settings.html -->
 <!DOCTYPE html>
 <html lang="de">
 <head>
     <meta charset="UTF-8">
     <title>Einstellungen - Interaktive Schatzsuche</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="Styles/styles.css">
 </head>
 <body>
-    <nav class="navbar">
-        <!-- Zurück-Button ganz links -->
-        <a href="index.html" class="navbar-button back-button">⬅️</a>
+    <header>
+        <nav class="navbar">
+            <a href="index.html" class="navbar-button-back-button">⬅️</a>
+    
+            <!-- Play-Button in der Mitte -->
+            <a href="karte.html" class="navbar-button play-button">Spiel starten</a>
+    
+            <!-- Einstellungen-Button rechts -->
+            <div class="navbar-right">
+                <a href="achievements.html" class="navbar-button">
+                    <img src="Images/icons8-achievement-24.png" alt="Erfolge">
+                </a>
+                <a href="settings.html" class="navbar-button">
+                    <img src="Images/icons8-einstellungen.svg" alt="Einstellungen">
+                </a>
+            </div>
+        </nav>
+    </header>
 
-        <!-- Play-Button in der Mitte -->
-        <a href="karte.html" class="navbar-button play-button">Spiel starten</a>
+    <main class="container">
+        <div class="wrapper">
+            <div class="einstellungen">
+                <h1 class="page-title">Einstellungen</h1>
+                <form id="settingsForm">        
+                    <section class="mb-4" aria-labelledby="time-heading">
+                        <h2 id="time-heading" class="h4">Spielzeit pro Runde (in Minuten)</h2>
+                        <label for="gameTime" class="form-label">Legen Sie fest, wie lange eine Runde dauern soll:</label>
+                        <input type="number" id="gameTime" name="gameTime" class="form-control" min="1" max="60" value="5">
+                    </section>
 
-        <!-- Einstellungen-Button rechts -->
-        <div class="navbar-right">
-            <a href="achievements.html" class="navbar-button">
-                <img src="Images/icons8-achievement-24.png" alt="Erfolge">
-            </a>
-            <a href="settings.html" class="navbar-button">
-                <img src="Images/icons8-einstellungen.svg" alt="Einstellungen">
-            </a>
+                    <section class="mb-4" aria-labelledby="distance-heading">
+                        <h2 id="distance-heading" class="h4">Maximale Entfernung der Rätsel (in Kilometern)</h2>
+                        <label for="maxDistance" class="form-label">Legen Sie fest, wie weit entfernt Rätsel liegen dürfen:</label>
+                        <input type="number" id="maxDistance" name="maxDistance" class="form-control" min="0.1" max="20" step="0.1" value="1">
+                    </section>
+
+                    <section class="mb-4" aria-labelledby="rounds-heading">
+                        <h2 id="rounds-heading" class="h4">Anzahl der Runden</h2>
+                        <label for="numRounds" class="form-label">Wie viele Runden möchten Sie spielen?</label>
+                        <input type="number" id="numRounds" name="numRounds" class="form-control" min="1" max="10" value="3">
+                    </section>
+
+                    <button type="submit" class="btn btn-primary mt-3" aria-label="Einstellungen speichern">Speichern</button>
+                    <span id="saveMessage" class="save-success" style="display:none; color:green; margin-left:10px;">Erfolgreich gespeichert!</span>
+                </form>
+            </div>
         </div>
-    </nav>
-
-    <main class="container my-5">
-        <h1 class="page-title">Einstellungen</h1>
-        <form id="settingsForm">
-            <!-- Kategorienauswahl -->
-            <h4>Kategorien:</h4>
-            <label><input type="checkbox" name="category" value="Alle" checked> Alle Kategorien</label><br>
-            <label><input type="checkbox" name="category" value="Historische Gebäude"> Historische Gebäude</label><br>
-            <label><input type="checkbox" name="category" value="Parks und Natur"> Parks und Natur</label><br>
-            <label><input type="checkbox" name="category" value="Wissenschaft und Bildung"> Wissenschaft und Bildung</label><br>
-            <label><input type="checkbox" name="category" value="Verkehrsknotenpunkte"> Verkehrsknotenpunkte</label><br>
-            <label><input type="checkbox" name="category" value="Religiöse Stätten"> Religiöse Stätten</label><br>
-            <label><input type="checkbox" name="category" value="Sonstige Orte"> Sonstige Orte</label><br>
-
-            <!-- Spielzeit -->
-            <h4>Spielzeit pro Runde (in Minuten):</h4>
-            <input type="number" id="gameTime" name="gameTime" min="1" max="60" value="5">
-
-            <!-- Maximale Entfernung -->
-            <h4>Maximale Entfernung der Rätsel (in Kilometern):</h4>
-            <input type="number" id="maxDistance" name="maxDistance" min="0.1" max="20" step="0.1" value="1">
-
-            <!-- Anzahl der Runden -->
-            <h4>Anzahl der Runden:</h4>
-            <input type="number" id="numRounds" name="numRounds" min="1" max="10" value="3">
-
-            <button type="submit" class="btn btn-primary mt-3">Speichern</button>
-        </form>
     </main>
 
-    <!-- JavaScript-Dateien -->
+
     <script src="Scripts/settings.js"></script>
 </body>
 </html>
+

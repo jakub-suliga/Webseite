@@ -19,31 +19,36 @@
     --border-radius-large: 10px;
 }
 
-/* Global Styles */
 html, body {
     margin: 0;
     padding: 0;
-    overflow-x: hidden;
+    width: 100%;
+    height: 100%;
     color: var(--text-color);
     background-color: var(--background-color);
 }
 
+
 /* Hintergrund-Container */
 .background-container {
     width: 100%;
-    min-height: 100vh;
+    height: calc(100vh - 60px); /* Gesamthöhe minus Navbar */
     background-image: url("../Images/background.png");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 /* Navbar-Styling */
 .navbar {
+    position: relative;
     display: flex;
-    align-items: center;          /* Vertikale Zentrierung der Elemente */
-    justify-content: space-between; /* Verteilung der Elemente */
+    justify-content: center; /* Zentriert den Spiel starten-Button */
+    align-items: center;
     background: rgba(0, 0, 0, 0.5);
     height: 60px;
     padding: 0 20px;
@@ -59,30 +64,14 @@ html, body {
 }
 
 /* Zurück-Button spezifisch */
-.back-button {
-    font-size: 24px; /* Größe des Pfeils anpassen */
-}
-
-/* Play-Button spezifisch */
-.play-button {
-    background-color: black;
-    padding: 10px 20px;
-    border-radius: 5px;
-}
-
-.play-button:hover {
-    background-color: #333;
-}
-
-/* Einstellungen-Button spezifisch */
-.settings-button img {
-    width: 24px;
-    height: 24px;
-    filter: invert(100%);
-}
-
-.settings-button:hover img {
-    filter: invert(80%);
+.navbar-button-back-button {
+    position: absolute;
+    left: 20px; /* Platziert den Back-Button ganz links */
+    font-size: 24px;
+    text-decoration: none;
+    color: #fff;
+    display: flex;
+    align-items: center;
 }
 
 /* Icon Buttons */
@@ -97,62 +86,29 @@ html, body {
     filter: invert(80%);
 }
 
-.settings-button {
-    position: relative;
-    margin-left: auto;
-}
-
-.settings-button:hover .dropdown-content {
-    display: block;
-}
-
-.dropdown-content a {
-    display: block;
-    padding: 12px 16px;
-    color: var(--text-color);
-    text-decoration: none;
-}
-
-.dropdown-content a:hover {
-    background-color: #333;
-}
-
-/* Hintergrund-Text Styling */
-.background-text {
-    position: absolute;
-    top: 40%; /* Anpassung nach Bedarf */
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: var(--text-color);
-    font-size: 2.5em;
-    font-weight: bold;
-    text-align: center;
-    text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.7);
-}
-
-/* Play-Button */
 .navbar-button.play-button {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    padding: 10px 20px;
-    background-color: var(--background-color-lighter);
-    border: none;
+    background-color: var(--primary-color);
     border-radius: var(--border-radius-base);
     font-size: var(--font-size-base);
+    transition: background-color 0.3s;
     cursor: pointer;
-    text-align: center;
-    -webkit-border-radius: var(--border-radius-base);
-    -moz-border-radius: var(--border-radius-base);
-    -ms-border-radius: var(--border-radius-base);
-    -o-border-radius: var(--border-radius-base);
+    text-decoration: none;
+    color: #fff;
+    padding: 10px 20px;
 }
 
 .navbar-button.play-button:hover {
     background-color: #333;
 }
 
-/* Einführungstext Styling */
+.navbar-right {
+    position: absolute;
+    right: 20px; 
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
 .intro-text {
     margin: 20px auto;
     padding: 20px;
@@ -165,10 +121,38 @@ html, body {
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
 }
 
-/* Hintergrundfarbe für andere Seiten */
-body.other-page {
-    background-color: var(--background-color);
+/* Zentrierter Inhalt in der Mitte des Hintergrundbildes */
+.content-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+/* Der Text skaliert nun mit der Fenstergröße */
+.background-text {
     color: var(--text-color);
+    font-weight: bold;
+    text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.7);
+    font-size: 4vw; /* skaliert mit der Fensterbreite */
+    line-height: 1.2;
+    margin-bottom: 20px;
+}
+
+/* Haupt-Play-Button unter dem Text, ebenfalls skalierend */
+.main-play-button {
+    background-color: var(--primary-color);
+    color: #fff;
+    text-decoration: none;
+    padding: 15px 30px;
+    font-size: 2vw; /* skaliert mit Fensterbreite */
+    border-radius: var(--border-radius-large);
+    transition: background-color 0.3s;
+    cursor: pointer;
+}
+
+.main-play-button:hover {
+    background-color: #333;
 }
 
 /* Container-Styles für andere Seiten */
@@ -188,6 +172,10 @@ body.other-page {
     background-color: var(--background-color-light);
     padding: 20px;
     border-radius: var(--border-radius-large);
+    -webkit-border-radius: var(--border-radius-large);
+    -moz-border-radius: var(--border-radius-large);
+    -ms-border-radius: var(--border-radius-large);
+    -o-border-radius: var(--border-radius-large);
 }
 
 .stat-section {
@@ -196,6 +184,43 @@ body.other-page {
     padding: 15px;
     border-radius: var(--border-radius-large);
     margin-bottom: 20px;
+}
+
+.wrapper { 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--background-color-light);
+    padding: 20px;
+    border-radius: var(--border-radius-large);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    
+    /* bereits existierend, an Bedürfnisse angepasst */
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.einstellungen {
+    text-align: center;
+    background-color: var(--background-color-lighter);
+    padding: 15px;
+    border-radius: var(--border-radius-large);
+    margin-bottom: 20px;
+    
+    /* bereits existierend */
+    max-width: 500px;
+    margin: 0 auto; 
+}
+
+.einstellungen h2 {
+    color: var(--text-color);
+    margin-bottom: 20px; /* Abstand unter der Überschrift */
+}
+
+.einstellungen p {
+    color: var(--text-color-secondary);
+    margin-bottom: 10px; /* Abstand unter den Absätzen */
 }
 
 .stat-section h2 {
@@ -261,25 +286,31 @@ body.other-page {
     opacity: 0.5;
 }
 
-/* Footer */
-footer.container {
-    background-color: var(--background-color);
+.save-success {
+    color: green;
+    font-weight: bold;
 }
 
-/* Responsives Design */
+/* Responsive Anpassungen */
 @media (max-width: 768px) {
     .background-text {
-        font-size: 2em;
-        top: 35%; /* Anpassung für kleinere Bildschirme */
+        font-size: 6vw; /* Größer für kleinere Bildschirme */
     }
 
-    .navbar-button.play-button {
+    .main-play-button {
+        font-size: 4vw;
+    }
+
+    .play-button {
         font-size: var(--font-size-small);
         padding: 8px 16px;
-        top: 60%; /* Anpassung für kleinere Bildschirme */
     }
 
     .stat-section {
+        width: 100%;
+    }
+
+    .einstellungen {
         width: 100%;
     }
 
@@ -292,25 +323,4 @@ footer.container {
         margin: 15px 10px;
         padding: 15px;
     }
-}
-
-/* Weitere Anpassungen */
-body, html {
-    overflow-x: hidden;
-}
-
-/* Rechte Seite der Navbar */
-.navbar-right {
-    position: absolute;
-    right: 20px;
-    display: flex;
-    align-items: center;
-}
-
-/* Stil für die Seitenüberschrift */
-.page-title {
-    text-align: center;
-    font-size: 2.5em; /* Schriftgröße anpassen */
-    margin-top: 20px; /* Optional: Abstand nach oben */
-    color: var(--text-color); /* Verwende die vorhandene Textfarbe */
 }

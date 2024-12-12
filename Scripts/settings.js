@@ -12,60 +12,74 @@ document.addEventListener('DOMContentLoaded', () => {
     } else {
         console.error('Formular mit ID "settingsForm" wurde nicht gefunden.');
     }
+
+    // Logik für "Alle" Kategorie
+    const allCheckbox = document.querySelector('input[name="category"][value="Alle"]');
+    const categoryCheckboxes = document.querySelectorAll('input[name="category"]:not([value="Alle"])');
+
+    if (allCheckbox && categoryCheckboxes.length > 0) {
+        allCheckbox.addEventListener('change', () => {
+            if (allCheckbox.checked) {
+                categoryCheckboxes.forEach(cb => cb.checked = true);
+            } else {
+                categoryCheckboxes.forEach(cb => cb.checked = false);
+            }
+        });
+
+        categoryCheckboxes.forEach(cb => {
+            cb.addEventListener('change', () => {
+                if (!cb.checked) {
+                    // Wenn eine andere Kategorie abgewählt wird, "Alle" abwählen
+                    allCheckbox.checked = false;
+                } else {
+                    // Prüfen, ob jetzt alle anderen angehakt sind
+                    const allChecked = Array.from(categoryCheckboxes).every(c => c.checked);
+                    if (allChecked) {
+                        allCheckbox.checked = true;
+                    }
+                }
+            });
+        });
+    }
 });
 
 function loadSettings() {
-    // Kategorien laden
     const selectedCategories = JSON.parse(localStorage.getItem('selectedCategories')) || [];
     const checkboxes = document.querySelectorAll('input[name="category"]');
 
     checkboxes.forEach((checkbox) => {
-        if (selectedCategories.includes(checkbox.value)) {
+        if (selectedCategories.length === 0 && checkbox.value === 'Alle') {
             checkbox.checked = true;
         } else {
-            checkbox.checked = false;
-        }
-
-        // Spezielle Behandlung für "Alle" Checkbox
-        if (checkbox.value === 'Alle' && selectedCategories.length === 0) {
-            checkbox.checked = true;
+            checkbox.checked = selectedCategories.includes(checkbox.value);
         }
     });
 
-    // Spielzeit laden
-    const gameTime = parseInt(localStorage.getItem('gameTime'), 10) || 5;
     const gameTimeInput = document.getElementById('gameTime');
     if (gameTimeInput) {
-        gameTimeInput.value = gameTime;
+        gameTimeInput.value = parseInt(localStorage.getItem('gameTime'), 10) || 5;
     }
 
-    // Maximale Entfernung laden
-    const maxDistance = parseFloat(localStorage.getItem('maxDistance')) || 1;
     const maxDistanceInput = document.getElementById('maxDistance');
     if (maxDistanceInput) {
-        maxDistanceInput.value = maxDistance;
+        maxDistanceInput.value = parseFloat(localStorage.getItem('maxDistance')) || 1;
     }
 
-    // Anzahl der Runden laden
-    const numRounds = parseInt(localStorage.getItem('numRounds'), 10) || 3;
     const numRoundsInput = document.getElementById('numRounds');
     if (numRoundsInput) {
-        numRoundsInput.value = numRounds;
+        numRoundsInput.value = parseInt(localStorage.getItem('numRounds'), 10) || 3;
     }
 }
 
 function saveSettings() {
-    // Kategorien speichern
     let selectedCategories = [];
     const checkboxes = document.querySelectorAll('input[name="category"]:checked');
-
     checkboxes.forEach((checkbox) => {
         if (checkbox.value !== 'Alle') {
             selectedCategories.push(checkbox.value);
         }
     });
 
-    // Wenn 'Alle' ausgewählt ist oder keine spezifischen Kategorien, leere das Array
     const alleCheckbox = document.querySelector('input[name="category"][value="Alle"]');
     if (alleCheckbox && alleCheckbox.checked) {
         selectedCategories = [];
@@ -73,36 +87,41 @@ function saveSettings() {
 
     localStorage.setItem('selectedCategories', JSON.stringify(selectedCategories));
 
-    // Spielzeit speichern
     const gameTimeInput = document.getElementById('gameTime');
     if (gameTimeInput) {
         let gameTime = parseInt(gameTimeInput.value, 10);
         if (isNaN(gameTime) || gameTime < 1) {
-            gameTime = 5; // Standardwert
+            gameTime = 5;
         }
         localStorage.setItem('gameTime', gameTime);
     }
 
-    // Maximale Entfernung speichern
     const maxDistanceInput = document.getElementById('maxDistance');
     if (maxDistanceInput) {
         let maxDistance = parseFloat(maxDistanceInput.value);
         if (isNaN(maxDistance) || maxDistance < 0.1) {
-            maxDistance = 1; // Standardwert
+            maxDistance = 1;
         }
         localStorage.setItem('maxDistance', maxDistance);
     }
 
-    // Anzahl der Runden speichern
     const numRoundsInput = document.getElementById('numRounds');
     if (numRoundsInput) {
         let numRounds = parseInt(numRoundsInput.value, 10);
         if (isNaN(numRounds) || numRounds < 1) {
-            numRounds = 3; // Standardwert
+            numRounds = 3;
         }
         localStorage.setItem('numRounds', numRounds);
     }
 
-    alert('Einstellungen wurden gespeichert.');
+    const saveMessage = document.getElementById('saveMessage');
+    if (saveMessage) {
+        saveMessage.style.display = 'inline';
+        saveMessage.innerText = 'Erfolgreich gespeichert!';
+        setTimeout(() => {
+            saveMessage.style.display = 'none';
+        }, 3000);
+    }
 }
+
 

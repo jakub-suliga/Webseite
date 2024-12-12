@@ -1,25 +1,39 @@
-<!-- karte.html -->
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8">
-  <title>Schatzkarte - Interaktive Schatzsuche</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <title>Schatzkarte - Interaktive Schatzsuche</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <!-- Leaflet CSS für die Karte -->
-  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 
-  <!-- Eigene CSS-Datei -->
-  <link rel="stylesheet" href="Styles/karte.css">
+    <!-- Eigene CSS-Datei -->
+    <link rel="stylesheet" href="Styles/karte.css">
 
-  <!-- Optional: Bootstrap CSS für Styling (falls verwendet) -->
-  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
-  <!-- Karte -->
-  <div id="map"></div>  
+    <header class="p-2">
+        <nav aria-label="Hauptnavigation">
+            <a href="index.html" class="btn btn-light" aria-label="Zurück zur Startseite">← Zurück</a>
+        </nav>
+    </header>
 
-  <!-- Aktuelles Rätsel -->
+    <main>
+        <!-- Tutorial Box hinzugefügt -->
+        <div class="tutorial-box" style="display: none;">
+            <div class="tutorial-content"></div>
+            <div class="tutorial-footer">
+                <label><input type="checkbox" id="showTutorialCheckbox"> Tutorial beim nächsten Mal nicht mehr anzeigen</label><br>
+                <button id="tutorialCloseButton">Schließen</button>
+            </div>
+        </div>
+
+        <div id="map" role="application" aria-label="Interaktive Schatzkarte"></div>  
+
+        <!-- Aktuelles Rätsel -->
   <div id="riddleContainer" class="container">
     <h2 id="currentRiddle">Lade Rätsel...</h2>
     <p id="currentHint"></p>
@@ -33,38 +47,38 @@
   <!-- Button zum Fortfahren -->
   <button id="continueButton" class="btn btn-primary" style="display:none;">Weiter</button>
 
-  <!-- Kombinierter Hinweis-Button -->
-  <button id="hintButton" class="round-button">💡</button>
-  <div id="hintMenu" class="hint-menu">
-    <button id="textHintButton" class="btn btn-secondary btn-sm mb-2">Text-Tipp</button><br>
-    <button id="directionHintButton" class="btn btn-secondary btn-sm mb-2">Richtungs-Tipp</button><br>
-    <button id="radiusHintButton" class="btn btn-secondary btn-sm mb-2">Radius-Tipp</button><br>
-    <button id="vibrateHintButton" class="btn btn-secondary btn-sm">Vibrations-Tipp</button>
-  </div>
+        
+        
+        
+        
 
-  <!-- Game Stats -->
-  <div id="gameStats">
-    <div id="timer">Zeit: 00:00</div>
-    <div id="round">Runde: 1</div>
-    <div id="points">Punkte: 0</div>
-</div>
+        <div class="hint-container">
+            <button id="hintButton" class="round-button" aria-haspopup="true" aria-expanded="false" aria-label="Hinweis anzeigen oder verbergen">💡</button>
+            <div id="hintMenu" class="hint-menu" role="menu" aria-label="Hinweismenü">
+                <button id="textHintButton" class="btn btn-secondary btn-sm mb-2" role="menuitem" aria-label="Text-Hinweis anzeigen">Text-Tipp</button><br>
+                <button id="directionHintButton" class="btn btn-secondary btn-sm mb-2" role="menuitem" aria-label="Richtungs-Hinweis anzeigen">Richtungs-Tipp</button><br>
+                <button id="radiusHintButton" class="btn btn-secondary btn-sm mb-2" role="menuitem" aria-label="Radius-Hinweis anzeigen">Radius-Tipp</button><br>
+                <button id="vibrateHintButton" class="btn btn-secondary btn-sm" role="menuitem" aria-label="Vibrations-Hinweis aktivieren">Vibrations-Tipp</button>
+            </div>
+        </div>
 
-  <!-- Nachrichten-Modal -->
-  <div id="messageModal" class="modal">
-    <div class="modal-content">
-      <p id="modalMessage"></p>
-      <button id="modalButton1" class="btn btn-primary">OK</button>
-      <button id="modalButton2" class="btn btn-secondary" style="display: none;">Button 2</button>
-    </div>
-  </div>
+        <div id="gameStats" class="container mt-3" aria-label="Spiel-Statistiken">
+            <div id="timer">Zeit: 00:00</div>
+            <div id="round">Runde: 1</div>
+            <div id="points">Punkte: 0</div>
+        </div>
 
-  <!-- Leaflet JS für die Karte -->
-  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+        <div id="messageModal" class="modal">
+            <div class="modal-content">
+                <p id="modalMessage"></p>
+                <button id="modalButton1" class="btn btn-primary">OK</button>
+                <button id="modalButton2" class="btn btn-secondary" style="display: none;">Button 2</button>
+            </div>
+        </div>
+    </main>
 
-  <!-- Leaflet.PolylineDecorator für Pfeile -->
-  <script src="https://unpkg.com/leaflet-polylinedecorator@1.6.0/dist/leaflet.polylineDecorator.js"></script>
-
-  <!-- Eigene Skripte -->
-  <script src="Scripts/maps.js"></script>
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet-polylinedecorator@1.6.0/dist/leaflet.polylineDecorator.js"></script>
+    <script src="Scripts/maps.js"></script>
 </body>
 </html>

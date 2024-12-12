@@ -107,4 +107,3 @@ function displayAchievements() {
         achievementList.appendChild(div);
     });
 }
-

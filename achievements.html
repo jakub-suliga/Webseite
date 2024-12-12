@@ -5,33 +5,31 @@
     <title>Erfolge - Interaktive Schatzsuche</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- Bootstrap CSS für Styling -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-
-    <!-- Eigene CSS-Datei -->
     <link rel="stylesheet" href="Styles/styles.css">
 </head>
 <body>
-    <nav class="navbar">
-        <!-- Zurück-Button ganz links -->
-        <a href="index.html" class="navbar-button back-button">⬅️</a>
+    <header>
+        <nav class="navbar">
+            <a href="index.html" class="navbar-button-back-button">⬅️</a>
+    
+            <!-- Play-Button in der Mitte -->
+            <a href="karte.html" class="navbar-button play-button">Spiel starten</a>
+    
+            <!-- Einstellungen-Button rechts -->
+            <div class="navbar-right">
+                <a href="achievements.html" class="navbar-button">
+                    <img src="Images/icons8-achievement-24.png" alt="Erfolge">
+                </a>
+                <a href="settings.html" class="navbar-button">
+                    <img src="Images/icons8-einstellungen.svg" alt="Einstellungen">
+                </a>
+            </div>
+        </nav>
+    </header>
 
-        <!-- Play-Button in der Mitte -->
-        <a href="karte.html" class="navbar-button play-button">Spiel starten</a>
-
-        <!-- Einstellungen-Button rechts -->
-        <div class="navbar-right">
-            <a href="achievements.html" class="navbar-button">
-                <img src="Images/icons8-achievement-24.png" alt="Erfolge">
-            </a>
-            <a href="settings.html" class="navbar-button">
-                <img src="Images/icons8-einstellungen.svg" alt="Einstellungen">
-            </a>
-        </div>
-    </nav>
-
-    <!-- Hauptinhalt -->
-    <div class="container">
+   <!-- Hauptinhalt -->
+   <div class="container">
         <!-- Statistiken -->
         <div class="statistics">
             <div class="stat-section">
@@ -53,10 +51,10 @@
         </div>
 
         <!-- Gespielte Kategorien -->
-<div class="categories-played">
-    <h2>Kategorien</h2>
-    <ul id="categoriesPlayedList"></ul>
-</div>
+        <div class="categories-played">
+        <h2>Kategorien</h2>
+        <ul id="categoriesPlayedList"></ul>
+        </div>
 
 
         <!-- Achievements -->
@@ -68,9 +66,7 @@
         </div>
     </div>
 
-    <!-- Eigene Skripte -->
-    <script src="Scripts/achievements.js"></script>
+<!-- Eigene Skripte -->
+<script src="Scripts/achievements.js"></script>
 </body>
 </html>
-
-
