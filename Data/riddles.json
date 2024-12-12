@@ -2,8 +2,6 @@
   "riddles": [
     {
       "id": 1,
-      "city": "Karlsruhe",
-      "category": "Historische Gebäude",
       "question": "Ich bin das Herz der Stadt, von dem aus die Straßen wie Sonnenstrahlen in alle Richtungen führen. Du solltest meinen Haupteingang aufsuchen, um Zugang zu einem Museum und einem Turm mit Aussichtsplattform zu erhalten. Wo bin ich?",
       "answer": "Schloss Karlsruhe",
       "latitude": 49.0140,
@@ -12,14 +10,10 @@
         "Ich wurde im 18. Jahrhundert erbaut und bin das Wahrzeichen der Stadt.",
         "Mein Park lädt zum Spazieren und Verweilen ein.",
         "Mein Turm bietet einen Blick über ganz Karlsruhe."
-      ],
-      "points": 100,
-      "proximity": 100
+      ]
     },
     {
       "id": 2,
-      "city": "Karlsruhe",
-      "category": "Parks und Natur",
       "question": "An meinem Ort wachsen Pflanzen aus aller Welt. Um meine exotischen Gewächshäuser zu entdecken, begib dich zum Eingang an der Nordseite. Wo bin ich?",
       "answer": "Botanischer Garten Karlsruhe",
       "latitude": 49.0149,
@@ -28,14 +22,10 @@
         "Ich wurde im 19. Jahrhundert von Heinrich Hübsch gestaltet.",
         "Ich bin ein Ort der Ruhe mitten in der Stadt.",
         "Meine Gewächshäuser beherbergen tropische und subtropische Pflanzen."
-      ],
-      "points": 100,
-      "proximity": 100
+      ]
     },
     {
       "id": 3,
-      "city": "Karlsruhe",
-      "category": "Historische Gebäude",
       "question": "Ich bin ein einzigartiges Bauwerk auf dem Marktplatz, und unter mir ruht der Gründer der Stadt. Begib dich zu meiner Basis, direkt auf dem Marktplatz, um mich zu finden. Wo bin ich?",
       "answer": "Karlsruher Pyramide",
       "latitude": 49.0097,
@@ -44,14 +34,10 @@
         "Ich bin eine rote Sandsteinpyramide im Zentrum von Karlsruhe.",
         "Ich wurde über der Gruft von Markgraf Karl Wilhelm errichtet.",
         "Ich bin ein Wahrzeichen der Stadt und stehe auf dem Marktplatz."
-      ],
-      "points": 100,
-      "proximity": 100
+      ]
     },
     {
       "id": 4,
-      "city": "Karlsruhe",
-      "category": "Wissenschaft und Bildung",
       "question": "Ich bin ein weltweit einzigartiges Kulturinstitut, das Kunst, Medien und Technologie verbindet. Du kannst mich durch meinen Haupteingang betreten, der durch eine große Glasfassade erkennbar ist. Wo bin ich?",
       "answer": "ZKM | Zentrum für Kunst und Medien Karlsruhe",
       "latitude": 49.0014,
@@ -60,14 +46,10 @@
         "Ich befinde mich in einem ehemaligen Industriebau, der Munitionsfabrik.",
         "Ich werde oft als 'elektronisches oder digitales Bauhaus' bezeichnet.",
         "Mein Name steht für Innovation in Kunst und Medien."
-      ],
-      "points": 100,
-      "proximity": 100
+      ]
     },
     {
       "id": 5,
-      "city": "Karlsruhe",
-      "category": "Wissenschaft und Bildung",
       "question": "Ich beherberge eine der bedeutendsten Kunstsammlungen Deutschlands mit Werken vom Mittelalter bis zur Gegenwart. Um mich zu besuchen, suche meinen Haupteingang an der Westseite auf. Wo bin ich?",
       "answer": "Staatliche Kunsthalle Karlsruhe",
       "latitude": 49.0095,
@@ -76,14 +58,10 @@
         "Ich wurde im 19. Jahrhundert gegründet.",
         "Ich besitze eine umfangreiche Sammlung von Gemälden und Skulpturen.",
         "Mein Gebäude ist ein Beispiel klassizistischer Architektur."
-      ],
-      "points": 100,
-      "proximity": 100
+      ]
     },
     {
       "id": 6,
-      "city": "Karlsruhe",
-      "category": "Parks und Natur",
       "question": "An meinem Ort kannst du Tiere aus aller Welt sehen und durch wunderschöne Gärten spazieren. Begib dich zu meinem Haupteingang auf der Südseite, um deinen Besuch zu starten. Wo bin ich?",
       "answer": "Zoologischer Stadtgarten Karlsruhe",
       "latitude": 48.9930,
@@ -92,14 +70,10 @@
         "Ich bin einer der ältesten Zoos in Deutschland.",
         "Ich kombiniere Zoo und botanischen Garten.",
         "Meine Flamingos und Eisbären sind besonders beliebt."
-      ],
-      "points": 100,
-      "proximity": 100
+      ]
     },
     {
       "id": 7,
-      "city": "Karlsruhe",
-      "category": "Parks und Natur",
       "question": "Ich bin ein Berg am Rande der Stadt mit einer Burgruine auf meinem Gipfel. Um die Aussicht zu genießen, fahre mit der Standseilbahn oder erklimme die Stufen bis zur Aussichtsplattform. Wo bin ich?",
       "answer": "Turmberg Durlach",
       "latitude": 49.0039,
@@ -114,8 +88,6 @@
     },
     {
       "id": 8,
-      "city": "Karlsruhe",
-      "category": "Verkehrsknotenpunkte",
       "question": "Ich bin das Zentrum der Stadt, umgeben von Geschäften und Cafés. Komm direkt zu meiner Mitte, um meine Pyramide zu sehen, die ein Wahrzeichen von Karlsruhe ist. Wo bin ich?",
       "answer": "Marktplatz Karlsruhe",
       "latitude": 49.0097,
@@ -124,14 +96,10 @@
         "Unter meiner Pyramide liegt der Gründer der Stadt begraben.",
         "Ich bin ein beliebter Treffpunkt für Einheimische und Touristen.",
         "Hier findet auch der Weihnachtsmarkt statt."
-      ],
-      "points": 100,
-      "proximity": 100
+      ]
     },
     {
       "id": 9,
-      "city": "Karlsruhe",
-      "category": "Religiöse Stätten",
       "question": "Ich bin ein Gotteshaus im Herzen der Stadt, mit klassizistischer Architektur und einem beeindruckenden Innenraum. Um mich zu betreten, suche meinen Haupteingang an der Westseite. Wo bin ich?",
       "answer": "Evangelische Stadtkirche Karlsruhe",
       "latitude": 49.0095,
@@ -140,14 +108,10 @@
         "Ich wurde im 19. Jahrhundert von Friedrich Weinbrenner erbaut.",
         "Mein Turm ist 61 Meter hoch.",
         "Ich bin bekannt für meine Orgelkonzerte."
-      ],
-      "points": 100,
-      "proximity": 100
+      ]
     },
     {
       "id": 10,
-      "city": "Karlsruhe",
-      "category": "Verkehrsknotenpunkte",
       "question": "Ich bin ein modernes Einkaufszentrum im Herzen von Karlsruhe mit über 130 Geschäften. Begib dich zu meinem Haupteingang, um mich zu erkunden. Wo bin ich?",
       "answer": "Ettlinger Tor Karlsruhe",
       "latitude": 49.0039,
@@ -156,14 +120,10 @@
         "Ich wurde 2005 eröffnet.",
         "Mein Name erinnert an ein altes Stadttor, das einst hier stand.",
         "Ich bin das größte innerstädtische Einkaufszentrum in Süddeutschland."
-      ],
-      "points": 100,
-      "proximity": 100
+      ]
     },
     {
       "id": 11,
-      "city": "Karlsruhe",
-      "category": "Parks und Natur",
       "question": "Ich bin eine große Grünanlage mit Hügeln, Seen und einem bekannten Festival. Um mich zu besuchen, starte deinen Weg am Haupteingang an der Westseite. Wo bin ich?",
       "answer": "Günther-Klotz-Anlage",
       "latitude": 48.9967,
@@ -172,14 +132,10 @@
         "Ich bin Heimat des 'Das Fest', eines der größten Open-Air-Festivals in Deutschland.",
         "Ich bin nach einem ehemaligen Bürgermeister von Karlsruhe benannt.",
         "Meine Hügel bieten einen schönen Blick über die Anlage."
-      ],
-      "points": 100,
-      "proximity": 100
+      ]
     },
     {
       "id": 12,
-      "city": "Karlsruhe",
-      "category": "Wissenschaft und Bildung",
       "question": "Ich bin das höchste deutsche Gericht in Zivilsachen und gehöre zur rechtsprechenden Gewalt. Begib dich zu meinem Eingang hinter den Treppenstufen, um mich zu finden. Wo bin ich?",
       "answer": "Bundesgerichtshof",
       "latitude": 49.0069,
@@ -188,14 +144,10 @@
         "Ich wurde 1950 gegründet.",
         "Mein Gebäude ist ein ehemaliges Residenzschloss.",
         "Ich bin nicht zu verwechseln mit dem Bundesverfassungsgericht."
-      ],
-      "points": 100,
-      "proximity": 100
+      ]
     },
     {
       "id": 13,
-      "city": "Karlsruhe",
-      "category": "Wissenschaft und Bildung",
       "question": "Ich bin ein Museum im Schloss Karlsruhe und zeige die Kulturgeschichte von der Urzeit bis zur Gegenwart. Gehe zum Haupteingang des Schlosses, um mich zu betreten. Wo bin ich?",
       "answer": "Badisches Landesmuseum",
       "latitude": 49.0140,
@@ -210,8 +162,6 @@
     },
     {
       "id": 14,
-      "city": "Karlsruhe",
-      "category": "Historische Gebäude",
       "question": "Ich bin der älteste Stadtteil von Karlsruhe mit malerischen Gassen und Fachwerkhäusern. Starte deinen Spaziergang im Zentrum meines Viertels, an der Karlsburg. Wo bin ich?",
       "answer": "Durlach Altstadt",
       "latitude": 49.0043,
@@ -226,8 +176,6 @@
     },
     {
       "id": 15,
-      "city": "Karlsruhe",
-      "category": "Historische Gebäude",
       "question": "Ich bin ein historisches Gebäude in Karlsruhe, das heute als Kulturzentrum mit Bibliothek und Museum dient. Begib dich zu meinem Haupteingang, um mich zu erkunden. Wo bin ich?",
       "answer": "Prinz-Max-Palais",
       "latitude": 49.0133,
@@ -236,14 +184,10 @@
         "Ich wurde nach Prinz Max von Baden benannt.",
         "Ich beherberge das Stadtmuseum Karlsruhe.",
         "Mein Gebäude ist ein Beispiel für Neorenaissance-Architektur."
-      ],
-      "points": 100,
-      "proximity": 100
+      ]
     },
     {
       "id": 16,
-      "city": "Karlsruhe",
-      "category": "Sonstige Orte",
       "question": "Ich bin die letzte Keramikmanufaktur Deutschlands, gegründet 1901. Um mich zu entdecken, gehe zu meinem Eingang an der Südseite des Geländes. Wo bin ich?",
       "answer": "Majolika Manufaktur Karlsruhe",
       "latitude": 49.0098,
@@ -252,14 +196,10 @@
         "Ich bin bekannt für meine blau-weißen Keramikarbeiten.",
         "Ich liege am Rande des Hardtwalds.",
         "In meinem Museum kannst du Werke berühmter Künstler sehen."
-      ],
-      "points": 100,
-      "proximity": 100
+      ]
     },
     {
       "id": 17,
-      "city": "Karlsruhe",
-      "category": "Wissenschaft und Bildung",
       "question": "Ich bin eine renommierte Universität und Forschungseinrichtung, bekannt für Technik und Naturwissenschaften. Besuche meinen Campus und starte deine Suche am Haupteingang. Wo bin ich?",
       "answer": "Karlsruher Institut für Technologie",
       "latitude": 49.0119,
@@ -268,14 +208,10 @@
         "Ich entstand 2009 durch die Fusion von Universität und Forschungszentrum.",
         "Mein Motto ist 'Die Forschungsuniversität in der Helmholtz-Gemeinschaft'.",
         "Ich bin eine der größten Forschungseinrichtungen Deutschlands."
-      ],
-      "points": 100,
-      "proximity": 100
+      ]
     },
     {
       "id": 18,
-      "city": "Karlsruhe",
-      "category": "Wissenschaft und Bildung",
       "question": "In meinen Hallen kannst du Dinosaurier treffen und mehr über die Natur erfahren. Gehe zu meinem Haupteingang, um mich zu betreten. Wo bin ich?",
       "answer": "Staatliches Museum für Naturkunde Karlsruhe",
       "latitude": 49.0091,
@@ -284,14 +220,10 @@
         "Ich bin eines der größten Naturkundemuseen in Deutschland.",
         "Meine Dauerausstellung umfasst Themen von der Urzeit bis zur Gegenwart.",
         "Ich habe ein Vivarium mit lebenden Tieren."
-      ],
-      "points": 100,
-      "proximity": 100
+      ]
     },
     {
       "id": 19,
-      "city": "Karlsruhe",
-      "category": "Religiöse Stätten",
       "question": "Ich bin das älteste Kirchengebäude der Stadt, versteckt zwischen den modernen Gebäuden des Zentrums. Um mich zu besuchen, suche den Eingang direkt neben dem Marktplatz. Wo bin ich?",
       "answer": "Kleine Kirche Karlsruhe",
       "latitude": 49.0090,
@@ -300,14 +232,10 @@
         "Ich wurde im 18. Jahrhundert erbaut.",
         "Ich liege direkt neben dem Marktplatz.",
         "Mein schlichter Baustil unterscheidet mich von anderen Kirchen."
-      ],
-      "points": 100,
-      "proximity": 100
+      ]
     },
     {
       "id": 20,
-      "city": "Karlsruhe",
-      "category": "Verkehrsknotenpunkte",
       "question": "Ich bin ein zentraler Platz in Karlsruhe, benannt nach einem Kontinent. Hier treffen sich viele Straßenbahnlinien. Um mich zu erleben, suche meine Mitte, wo die Straßenbahnen halten. Wo bin ich?",
       "answer": "Europaplatz Karlsruhe",
       "latitude": 49.0070,
@@ -316,14 +244,10 @@
         "Ich war früher als 'Ludwigsplatz' bekannt.",
         "Ich bin ein wichtiger Knotenpunkt für den öffentlichen Nahverkehr.",
         "Rund um mich gibt es viele Einkaufsmöglichkeiten."
-      ],
-      "points": 100,
-      "proximity": 100
+      ]
     },
     {
       "id": 21,
-      "city": "Karlsruhe",
-      "category": "Parks und Natur",
       "question": "Ich bin ein kleiner Park, der für seine Springbrunnen bekannt ist. Suche meinen zentralen Platz, um die Fontänen zu sehen. Wo bin ich?",
       "answer": "Friedrichsplatz Karlsruhe",
       "latitude": 49.0080,
@@ -332,14 +256,10 @@
         "Ich liege in der Nähe der Staatlichen Kunsthalle.",
         "Ich bin von klassizistischer Architektur umgeben.",
         "Mein Springbrunnen ist ein beliebtes Fotomotiv."
-      ],
-      "points": 100,
-      "proximity": 100
+      ]
     },
     {
       "id": 22,
-      "city": "Karlsruhe",
-      "category": "Wissenschaft und Bildung",
       "question": "Ich bin eine große Bibliothek mit einer Sammlung von Büchern und Medien für Forschung und Studium. Suche meinen Haupteingang im Zentrum des Campus. Wo bin ich?",
       "answer": "KIT-Bibliothek",
       "latitude": 49.0116,
@@ -348,14 +268,10 @@
         "Ich bin ein wichtiger Lernort für Studenten.",
         "Ich biete auch digitale Medien und Arbeitsplätze.",
         "Mein modernes Gebäude ist ein Blickfang auf dem Campus."
-      ],
-      "points": 100,
-      "proximity": 100
+      ]
     },
     {
       "id": 23,
-      "city": "Karlsruhe",
-      "category": "Parks und Natur",
       "question": "Ich bin ein botanischer Garten, der sich auf Heil- und Nutzpflanzen spezialisiert hat. Suche meinen Eingang am Rand des Schlossgartens. Wo bin ich?",
       "answer": "Apothekergarten Karlsruhe",
       "latitude": 49.0144,
@@ -364,14 +280,10 @@
         "Ich bin ein kleiner Teil des Schlossgartens.",
         "Meine Pflanzen werden oft für medizinische Zwecke verwendet.",
         "Ich bin ein Ort der Ruhe und des Wissens."
-      ],
-      "points": 100,
-      "proximity": 100
+      ]
     },
     {
       "id": 24,
-      "city": "Karlsruhe",
-      "category": "Historische Gebäude",
       "question": "Ich bin ein beeindruckendes Theatergebäude mit regelmäßigen Aufführungen. Begib dich zu meinem Haupteingang, um mich näher kennenzulernen. Wo bin ich?",
       "answer": "Badisches Staatstheater Karlsruhe",
       "latitude": 49.0028,
@@ -380,14 +292,10 @@
         "Ich bin ein kultureller Treffpunkt der Stadt.",
         "Ich biete Opern, Theater und Ballett.",
         "Mein modernes Gebäude hebt sich von der Umgebung ab."
-      ],
-      "points": 100,
-      "proximity": 100
+      ]
     },
     {
       "id": 25,
-      "city": "Karlsruhe",
-      "category": "Wissenschaft und Bildung",
       "question": "Ich bin eine naturwissenschaftliche Sammlung mit interaktiven Ausstellungen. Suche meinen Haupteingang, um mehr über Wissenschaft zu erfahren. Wo bin ich?",
       "answer": "Experimenta Karlsruhe",
       "latitude": 49.0085,
@@ -396,14 +304,10 @@
         "Ich bin besonders bei Familien und Schulklassen beliebt.",
         "Ich biete hands-on Erlebnisse.",
         "Meine Themen reichen von Physik bis zu Biologie."
-      ],
-      "points": 100,
-      "proximity": 100
+      ]
     },
     {
       "id": 26,
-      "city": "Karlsruhe",
-      "category": "Parks und Natur",
       "question": "Ich bin ein kleiner Wald am Stadtrand, ideal für Spaziergänge und Joggen. Suche den Startpunkt meiner Hauptwege am Parkplatz. Wo bin ich?",
       "answer": "Hardtwald Karlsruhe",
       "latitude": 49.0340,
@@ -412,14 +316,10 @@
         "Ich bin ein beliebter Ort für Outdoor-Aktivitäten.",
         "Ich bin Heimat vieler Vogelarten.",
         "Mein Name bedeutet 'Harter Wald'."
-      ],
-      "points": 100,
-      "proximity": 100
+      ]
     },
     {
       "id": 27,
-      "city": "Karlsruhe",
-      "category": "Historische Gebäude",
       "question": "Ich bin ein kleiner Pavillon im Schlossgarten, der für Veranstaltungen genutzt wird. Suche meinen Eingang am Rande des Hauptweges. Wo bin ich?",
       "answer": "Schlosspavillon Karlsruhe",
       "latitude": 49.0142,
@@ -428,14 +328,10 @@
         "Ich bin von Blumenbeeten umgeben.",
         "Ich diene manchmal als Bühne für Musik.",
         "Mein Baujahr geht ins 19. Jahrhundert zurück."
-      ],
-      "points": 100,
-      "proximity": 100
+      ]
     },
     {
       "id": 28,
-      "city": "Karlsruhe",
-      "category": "Religiöse Stätten",
       "question": "Ich bin eine katholische Kirche mit beeindruckenden Glasfenstern. Suche meinen Haupteingang direkt an der Straßenkreuzung. Wo bin ich?",
       "answer": "St. Stephan Karlsruhe",
       "latitude": 49.0093,
@@ -444,14 +340,10 @@
         "Ich wurde im klassizistischen Stil erbaut.",
         "Mein Innenraum ist schlicht und hell.",
         "Ich bin ein Ort für Gottesdienste und Konzerte."
-      ],
-      "points": 100,
-      "proximity": 100
+      ]
     },
     {
       "id": 29,
-      "city": "Karlsruhe",
-      "category": "Wissenschaft und Bildung",
       "question": "Ich bin ein Platz der Wissenschaft mit mehreren Gebäuden für Forschung und Lehre. Suche den zentralen Platz, um die Wissenschaft zu erleben. Wo bin ich?",
       "answer": "Campus Süd KIT Karlsruhe",
       "latitude": 49.0115,
@@ -460,14 +352,10 @@
         "Ich bin das Zentrum des KIT.",
         "Ich beherberge Fakultäten für Naturwissenschaften und Technik.",
         "Meine Gebäude haben eine Mischung aus Alt und Neu."
-      ],
-      "points": 100,
-      "proximity": 100
+      ]
     },
     {
       "id": 30,
-      "city": "Karlsruhe",
-      "category": "Parks und Natur",
       "question": "Ich bin ein Park mit weitläufigen Grünflächen und einem kleinen See. Suche meinen Haupteingang, um deine Erkundung zu starten. Wo bin ich?",
       "answer": "Oberwald Karlsruhe",
       "latitude": 49.0055,
@@ -476,14 +364,10 @@
         "Ich bin ein beliebter Ort für Spaziergänge und Tierbeobachtungen.",
         "Mein See ist Heimat vieler Enten und Schwäne.",
         "Ich biete einen ruhigen Rückzugsort in Stadtnähe."
-      ],
-      "points": 100,
-      "proximity": 100
+      ]
     },
     {
       "id": 31,
-      "city": "Karlsruhe",
-      "category": "Sonstige Orte",
       "question": "Ich bin ein Veranstaltungsort für große Messen und Events. Suche meinen Haupteingang, um mich zu betreten. Wo bin ich?",
       "answer": "Messe Karlsruhe",
       "latitude": 48.9821,
@@ -492,14 +376,10 @@
         "Ich bin bekannt für internationale Ausstellungen.",
         "Mein modernes Design fällt sofort ins Auge.",
         "Ich liege am Stadtrand von Karlsruhe."
-      ],
-      "points": 100,
-      "proximity": 100
+      ]
     },
     {
       "id": 32,
-      "city": "Karlsruhe",
-      "category": "Religiöse Stätten",
       "question": "Ich bin eine Synagoge mit einer markanten Kuppel. Suche meinen Haupteingang, um mehr über mich zu erfahren. Wo bin ich?",
       "answer": "Synagoge Karlsruhe",
       "latitude": 49.0105,
@@ -508,14 +388,10 @@
         "Ich bin ein wichtiges Zentrum der jüdischen Gemeinde.",
         "Mein Gebäude wurde nach dem Zweiten Weltkrieg neu errichtet.",
         "Ich habe eine markante moderne Architektur."
-      ],
-      "points": 100,
-      "proximity": 100
+      ]
     },
     {
       "id": 33,
-      "city": "Karlsruhe",
-      "category": "Parks und Natur",
       "question": "Ich bin ein kleiner See, umgeben von einem dichten Wald. Suche den Parkplatz am Westufer, um deine Wanderung zu starten. Wo bin ich?",
       "answer": "Epplesee Karlsruhe",
       "latitude": 48.9664,
@@ -524,14 +400,10 @@
         "Ich bin ein beliebter Ort für Schwimmen und Picknicks.",
         "Ich liege etwas außerhalb des Stadtzentrums.",
         "Mein Wasser ist von hoher Qualität."
-      ],
-      "points": 100,
-      "proximity": 100
+      ]
     },
     {
       "id": 34,
-      "city": "Karlsruhe",
-      "category": "Historische Gebäude",
       "question": "Ich bin ein altes Rathausgebäude mit einem prächtigen Glockenturm. Suche den Haupteingang am Marktplatz, um mich zu entdecken. Wo bin ich?",
       "answer": "Altes Rathaus Karlsruhe",
       "latitude": 49.0097,
@@ -540,14 +412,10 @@
         "Ich wurde im klassizistischen Stil erbaut.",
         "Mein Glockenspiel ist weithin bekannt.",
         "Ich bin eines der zentralen Gebäude der Stadtgeschichte."
-      ],
-      "points": 100,
-      "proximity": 100
+      ]
     },
     {
       "id": 35,
-      "city": "Karlsruhe",
-      "category": "Sonstige Orte",
       "question": "Ich bin ein großer Sportpark mit mehreren Spielfeldern und einer Laufbahn. Suche den Haupteingang an der Südseite, um mich zu betreten. Wo bin ich?",
       "answer": "Sportpark Karlsruhe",
       "latitude": 49.0002,
@@ -556,14 +424,10 @@
         "Ich bin ein Zentrum für Sport und Freizeitaktivitäten.",
         "Ich biete Trainingsmöglichkeiten für Leichtathletik und Teamsportarten.",
         "Ich bin Austragungsort von lokalen und regionalen Wettkämpfen."
-      ],
-      "points": 100,
-      "proximity": 100
+      ]
     },
     {
       "id": 36,
-      "city": "Karlsruhe",
-      "category": "Wissenschaft und Bildung",
       "question": "Ich bin ein Planetarium, in dem du die Sterne erkunden kannst. Suche meinen Eingang an der Südseite meines Gebäudes. Wo bin ich?",
       "answer": "Planetarium Karlsruhe",
       "latitude": 49.0109,
@@ -572,14 +436,10 @@
         "Ich bin ein Ort, um mehr über Astronomie zu lernen.",
         "Meine Kuppelprojektionen sind beeindruckend.",
         "Ich biete auch Shows für Kinder an."
-      ],
-      "points": 100,
-      "proximity": 100
+      ]
     },
     {
       "id": 37,
-      "city": "Karlsruhe",
-      "category": "Historische Gebäude",
       "question": "Ich bin eine Festung aus dem 16. Jahrhundert, die heute als Museum genutzt wird. Suche meinen Eingang an der Nordseite. Wo bin ich?",
       "answer": "Karlsburg Durlach",
       "latitude": 49.0043,
@@ -588,14 +448,10 @@
         "Ich bin ein historisches Zentrum in Durlach.",
         "Mein Innenhof wird oft für Veranstaltungen genutzt.",
         "Mein Name verweist auf den Gründer von Karlsruhe."
-      ],
-      "points": 100,
-      "proximity": 100
+      ]
     },
     {
       "id": 38,
-      "city": "Karlsruhe",
-      "category": "Parks und Natur",
       "question": "Ich bin ein großer Park mit einem Kanal, ideal für Radtouren und Spaziergänge. Suche den Eingang am Hauptkanal. Wo bin ich?",
       "answer": "Rheinpark Karlsruhe",
       "latitude": 48.9994,
@@ -604,14 +460,10 @@
         "Ich liege in der Nähe des Rheins.",
         "Ich bin ein beliebter Ort für Familienausflüge.",
         "Mein Kanal wird oft von Booten befahren."
-      ],
-      "points": 100,
-      "proximity": 100
+      ]
     },
     {
       "id": 39,
-      "city": "Karlsruhe",
-      "category": "Religiöse Stätten",
       "question": "Ich bin eine moderne Kirche mit einer schlichten Fassade und einem hellen Innenraum. Suche meinen Haupteingang an der Südseite, um mich zu betreten. Wo bin ich?",
       "answer": "Christuskirche Karlsruhe",
       "latitude": 49.0085,
@@ -620,14 +472,10 @@
         "Ich bin bekannt für meine Akustik.",
         "Ich wurde in den 1950er Jahren erbaut.",
         "Mein Turm ist ein markantes Wahrzeichen."
-      ],
-      "points": 100,
-      "proximity": 100
+      ]
     },
     {
       "id": 40,
-      "city": "Karlsruhe",
-      "category": "Sonstige Orte",
       "question": "Ich bin eine große Veranstaltungshalle, die für Konzerte und Shows genutzt wird. Suche meinen Haupteingang an der Ostseite. Wo bin ich?",
       "answer": "dm-Arena Karlsruhe",
       "latitude": 48.9945,
@@ -636,14 +484,10 @@
         "Ich bin Teil des Messegeländes Karlsruhe.",
         "Ich habe Platz für mehrere Tausend Zuschauer.",
         "Ich bin bekannt für große Musikkonzerte."
-      ],
-      "points": 100,
-      "proximity": 100
+      ]
     },
     {
       "id": 41,
-      "city": "Karlsruhe",
-      "category": "Parks und Natur",
       "question": "Ich bin ein weitläufiger Park mit Spielplätzen und einem beliebten Café. Suche meinen Haupteingang an der Hauptallee, um mich zu entdecken. Wo bin ich?",
       "answer": "Schlossgarten Karlsruhe",
       "latitude": 49.0151,
@@ -652,14 +496,10 @@
         "Ich umgebe das Schloss Karlsruhe.",
         "Meine großen Wiesen eignen sich für Picknicks.",
         "Ich bin ein beliebter Treffpunkt für Familien."
-      ],
-      "points": 100,
-      "proximity": 100
+      ]
     },
     {
       "id": 42,
-      "city": "Karlsruhe",
-      "category": "Historische Gebäude",
       "question": "Ich bin ein altes Schulgebäude, das heute für Kunst- und Musikveranstaltungen genutzt wird. Suche meinen Haupteingang an der Ostseite, um mich näher zu betrachten. Wo bin ich?",
       "answer": "Prinz-Wilhelm-Schule Karlsruhe",
       "latitude": 49.0062,
@@ -668,14 +508,10 @@
         "Ich wurde im 19. Jahrhundert erbaut.",
         "Mein Gebäude ist ein Beispiel für neoklassizistische Architektur.",
         "Ich bin bekannt für meine Konzerte und Kunstworkshops."
-      ],
-      "points": 100,
-      "proximity": 100
+      ]
     },
     {
       "id": 43,
-      "city": "Karlsruhe",
-      "category": "Religiöse Stätten",
       "question": "Ich bin eine Moschee mit einer beeindruckenden Kuppel und Minaretten. Suche meinen Haupteingang, um mehr über mich zu erfahren. Wo bin ich?",
       "answer": "Moschee Karlsruhe",
       "latitude": 49.0107,
@@ -684,14 +520,10 @@
         "Ich bin ein Ort des Gebets und der Gemeinschaft.",
         "Mein Gebäude wurde in den 1980er Jahren erbaut.",
         "Ich bin bekannt für interkulturelle Veranstaltungen."
-      ],
-      "points": 100,
-      "proximity": 100
+      ]
     },
     {
       "id": 44,
-      "city": "Karlsruhe",
-      "category": "Parks und Natur",
       "question": "Ich bin ein kleiner Park mit Bänken und einem zentralen Springbrunnen. Suche meinen Eingang an der Südseite, um die Ruhe zu genießen. Wo bin ich?",
       "answer": "Kolpingplatz Karlsruhe",
       "latitude": 49.0088,
@@ -700,14 +532,10 @@
         "Ich bin ein Ort der Entspannung mitten in der Stadt.",
         "Mein Springbrunnen ist ein beliebter Treffpunkt.",
         "Ich bin von historischen Gebäuden umgeben."
-      ],
-      "points": 100,
-      "proximity": 100
+      ]
     },
     {
       "id": 45,
-      "city": "Karlsruhe",
-      "category": "Wissenschaft und Bildung",
       "question": "Ich bin ein Technikmuseum mit Exponaten von der Dampfmaschine bis zur modernen Elektronik. Suche meinen Haupteingang, um die Geschichte der Technik zu erkunden. Wo bin ich?",
       "answer": "Technoseum Karlsruhe",
       "latitude": 49.0110,
@@ -716,14 +544,10 @@
         "Ich bin besonders bei Technikinteressierten beliebt.",
         "Ich biete interaktive Ausstellungen.",
         "Mein Fokus liegt auf der industriellen Entwicklung."
-      ],
-      "points": 100,
-      "proximity": 100
+      ]
     },
     {
       "id": 46,
-      "city": "Karlsruhe",
-      "category": "Verkehrsknotenpunkte",
       "question": "Ich bin ein Bahnhof am Stadtrand, der Verbindungen in die Region bietet. Suche meinen Haupteingang an der Ostseite. Wo bin ich?",
       "answer": "Karlsruhe-Durlach Bahnhof",
       "latitude": 49.0065,
@@ -732,14 +556,10 @@
         "Ich bin ein wichtiger Knotenpunkt für Regionalzüge.",
         "Ich bin moderner als der Hauptbahnhof.",
         "Mein Vorplatz ist oft belebt."
-      ],
-      "points": 100,
-      "proximity": 100
+      ]
     },
     {
       "id": 47,
-      "city": "Karlsruhe",
-      "category": "Historische Gebäude",
       "question": "Ich bin ein beeindruckender Bau mit einer großen Kuppel, der heute für Veranstaltungen genutzt wird. Suche meinen Haupteingang an der Südseite. Wo bin ich?",
       "answer": "Kongresszentrum Karlsruhe",
       "latitude": 49.0050,
@@ -748,14 +568,10 @@
         "Ich biete Platz für große Konferenzen.",
         "Meine Kuppel ist ein Wahrzeichen.",
         "Ich liege zentral in Karlsruhe."
-      ],
-      "points": 100,
-      "proximity": 100
+      ]
     },
     {
       "id": 48,
-      "city": "Karlsruhe",
-      "category": "Parks und Natur",
       "question": "Ich bin ein Wildpark am Stadtrand, ideal für Familienausflüge. Suche den Haupteingang am Parkplatz. Wo bin ich?",
       "answer": "Wildpark Karlsruhe",
       "latitude": 49.0345,
@@ -764,14 +580,10 @@
         "Ich beherberge Tiere aus heimischen Wäldern.",
         "Ich bin ein beliebter Ort für Naturbegeisterte.",
         "Mein Gelände ist groß und weitläufig."
-      ],
-      "points": 100,
-      "proximity": 100
+      ]
     },
     {
       "id": 49,
-      "city": "Karlsruhe",
-      "category": "Sonstige Orte",
       "question": "Ich bin ein modernes Gebäude mit Glasfassade, das ein Stadtarchiv und eine Bibliothek beherbergt. Suche meinen Haupteingang, um mehr über mich zu erfahren. Wo bin ich?",
       "answer": "Stadtarchiv Karlsruhe",
       "latitude": 49.0109,
@@ -780,14 +592,10 @@
         "Ich bewahre die Geschichte der Stadt auf.",
         "Meine Sammlungen sind auch für die Öffentlichkeit zugänglich.",
         "Ich biete ein modernes Ambiente für Forschung und Lernen."
-      ],
-      "points": 100,
-      "proximity": 100
+      ]
     },
     {
       "id": 50,
-      "city": "Karlsruhe",
-      "category": "Wissenschaft und Bildung",
       "question": "Ich bin ein modernes Gebäude, das als Zentrum für Innovation und Start-ups dient. Suche meinen Haupteingang, um mehr über technologische Fortschritte zu erfahren. Wo bin ich?",
       "answer": "Cyberforum Karlsruhe",
       "latitude": 49.0160,
@@ -796,14 +604,10 @@
         "Ich bin ein Netzwerk für Unternehmer und Entwickler.",
         "Mein Fokus liegt auf IT und Innovation.",
         "Ich organisiere auch Events und Workshops."
-      ],
-      "points": 100,
-      "proximity": 100
+      ]
     },
     {
       "id": 51,
-      "city": "Karlsruhe",
-      "category": "Historische Gebäude",
       "question": "Ich bin ein altes Verwaltungsgebäude mit einer beeindruckenden Fassade. Suche meinen Haupteingang an der Vorderseite, um mich näher zu betrachten. Wo bin ich?",
       "answer": "Regierungspräsidium Karlsruhe",
       "latitude": 49.0078,
@@ -812,14 +616,10 @@
         "Ich bin ein wichtiges Verwaltungsgebäude der Region.",
         "Mein Baujahr reicht ins 19. Jahrhundert zurück.",
         "Ich bin nahe der Innenstadt gelegen."
-      ],
-      "points": 100,
-      "proximity": 100
+      ]
     },
     {
       "id": 52,
-      "city": "Karlsruhe",
-      "category": "Religiöse Stätten",
       "question": "Ich bin ein kleines Kloster mit einem ruhigen Innenhof. Suche den Eingang an der Ostseite, um meinen Garten zu entdecken. Wo bin ich?",
       "answer": "Karmeliterkloster Karlsruhe",
       "latitude": 49.0095,
@@ -828,14 +628,10 @@
         "Ich bin ein Ort der Stille mitten in der Stadt.",
         "Mein Innenhof ist mit Blumen und Bäumen geschmückt.",
         "Ich biete auch Veranstaltungen zur spirituellen Bildung an."
-      ],
-      "points": 100,
-      "proximity": 100
+      ]
     },
     {
       "id": 53,
-      "city": "Karlsruhe",
-      "category": "Parks und Natur",
       "question": "Ich bin ein großer Park mit einem bekannten Musikpavillon. Suche meinen Haupteingang, um deine Erkundung zu beginnen. Wo bin ich?",
       "answer": "Stadtgarten Karlsruhe",
       "latitude": 48.9932,
@@ -844,14 +640,10 @@
         "Ich biete sowohl Ruhe als auch Veranstaltungen.",
         "Mein Musikpavillon wird oft für Konzerte genutzt.",
         "Ich bin ein Teil des Zoologischen Gartens."
-      ],
-      "points": 100,
-      "proximity": 100
+      ]
     },
     {
       "id": 54,
-      "city": "Karlsruhe",
-      "category": "Wissenschaft und Bildung",
       "question": "Ich bin ein Ort für moderne Kunst und Experimentelles. Suche meinen Haupteingang am westlichen Ende des Gebäudes. Wo bin ich?",
       "answer": "Kunstverein Karlsruhe",
       "latitude": 49.0103,
@@ -860,14 +652,10 @@
         "Ich bin bekannt für wechselnde Ausstellungen.",
         "Mein Fokus liegt auf zeitgenössischer Kunst.",
         "Ich biete auch Workshops für Kunstliebhaber an."
-      ],
-      "points": 100,
-      "proximity": 100
+      ]
     },
     {
       "id": 55,
-      "city": "Karlsruhe",
-      "category": "Verkehrsknotenpunkte",
       "question": "Ich bin der Hauptbahnhof der Stadt mit Verbindungen in ganz Europa. Suche meinen Haupteingang an der Vorderseite, um mich zu betreten. Wo bin ich?",
       "answer": "Hauptbahnhof Karlsruhe",
       "latitude": 48.9937,
@@ -876,14 +664,10 @@
         "Ich bin ein zentraler Verkehrsknotenpunkt.",
         "Mein Gebäude hat eine markante Fassade.",
         "Ich bin von Hotels und Restaurants umgeben."
-      ],
-      "points": 100,
-      "proximity": 100
+      ]
     },
     {
       "id": 56,
-      "city": "Karlsruhe",
-      "category": "Historische Gebäude",
       "question": "Ich bin ein historisches Gefängnis mit einer langen Geschichte. Suche den Haupteingang an der Nordseite, um mehr über mich zu erfahren. Wo bin ich?",
       "answer": "Justizvollzugsanstalt Karlsruhe",
       "latitude": 49.0071,
@@ -892,14 +676,10 @@
         "Ich bin bekannt als 'Ständehaus'.",
         "Mein Gebäude wurde im 19. Jahrhundert errichtet.",
         "Ich bin nicht öffentlich zugänglich, aber ein historisches Wahrzeichen."
-      ],
-      "points": 100,
-      "proximity": 100
+      ]
     },
     {
       "id": 57,
-      "city": "Karlsruhe",
-      "category": "Sonstige Orte",
       "question": "Ich bin ein modernes Fitnessstudio mit einer großen Glasfront. Suche meinen Haupteingang, um fit zu werden. Wo bin ich?",
       "answer": "Fitnesspark Karlsruhe",
       "latitude": 49.0155,
@@ -908,14 +688,10 @@
         "Ich biete moderne Trainingsgeräte.",
         "Ich habe Kurse für alle Fitnesslevel.",
         "Ich bin in der Nähe des Schlossparks."
-      ],
-      "points": 100,
-      "proximity": 100
+      ]
     },
     {
       "id": 58,
-      "city": "Karlsruhe",
-      "category": "Religiöse Stätten",
       "question": "Ich bin ein beeindruckender Dom mit bunten Glasfenstern. Suche meinen Haupteingang an der Südseite, um mich zu betreten. Wo bin ich?",
       "answer": "Dom St. Peter und Paul Karlsruhe",
       "latitude": 49.0083,
@@ -924,14 +700,10 @@
         "Ich bin eine der größten Kirchen der Region.",
         "Mein Inneres ist reich verziert.",
         "Ich bin ein wichtiger Ort für religiöse Zeremonien."
-      ],
-      "points": 100,
-      "proximity": 100
+      ]
     },
     {
       "id": 59,
-      "city": "Karlsruhe",
-      "category": "Parks und Natur",
       "question": "Ich bin ein kleiner Park mit einem historischen Denkmal in meiner Mitte. Suche den Eingang am Westende, um mich zu betreten. Wo bin ich?",
       "answer": "Schillerplatz Karlsruhe",
       "latitude": 49.0109,
@@ -940,14 +712,10 @@
         "Ich bin ein beliebter Treffpunkt für Spaziergänger.",
         "Mein Denkmal ist Friedrich Schiller gewidmet.",
         "Ich bin umgeben von historischen Gebäuden."
-      ],
-      "points": 100,
-      "proximity": 100
+      ]
     },
     {
       "id": 60,
-      "city": "Karlsruhe",
-      "category": "Sonstige Orte",
       "question": "Ich bin ein großes Einkaufszentrum mit einer offenen Architektur. Suche meinen Haupteingang an der Südseite, um mich zu entdecken. Wo bin ich?",
       "answer": "Postgalerie Karlsruhe",
       "latitude": 49.0085,
@@ -956,9 +724,7 @@
         "Ich biete viele Shops und Restaurants.",
         "Mein Gebäude war früher eine Poststation.",
         "Ich liege zentral in der Innenstadt."
-      ],
-      "points": 100,
-      "proximity": 100
+      ]
     }
   ]
 }

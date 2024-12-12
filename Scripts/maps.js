@@ -1,11 +1,11 @@
 // Scripts/maps.js
 
 document.addEventListener('DOMContentLoaded', () => {
-    // Holds all riddles that match current filters
+    // Holds all riddles initially loaded from JSON
+    let allRiddles = [];
+    // Holds currently available riddles after filtering
     let riddles = [];
-    // Holds all solved riddle IDs
     let solvedRiddles = JSON.parse(localStorage.getItem('solvedRiddles')) || [];
-    // Current score and round-related data
     let points = 0;
     let currentRiddle = null;
     let hintsUsed = { text: 0, direction: 0, radius: 0 };
@@ -27,14 +27,13 @@ document.addEventListener('DOMContentLoaded', () => {
     let gamesPlayed = parseInt(localStorage.getItem('gamesPlayed'), 10) || 0;
     let roundTimer = null;
 
-    // Game settings from localStorage or defaults
     const gameTime = parseInt(localStorage.getItem('gameTime'), 10) || 5;
     const maxDistance = parseFloat(localStorage.getItem('maxDistance')) || 1;
     const maxRounds = parseInt(localStorage.getItem('numRounds'), 10) || 3;
 
     const roundDuration = gameTime * 60 * 1000;
 
-    // Since now only Karlsruhe is available, we only keep Karlsruhe boundaries
+    // Only Karlsruhe is relevant
     const cityBoundaries = {
         Karlsruhe: { latMin: 48.9, latMax: 49.1, lonMin: 8.3, lonMax: 8.6 }
     };
@@ -47,7 +46,6 @@ document.addEventListener('DOMContentLoaded', () => {
         attribution: '&copy; OpenStreetMap contributors',
     }).addTo(map);
 
-    // UI elements
     const currentRiddleElement = document.getElementById('currentRiddle');
     const currentHintElement = document.getElementById('currentHint');
     const riddleAnswerElement = document.getElementById('riddleAnswer');
@@ -67,115 +65,21 @@ document.addEventListener('DOMContentLoaded', () => {
     const modalButton2 = document.getElementById('modalButton2');
     const roundPointsEl = document.getElementById('roundPoints');
 
-    // Optional tutorial elements
     const tutorialBox = document.querySelector('.tutorial-box');
     const tutorialContent = tutorialBox ? tutorialBox.querySelector('.tutorial-content') : null;
     const tutorialCloseButton = tutorialBox ? document.getElementById('tutorialCloseButton') : null;
     const tutorialCheckbox = tutorialBox ? document.getElementById('showTutorialCheckbox') : null;
 
-    // Check if geolocation is available
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(
-            position => {
-                const userLat = position.coords.latitude;
-                const userLon = position.coords.longitude;
-                currentCity = getCurrentCity(userLat, userLon);
-
-                if (currentCity) {
-                    map.setView([userLat, userLon], 18);
-                    userMarker = L.marker([userLat, userLon])
-                        .addTo(map)
-                        .bindPopup('Your position')
-                        .openPopup();
-
-                    loadRiddles();
-                    startWatchingPosition();
-                } else {
-                    showMessage('No riddles available at your current location.', () => {
-                        window.location.href = 'index.html';
-                    });
-                }
-            },
-            error => {
-                console.error('Geolocation error:', error);
-                showMessage('Location access is required to play.', () => {
-                    window.location.href = 'index.html';
-                });
-            },
-            { enableHighAccuracy: true, maximumAge: 0, timeout: 2000 }
-        );
-    } else {
-        showMessage('Geolocation is not supported by your browser.', () => {
-            window.location.href = 'index.html';
-        });
-    }
-
-    if (hintButton) {
-        hintButton.addEventListener('click', () => hintMenu.classList.toggle('show'));
-    }
-
-    if (logLocationButton) {
-        logLocationButton.addEventListener('click', () => {
-            clearInterval(roundTimer);
-            logPlayerLocation();
-        });
-    }
-
-    if (textHintButton) textHintButton.addEventListener('click', handleTextHint);
-    if (directionHintButton) directionHintButton.addEventListener('click', handleDirectionHint);
-    if (radiusHintButton) radiusHintButton.addEventListener('click', handleRadiusHint);
-
-    // Listen for device orientation to update fan direction
-    window.addEventListener('deviceorientation', (event) => {
-        const alpha = event.alpha; 
-        if (alpha !== null && userMarker) {
-            currentHeading = alpha * Math.PI / 180;
-            updateDeviceOrientationFan();
-        }
-    });
-
-    // Return the city based on user coordinates; only Karlsruhe is relevant now
-    function getCurrentCity(lat, lon) {
-        const bounds = cityBoundaries.Karlsruhe;
-        if (lat >= bounds.latMin && lat <= bounds.latMax && lon >= bounds.lonMin && lon <= bounds.lonMax) {
-            return 'Karlsruhe';
-        }
-        return null;
-    }
-
-    // Load riddles from JSON and filter them based on current location and solved status
-    function loadRiddles() {
-        fetch('Data/riddles.json')
+    // Load all riddles once
+    function initialLoadOfRiddles() {
+        return fetch('Data/riddles.json')
             .then(response => {
                 if (!response.ok) throw new Error('Network response was not ok');
                 return response.json();
             })
             .then(data => {
-                riddles = data.riddles
-                    .filter(r => r.city === 'Karlsruhe')
-                    .filter(r => !solvedRiddles.includes(r.id));
-
-                if (userMarker) {
-                    riddles = riddles.filter(r => {
-                        const dist = getDistance(userMarker.getLatLng().lat, userMarker.getLatLng().lng, r.latitude, r.longitude) / 1000;
-                        return dist <= maxDistance;
-                    });
-                }
-
-                const showTutorial = localStorage.getItem('showTutorial') === null || JSON.parse(localStorage.getItem('showTutorial')) === true;
-
-                if (riddles.length > 0) {
-                    if (round === 1 && showTutorial) {
-                        showInstructions();
-                    } else {
-                        startRound();
-                    }
-                } else {
-                    showMessage(
-                        'No riddles available within the set distance.',
-                        () => { window.location.href = 'index.html'; }
-                    );
-                }
+                // Store all riddles without filtering
+                allRiddles = data.riddles;
             })
             .catch(error => {
                 console.error('Error loading riddles:', error);
@@ -183,7 +87,28 @@ document.addEventListener('DOMContentLoaded', () => {
             });
     }
 
-    // Show tutorial instructions if needed
+    // Filter riddles based on current position, solved, and distance
+    function filterRiddles() {
+        if (!allRiddles) return;
+
+        let userLat = null;
+        let userLon = null;
+        if (userMarker) {
+            userLat = userMarker.getLatLng().lat;
+            userLon = userMarker.getLatLng().lng;
+        }
+
+        riddles = allRiddles
+            .filter(r => r.city === 'Karlsruhe')
+            .filter(r => !solvedRiddles.includes(r.id))
+            .filter(r => {
+                if (userLat === null || userLon === null) return true;
+                const dist = getDistance(userLat, userLon, r.latitude, r.longitude) / 1000;
+                return dist <= maxDistance;
+            });
+    }
+
+    // Show tutorial if needed, otherwise start round
     function showInstructions() {
         if (!tutorialBox || !tutorialContent || !tutorialCloseButton || !tutorialCheckbox) {
             startRound();
@@ -195,7 +120,7 @@ document.addEventListener('DOMContentLoaded', () => {
         <p>You will receive riddles leading you to real-world locations.</p>
         <p><strong>How it works:</strong></p>
         <ul>
-            <li>You get a riddle hinting at a specific place.</li>
+            <li>You get a riddle hinting at a specific place in Karlsruhe.</li>
             <li>Use hints if needed, each costs 100 points.</li>
             <li>The closer you are when logging your position, the more points you earn.</li>
             <li>Click "Log Location" when you believe you are at the correct spot.</li>
@@ -204,7 +129,7 @@ document.addEventListener('DOMContentLoaded', () => {
         <p><strong>Hints:</strong></p>
         <ul>
             <li><strong>Text Hint:</strong> Additional textual clues.</li>
-            <li><strong>Direction Hint:</strong> A sector showing the approximate direction.</li>
+            <li><strong>Direction Hint:</strong> A sector showing approximate direction.</li>
             <li><strong>Radius Hint:</strong> A circle showing the approximate area.</li>
         </ul>
         <p>Have fun!</p>
@@ -219,18 +144,24 @@ document.addEventListener('DOMContentLoaded', () => {
         };
     }
 
-    // Start a new round or end the game if no riddles remain
+    // Start a round
     function startRound() {
+        const showTutorial = localStorage.getItem('showTutorial') === null || JSON.parse(localStorage.getItem('showTutorial')) === true;
+        if (round === 1 && showTutorial) {
+            showInstructions();
+            return;
+        }
+
         if (round > maxRounds || riddles.length === 0) {
             endGame();
             return;
         }
+
         loadNextRiddle();
         startTimer();
         updateRoundUI();
     }
 
-    // Select a random riddle from the filtered list
     function loadNextRiddle() {
         if (riddles.length === 0) {
             endGame();
@@ -240,14 +171,12 @@ document.addEventListener('DOMContentLoaded', () => {
         displayRiddle();
     }
 
-    // Get a random riddle and remove it from the list
     function getRandomRiddle() {
         if (riddles.length === 0) return null;
         const randomIndex = Math.floor(Math.random() * riddles.length);
         return riddles.splice(randomIndex, 1)[0]; 
     }
 
-    // Show the current riddle on screen
     function displayRiddle() {
         if (!currentRiddle || !currentRiddle.question) return;
         if (currentRiddleElement) currentRiddleElement.innerText = currentRiddle.question;
@@ -261,13 +190,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
         enableHintButtons();
 
-        if (logLocationButton) {
-            logLocationButton.style.display = 'block';
-        }
+        if (logLocationButton) logLocationButton.style.display = 'block';
         if (continueButton) continueButton.style.display = 'none';
     }
 
-    // Enable all hint buttons
     function enableHintButtons() {
         [textHintButton, directionHintButton, radiusHintButton].forEach(btn => {
             if (btn) {
@@ -281,7 +207,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Start the round timer
     function startTimer() {
         let timeLeft = roundDuration;
         updateTimerDisplay(timeLeft);
@@ -297,7 +222,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 1000);
     }
 
-    // Update the displayed timer
     function updateTimerDisplay(time) {
         const minutes = Math.floor(time / 60000);
         const seconds = ((time % 60000) / 1000).toFixed(0);
@@ -312,12 +236,10 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Called when the timer runs out, log player's location automatically
     function timerEnded() {
         logPlayerLocation();
     }
 
-    // Log player's current location and calculate points
     function logPlayerLocation() {
         if (!userMarker) {
             console.error('No known user position available.');
@@ -384,7 +306,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Disable all hint buttons
     function disableAllHintButtons() {
         [textHintButton, directionHintButton, radiusHintButton].forEach(btn => {
             if (btn) {
@@ -398,7 +319,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Show the solution on the map
     function showSolution(userLat, userLon, treasureLat, treasureLon) {
         if (answerTextElement) answerTextElement.innerText = currentRiddle.answer;
         if (riddleAnswerElement) riddleAnswerElement.style.display = 'block';
@@ -442,6 +362,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 hintMenu.classList.remove('show');
             }
 
+            // After pressing continue, we only re-check position and filter riddles again
             navigator.geolocation.getCurrentPosition(position => {
                 const userLat = position.coords.latitude;
                 const userLon = position.coords.longitude;
@@ -449,15 +370,14 @@ document.addEventListener('DOMContentLoaded', () => {
                     userMarker.setLatLng([userLat, userLon]);
                 }
 
-                // Reload riddles based on new position
-                loadRiddles();
+                // Instead of loading from JSON again, just re-filter existing allRiddles
+                filterRiddles();
                 round++;
                 startRound();
             }, showError, { enableHighAccuracy: true, maximumAge: 0, timeout: 5000 });
         };
     }
 
-    // End the game and show a summary
     function endGame() {
         const avgDistance = (totalDistance / maxRounds).toFixed(2);
         const avgPointsPerRound = (points / maxRounds).toFixed(2);
@@ -477,7 +397,6 @@ Average points per round: ${avgPointsPerRound}`;
         showEndGameMessage(message);
     }
 
-    // Reset the game state
     function resetGame() {
         round = 1;
         points = 0;
@@ -494,10 +413,9 @@ Average points per round: ${avgPointsPerRound}`;
         updatePointsDisplay();
         updateRoundUI();
         startWatchingPosition();
-        loadRiddles();
+        filterRiddles();
     }
 
-    // Update UI elements for rounds and points
     function updateRoundUI() {
         if (roundElement) roundElement.innerText = `Round: ${round} / ${maxRounds}`;
         const pointsElement = document.getElementById('points');
@@ -510,7 +428,6 @@ Average points per round: ${avgPointsPerRound}`;
         button.style.opacity = 0.5;
     }
 
-    // Handle text hints
     function handleTextHint() {
         if (!textHintButton || !currentHintElement) return;
         if (hintsUsed.text < maxHints && hintsAvailable.length > 0) {
@@ -522,7 +439,6 @@ Average points per round: ${avgPointsPerRound}`;
         if (hintsUsed.text >= maxHints || hintsAvailable.length === 0) disableButton(textHintButton);
     }
 
-    // Handle direction hints
     function handleDirectionHint() {
         if (hintsUsed.direction >= maxHints) return;
         hintsUsed.direction++;
@@ -539,7 +455,6 @@ Average points per round: ${avgPointsPerRound}`;
 
         const bearing = getBearing(userLat, userLon, currentRiddle.latitude, currentRiddle.longitude);
 
-        // Increase length to 200m, base angle to 40°, second use reduces angle by 10° each time
         const radius = 200;
         const baseAngleDegrees = 40;
         const decreasePerUse = 10;
@@ -569,7 +484,6 @@ Average points per round: ${avgPointsPerRound}`;
         if (hintsUsed.direction >= maxHints) disableButton(directionHintButton);
     }
 
-    // Handle radius hints
     function handleRadiusHint() {
         if (!radiusHintButton || hintsUsed.radius >= maxHints) return;
         hintsUsed.radius++;
@@ -595,7 +509,6 @@ Average points per round: ${avgPointsPerRound}`;
         if (hintsUsed.radius >= maxHints) disableButton(radiusHintButton);
     }
 
-    // Remove any hint markers from the map
     function clearMapHints() {
         if (directionLine) { map.removeLayer(directionLine); directionLine = null; }
         if (radiusCircle) { map.removeLayer(radiusCircle); radiusCircle = null; }
@@ -605,7 +518,6 @@ Average points per round: ${avgPointsPerRound}`;
         console.error('Location error:', error);
     }
 
-    // Calculate distance between two coordinates in meters
     function getDistance(lat1, lon1, lat2, lon2) {
         const R = 6371e3;
         const φ1 = (lat1 * Math.PI) / 180;
@@ -618,7 +530,6 @@ Average points per round: ${avgPointsPerRound}`;
         return R * c;
     }
 
-    // Calculate bearing from one coordinate to another
     function getBearing(lat1, lon1, lat2, lon2) {
         const φ1 = (lat1 * Math.PI) / 180;
         const φ2 = (lat2 * Math.PI) / 180;
@@ -629,7 +540,6 @@ Average points per round: ${avgPointsPerRound}`;
         return Math.atan2(y, x);
     }
 
-    // Compute a destination point given start coords, bearing, and distance
     function computeDestinationPoint(lat, lon, bearing, distance) {
         const R = 6371e3;
         const δ = distance / R;
@@ -726,18 +636,14 @@ Average points per round: ${avgPointsPerRound}`;
         }, 1000);
     }
 
-    // Update the device orientation fan angle and length
     function updateDeviceOrientationFan() {
         if (!userMarker || currentHeading === null) return;
         const userLat = userMarker.getLatLng().lat;
         const userLon = userMarker.getLatLng().lng;
 
-        // Increase angle range per side to 20°, total 40°
         const angleRange = 20 * (Math.PI/180); 
         const startAngle = currentHeading - angleRange;
         const endAngle = currentHeading + angleRange;
-
-        // Increase radius to 50m
         const radius = 50;
 
         const sectorPoints = [[userLat, userLon]];
@@ -757,5 +663,52 @@ Average points per round: ${avgPointsPerRound}`;
             weight: 1
         }).addTo(map);
     }
+
+    // Begin initialization
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+            position => {
+                const userLat = position.coords.latitude;
+                const userLon = position.coords.longitude;
+                currentCity = getCurrentCity(userLat, userLon);
+
+                if (currentCity) {
+                    map.setView([userLat, userLon], 18);
+                    userMarker = L.marker([userLat, userLon])
+                        .addTo(map)
+                        .bindPopup('Your Position')
+                        .openPopup();
+
+                    initialLoadOfRiddles().then(() => {
+                        filterRiddles();
+                        startWatchingPosition();
+                        if (riddles.length > 0) {
+                            startRound();
+                        } else {
+                            showMessage('No riddles available at your current location.', () => {
+                                window.location.href = 'index.html';
+                            });
+                        }
+                    });
+                } else {
+                    showMessage('No riddles available at your current location.', () => {
+                        window.location.href = 'index.html';
+                    });
+                }
+            },
+            error => {
+                console.error('Geolocation error:', error);
+                showMessage('Location access is required to play.', () => {
+                    window.location.href = 'index.html';
+                });
+            },
+            { enableHighAccuracy: true, maximumAge: 0, timeout: 2000 }
+        );
+    } else {
+        showMessage('Geolocation is not supported by your browser.', () => {
+            window.location.href = 'index.html';
+        });
+    }
 });
+
 
