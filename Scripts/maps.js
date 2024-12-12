@@ -644,7 +644,7 @@ Durchschnittliche Punkte pro Runde: ${avgPointsPerRound}`;
             console.log(`Abweichung: ${diff.toFixed(2)}°`);
     
             // Statt 15° jetzt 30° Toleranz, um leichter ein Vibrationsfeedback zu bekommen
-            if (diff < 30) {
+            if (diff < 360) {
                 console.log('In die richtige Richtung geschaut! Starte Vibration...');
                 vibrateDevice(1500); // 1,5 Sekunden vibrieren
             } else {
