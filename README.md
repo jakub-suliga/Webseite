@@ -1,6 +1,12 @@
 # Interaktive Schatzsuche
 
-**Wie funktioniert das Spiel?**
+## Anforderungen
+
+1. Das Spiel funktioniert am besten auf dem Handy, da man durch die Stadt laufen muss
+
+2. Standort aktivieren, da man sonst das Spiel nicht spielen kann
+
+## Wie funktioniert das Spiel?
 
 1. **Starten:**  
    Klicke auf den *"Spiel starten"* Button in der Mitte des Startbildschirms, um das Spiel zu beginnen.
