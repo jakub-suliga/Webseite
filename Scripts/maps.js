@@ -5,8 +5,8 @@ document.addEventListener('DOMContentLoaded', () => {
     let solvedRiddles = JSON.parse(localStorage.getItem('solvedRiddles')) || [];
     let points = 0;
     let currentRiddle = null;
-    let hintsUsed = { text: 0, direction: 0, radius: 0, vibrate: 0 };
-    let totalHintsUsed = JSON.parse(localStorage.getItem('totalHintsUsed')) || { text: 0, direction: 0, radius: 0, vibrate: 0 };
+    let hintsUsed = { text: 0, direction: 0, radius: 0};
+    let totalHintsUsed = JSON.parse(localStorage.getItem('totalHintsUsed')) || { text: 0, direction: 0, radius: 0 };
     const maxHints = 3;
     let userMarker = null;
     let directionLine = null;
@@ -55,7 +55,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const textHintButton = document.getElementById('textHintButton');
     const directionHintButton = document.getElementById('directionHintButton');
     const radiusHintButton = document.getElementById('radiusHintButton');
-    const vibrateHintButton = document.getElementById('vibrateHintButton');
     const timerElement = document.getElementById('timer');
     const roundElement = document.getElementById('round');
     const modal = document.getElementById('messageModal');
@@ -70,12 +69,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const tutorialCloseButton = tutorialBox ? document.getElementById('tutorialCloseButton') : null;
     const tutorialCheckbox = tutorialBox ? document.getElementById('showTutorialCheckbox') : null;
 
-    const vibrateSupported = 'vibrate' in navigator;
-    if (!vibrateSupported && vibrateHintButton) {
-        vibrateHintButton.disabled = true;
-        vibrateHintButton.style.opacity = 0.5;
-        console.log("Vibration wird von diesem Gerät/Browser nicht unterstützt. Vibrationshinweis deaktiviert.");
-    }
 
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(
@@ -127,7 +120,6 @@ document.addEventListener('DOMContentLoaded', () => {
     if (textHintButton) textHintButton.addEventListener('click', handleTextHint);
     if (directionHintButton) directionHintButton.addEventListener('click', handleDirectionHint);
     if (radiusHintButton) radiusHintButton.addEventListener('click', handleRadiusHint);
-    if (vibrateHintButton) vibrateHintButton.addEventListener('click', handleVibrateHint);
 
     // Geräteorientierung hinzufügen (falls verfügbar)
     window.addEventListener('deviceorientation', (event) => {
@@ -210,7 +202,6 @@ document.addEventListener('DOMContentLoaded', () => {
             <li><strong>Text-Tipp:</strong> Zusätzliche schriftliche Hinweise.</li>
             <li><strong>Richtungs-Tipp:</strong> Zeigt einen sehr kurzen Sektor an, in dessen Richtung das Ziel liegt.</li>
             <li><strong>Radius-Tipp:</strong> Markiert einen Bereich (Kreis) auf der Karte, in dem sich das Ziel befindet.</li>
-            <li><strong>Vibrations-Tipp:</strong> Das Gerät vibriert stärker, je näher du dem Ziel bist (falls unterstützt).</li>
         </ul>
         <p>Viel Spaß bei der Schatzsuche!</p>
         `;
@@ -256,7 +247,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (riddleAnswerElement) riddleAnswerElement.style.display = 'none';
         if (answerTextElement) answerTextElement.innerText = '';
 
-        hintsUsed = { text: 0, direction: 0, radius: 0, vibrate: 0 };
+        hintsUsed = { text: 0, direction: 0, radius: 0};
         hintsAvailable = currentRiddle.hints ? [...currentRiddle.hints] : [];
         updatePointsDisplay();
 
@@ -275,7 +266,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function enableHintButtons() {
-        [textHintButton, directionHintButton, radiusHintButton, vibrateHintButton].forEach(btn => {
+        [textHintButton, directionHintButton, radiusHintButton].forEach(btn => {
             if (btn) {
                 btn.disabled = false;
                 btn.style.opacity = 1;
@@ -336,7 +327,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
         const distance = getDistance(userLat, userLon, treasureLat, treasureLon);
     
-        let basePoints = 1000 - ((hintsUsed.text + hintsUsed.direction + hintsUsed.radius + hintsUsed.vibrate) * 100);
+        let basePoints = 1000 - ((hintsUsed.text + hintsUsed.direction + hintsUsed.radius) * 100);
         if (basePoints < 0) basePoints = 0;
     
         let finalPoints = 0;
@@ -363,7 +354,6 @@ document.addEventListener('DOMContentLoaded', () => {
         totalHintsUsed.text += hintsUsed.text;
         totalHintsUsed.direction += hintsUsed.direction;
         totalHintsUsed.radius += hintsUsed.radius;
-        totalHintsUsed.vibrate += hintsUsed.vibrate;
         localStorage.setItem('totalHintsUsed', JSON.stringify(totalHintsUsed));
     
         let totalRoundsPlayed = parseInt(localStorage.getItem('totalRoundsPlayed'), 10) || 0;
@@ -393,7 +383,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
 
     function disableAllHintButtons() {
-        [textHintButton, directionHintButton, radiusHintButton, vibrateHintButton].forEach(btn => {
+        [textHintButton, directionHintButton, radiusHintButton].forEach(btn => {
             if (btn) {
                 btn.disabled = true;
                 btn.style.opacity = 0.5;
@@ -568,30 +558,7 @@ Durchschnittliche Punkte pro Runde: ${avgPointsPerRound}`;
         }).addTo(map);
     
         map.fitBounds(directionLine.getBounds());
-        updatePointsDisplay();
-    
-        // Prüfen, ob das Gerät in die richtige Richtung schaut
-        // Voraussetzung: currentHeading (in Radianten) ist gesetzt.
-        // Wir konvertieren currentHeading in Grad für einfachere Vergleichbarkeit.
-        if (currentHeading !== null) {
-            const headingDeg = currentHeading * (180 / Math.PI);
-    
-            // Bearing ebenfalls in Grad umrechnen
-            let bearingDeg = bearing * (180 / Math.PI);
-            bearingDeg = (bearingDeg + 360) % 360;
-            const headingFixed = (headingDeg + 360) % 360;
-    
-            // Differenz zwischen Richtung des Geräts und des Ziels
-            let diff = Math.abs(bearingDeg - headingFixed);
-            // Man sollte den kleinsten Winkel nehmen (z.B. 350° vs 10° sind 20° auseinander)
-            if (diff > 180) diff = 360 - diff;
-    
-            // Wenn die Abweichung < 15° ist, vibrieren wir
-            if (diff < 15) {
-                vibrateDevice(300); // Vibriert 300ms als Feedback
-            }
-        }
-    
+        updatePointsDisplay();    
         if (hintsUsed.direction >= maxHints) disableButton(directionHintButton);
     }
     
@@ -621,53 +588,7 @@ Durchschnittliche Punkte pro Runde: ${avgPointsPerRound}`;
 
         updatePointsDisplay();
         if (hintsUsed.radius >= maxHints) disableButton(radiusHintButton);
-    }
-
-    function handleVibrateHint() {
-        if (!vibrateHintButton || hintsUsed.vibrate >= maxHints) return;
-        hintsUsed.vibrate++;
-    
-        if (!userMarker) {
-            console.log('Keine Nutzerposition vorhanden, kein Vibrationshinweis möglich.');
-            return;
-        }
-    
-        const userLat = userMarker.getLatLng().lat;
-        const userLon = userMarker.getLatLng().lng;
-        const targetLat = currentRiddle.latitude;
-        const targetLon = currentRiddle.longitude;
-    
-        // Berechne die Richtung (bearing) zum Ziel
-        const bearing = getBearing(userLat, userLon, targetLat, targetLon);
-    
-        // Prüfen, ob currentHeading verfügbar ist
-        if (currentHeading !== null) {
-            const headingDeg = (currentHeading * 180 / Math.PI + 360) % 360;
-            let bearingDeg = (bearing * 180 / Math.PI + 360) % 360;
-    
-            let diff = Math.abs(bearingDeg - headingDeg);
-            if (diff > 180) diff = 360 - diff;
-    
-            console.log(`Geräteausrichtung: ${headingDeg.toFixed(2)}°`);
-            console.log(`Zielausrichtung: ${bearingDeg.toFixed(2)}°`);
-            console.log(`Abweichung: ${diff.toFixed(2)}°`);
-    
-            // Statt 15° jetzt 30° Toleranz, um leichter ein Vibrationsfeedback zu bekommen
-            if (diff < 360) {
-                console.log('In die richtige Richtung geschaut! Starte Vibration...');
-                vibrateDevice(1500); // 1,5 Sekunden vibrieren
-            } else {
-                console.log('Nicht in der richtigen Richtung, keine Vibration.');
-            }
-        } else {
-            console.log('Keine Geräteausrichtung verfügbar (currentHeading ist null), kein Vibrieren möglich.');
-        }
-    
-        updatePointsDisplay();
-        if (hintsUsed.vibrate >= maxHints) disableButton(vibrateHintButton);
-    }
-    
-    
+    }  
 
     function clearMapHints() {
         if (directionLine) { map.removeLayer(directionLine); directionLine = null; }
@@ -715,26 +636,6 @@ Durchschnittliche Punkte pro Runde: ${avgPointsPerRound}`;
         );
 
         return { lat: (φ2 * 180) / Math.PI, lon: (λ2 * 180) / Math.PI };
-    }
-
-    function calculateVibrationDuration(distance) {
-        const maxDist = 2000;
-        const minDuration = 200;
-        const maxDuration = 1000;
-        if (distance > maxDist) {
-            return minDuration;
-        } else {
-            const factor = 1 - (distance / maxDist);
-            return Math.floor(minDuration + (maxDuration - minDuration)*factor);
-        }
-    }
-
-    function vibrateDevice(duration) {
-        if (navigator.vibrate) {
-            navigator.vibrate(duration);
-        } else {
-            console.log('Vibration API wird nicht unterstützt.');
-        }
     }
 
     function updatePointsDisplay() {
