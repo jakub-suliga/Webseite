@@ -618,9 +618,8 @@ Durchschnittliche Punkte pro Runde: ${avgPointsPerRound}`;
         if (!vibrateHintButton || hintsUsed.vibrate >= maxHints) return;
         hintsUsed.vibrate++;
     
-        // Wir verwenden die aktuelle Nutzerposition aus userMarker:
         if (!userMarker) {
-            console.log('Keine Nutzerposition vorhanden.');
+            console.log('Keine Nutzerposition vorhanden, kein Vibrationshinweis möglich.');
             return;
         }
     
@@ -632,30 +631,33 @@ Durchschnittliche Punkte pro Runde: ${avgPointsPerRound}`;
         // Berechne die Richtung (bearing) zum Ziel
         const bearing = getBearing(userLat, userLon, targetLat, targetLon);
     
-        // Prüfe, ob currentHeading verfügbar ist
+        // Prüfen, ob currentHeading verfügbar ist
         if (currentHeading !== null) {
-            // currentHeading ist in Radianten, bearing ebenso
-            const headingDeg = currentHeading * (180 / Math.PI);
-            let bearingDeg = bearing * (180 / Math.PI);
-            bearingDeg = (bearingDeg + 360) % 360;
-            const headingFixed = (headingDeg + 360) % 360;
+            const headingDeg = (currentHeading * 180 / Math.PI + 360) % 360;
+            let bearingDeg = (bearing * 180 / Math.PI + 360) % 360;
     
-            let diff = Math.abs(bearingDeg - headingFixed);
+            let diff = Math.abs(bearingDeg - headingDeg);
             if (diff > 180) diff = 360 - diff;
     
-            // Wenn Abweichung < 15° ist, dann vibrieren wir 1,5 Sekunden (1500 ms)
-            if (diff < 15) {
-                vibrateDevice(1500);
+            console.log(`Geräteausrichtung: ${headingDeg.toFixed(2)}°`);
+            console.log(`Zielausrichtung: ${bearingDeg.toFixed(2)}°`);
+            console.log(`Abweichung: ${diff.toFixed(2)}°`);
+    
+            // Statt 15° jetzt 30° Toleranz, um leichter ein Vibrationsfeedback zu bekommen
+            if (diff < 30) {
+                console.log('In die richtige Richtung geschaut! Starte Vibration...');
+                vibrateDevice(1500); // 1,5 Sekunden vibrieren
             } else {
-                console.log('Nicht in der richtigen Richtung, kein Vibrieren.');
+                console.log('Nicht in der richtigen Richtung, keine Vibration.');
             }
         } else {
-            console.log('Keine Geräteausrichtung verfügbar, kein Vibrieren.');
+            console.log('Keine Geräteausrichtung verfügbar (currentHeading ist null), kein Vibrieren möglich.');
         }
     
         updatePointsDisplay();
         if (hintsUsed.vibrate >= maxHints) disableButton(vibrateHintButton);
     }
+    
     
 
     function clearMapHints() {
