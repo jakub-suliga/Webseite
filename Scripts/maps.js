@@ -70,6 +70,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const tutorialCloseButton = tutorialBox ? document.getElementById('tutorialCloseButton') : null;
     const tutorialCheckbox = tutorialBox ? document.getElementById('showTutorialCheckbox') : null;
 
+    const vibrateSupported = 'vibrate' in navigator;
+    if (!vibrateSupported && vibrateHintButton) {
+        vibrateHintButton.disabled = true;
+        vibrateHintButton.style.opacity = 0.5;
+        console.log("Vibration wird von diesem Gerät/Browser nicht unterstützt. Vibrationshinweis deaktiviert.");
+    }
+
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(
             position => {
