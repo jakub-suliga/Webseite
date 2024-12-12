@@ -810,11 +810,15 @@ Durchschnittliche Punkte pro Runde: ${avgPointsPerRound}`;
         if (!userMarker || currentHeading === null) return;
         const userLat = userMarker.getLatLng().lat;
         const userLon = userMarker.getLatLng().lng;
-        const angleRange = 15 * (Math.PI/180); // 15 Grad auf jeder Seite -> 30° gesamt
+    
+        // Statt 15° pro Seite nun 20° pro Seite
+        const angleRange = 20 * (Math.PI/180); 
         const startAngle = currentHeading - angleRange;
         const endAngle = currentHeading + angleRange;
-        const radius = 20; // 20m Reichweite des Fächers
-
+    
+        // Statt 20 m nun 50 m Reichweite des Fächers
+        const radius = 50;
+    
         const sectorPoints = [[userLat, userLon]];
         const numPoints = 10;
         for (let i = 0; i <= numPoints; i++) {
@@ -823,13 +827,13 @@ Durchschnittliche Punkte pro Runde: ${avgPointsPerRound}`;
             sectorPoints.push([endPoint.lat, endPoint.lon]);
         }
         sectorPoints.push([userLat, userLon]);
-
+    
         if (deviceOrientationFan) map.removeLayer(deviceOrientationFan);
         deviceOrientationFan = L.polygon(sectorPoints, {
             color: 'gray',
             fillColor: 'gray',
             fillOpacity: 0.2,
-            weight:1
+            weight: 1
         }).addTo(map);
-    }
+    }    
 });
