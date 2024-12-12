@@ -518,50 +518,74 @@ Durchschnittliche Punkte pro Runde: ${avgPointsPerRound}`;
     function handleDirectionHint() {
         if (hintsUsed.direction >= maxHints) return;
         hintsUsed.direction++;
-
-        navigator.geolocation.getCurrentPosition(
-            position => {
-                const userLat = position.coords.latitude;
-                const userLon = position.coords.longitude;
-
-                if (directionLine) map.removeLayer(directionLine);
-
-                const bearing = getBearing(userLat, userLon, currentRiddle.latitude, currentRiddle.longitude);
-
-                // Richtungs-Tipp nun 70 m lang
-                const radius = 70;  
-                const baseAngleDegrees = 20;
-                const decreasePerUse = 5;
-                const currentAngle = baseAngleDegrees - (hintsUsed.direction - 1)*decreasePerUse;
-                const angleRange = currentAngle * (Math.PI / 180);
-
-                const startAngle = bearing - angleRange;
-                const endAngle = bearing + angleRange;
-                const sectorPoints = [[userLat, userLon]];
-                const numPoints = 30;
-                for (let i = 0; i <= numPoints; i++) {
-                    const angle = startAngle + (i * (endAngle - startAngle) / numPoints);
-                    const endPoint = computeDestinationPoint(userLat, userLon, angle, radius);
-                    sectorPoints.push([endPoint.lat, endPoint.lon]);
-                }
-                sectorPoints.push([userLat, userLon]);
-
-                clearMapHints();
-                directionLine = L.polygon(sectorPoints, {
-                    color: 'blue',
-                    fillColor: 'blue',
-                    fillOpacity: 0.2
-                }).addTo(map);
-
-                map.fitBounds(directionLine.getBounds());
-                updatePointsDisplay();
-            },
-            showError,
-            { enableHighAccuracy: true, maximumAge: 0, timeout: 5000 }
-        );
-
+    
+        // Statt erneut Geolocation abzurufen, verwenden wir die letzte bekannte Position aus userMarker
+        if (!userMarker) {
+            console.log('Keine Nutzerposition vorhanden.');
+            return;
+        }
+    
+        const userLat = userMarker.getLatLng().lat;
+        const userLon = userMarker.getLatLng().lng;
+    
+        if (directionLine) map.removeLayer(directionLine);
+    
+        const bearing = getBearing(userLat, userLon, currentRiddle.latitude, currentRiddle.longitude);
+    
+        // Richtungs-Tipp nun 200 m lang
+        const radius = 200;  
+        // Basiswinkel zuvor 20°, jetzt verdoppeln wir auf 40°
+        const baseAngleDegrees = 40;
+        const decreasePerUse = 5;
+        const currentAngle = baseAngleDegrees - (hintsUsed.direction - 1)*decreasePerUse;
+        const angleRange = currentAngle * (Math.PI / 180);
+    
+        const startAngle = bearing - angleRange;
+        const endAngle = bearing + angleRange;
+        const sectorPoints = [[userLat, userLon]];
+        const numPoints = 30;
+        for (let i = 0; i <= numPoints; i++) {
+            const angle = startAngle + (i * (endAngle - startAngle) / numPoints);
+            const endPoint = computeDestinationPoint(userLat, userLon, angle, radius);
+            sectorPoints.push([endPoint.lat, endPoint.lon]);
+        }
+        sectorPoints.push([userLat, userLon]);
+    
+        clearMapHints();
+        directionLine = L.polygon(sectorPoints, {
+            color: 'blue',
+            fillColor: 'blue',
+            fillOpacity: 0.2
+        }).addTo(map);
+    
+        map.fitBounds(directionLine.getBounds());
+        updatePointsDisplay();
+    
+        // Prüfen, ob das Gerät in die richtige Richtung schaut
+        // Voraussetzung: currentHeading (in Radianten) ist gesetzt.
+        // Wir konvertieren currentHeading in Grad für einfachere Vergleichbarkeit.
+        if (currentHeading !== null) {
+            const headingDeg = currentHeading * (180 / Math.PI);
+    
+            // Bearing ebenfalls in Grad umrechnen
+            let bearingDeg = bearing * (180 / Math.PI);
+            bearingDeg = (bearingDeg + 360) % 360;
+            const headingFixed = (headingDeg + 360) % 360;
+    
+            // Differenz zwischen Richtung des Geräts und des Ziels
+            let diff = Math.abs(bearingDeg - headingFixed);
+            // Man sollte den kleinsten Winkel nehmen (z.B. 350° vs 10° sind 20° auseinander)
+            if (diff > 180) diff = 360 - diff;
+    
+            // Wenn die Abweichung < 15° ist, vibrieren wir
+            if (diff < 15) {
+                vibrateDevice(300); // Vibriert 300ms als Feedback
+            }
+        }
+    
         if (hintsUsed.direction >= maxHints) disableButton(directionHintButton);
     }
+    
 
     function handleRadiusHint() {
         if (!radiusHintButton || hintsUsed.radius >= maxHints) return;
@@ -593,19 +617,46 @@ Durchschnittliche Punkte pro Runde: ${avgPointsPerRound}`;
     function handleVibrateHint() {
         if (!vibrateHintButton || hintsUsed.vibrate >= maxHints) return;
         hintsUsed.vibrate++;
-        navigator.geolocation.getCurrentPosition(
-            position => {
-                const userLat = position.coords.latitude;
-                const userLon = position.coords.longitude;
-                const distance = getDistance(userLat, userLon, currentRiddle.latitude, currentRiddle.longitude);
-                const vibrationDuration = calculateVibrationDuration(distance);
-                vibrateDevice(vibrationDuration);
-            },
-            showError,
-            { enableHighAccuracy: true, maximumAge: 0, timeout: 5000 }
-        );
+    
+        // Wir verwenden die aktuelle Nutzerposition aus userMarker:
+        if (!userMarker) {
+            console.log('Keine Nutzerposition vorhanden.');
+            return;
+        }
+    
+        const userLat = userMarker.getLatLng().lat;
+        const userLon = userMarker.getLatLng().lng;
+        const targetLat = currentRiddle.latitude;
+        const targetLon = currentRiddle.longitude;
+    
+        // Berechne die Richtung (bearing) zum Ziel
+        const bearing = getBearing(userLat, userLon, targetLat, targetLon);
+    
+        // Prüfe, ob currentHeading verfügbar ist
+        if (currentHeading !== null) {
+            // currentHeading ist in Radianten, bearing ebenso
+            const headingDeg = currentHeading * (180 / Math.PI);
+            let bearingDeg = bearing * (180 / Math.PI);
+            bearingDeg = (bearingDeg + 360) % 360;
+            const headingFixed = (headingDeg + 360) % 360;
+    
+            let diff = Math.abs(bearingDeg - headingFixed);
+            if (diff > 180) diff = 360 - diff;
+    
+            // Wenn Abweichung < 15° ist, dann vibrieren wir 1,5 Sekunden (1500 ms)
+            if (diff < 15) {
+                vibrateDevice(1500);
+            } else {
+                console.log('Nicht in der richtigen Richtung, kein Vibrieren.');
+            }
+        } else {
+            console.log('Keine Geräteausrichtung verfügbar, kein Vibrieren.');
+        }
+    
+        updatePointsDisplay();
         if (hintsUsed.vibrate >= maxHints) disableButton(vibrateHintButton);
     }
+    
 
     function clearMapHints() {
         if (directionLine) { map.removeLayer(directionLine); directionLine = null; }
