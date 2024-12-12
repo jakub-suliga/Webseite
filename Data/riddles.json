@@ -4,8 +4,8 @@
       "id": 1,
       "question": "Ich bin das Herz der Stadt, von dem aus die Straßen wie Sonnenstrahlen in alle Richtungen führen. Du solltest meinen Haupteingang aufsuchen, um Zugang zu einem Museum und einem Turm mit Aussichtsplattform zu erhalten. Wo bin ich?",
       "answer": "Schloss Karlsruhe",
-      "latitude": 49.0140,
-      "longitude": 8.4043,
+      "latitude": 49.013397,
+      "longitude": 8.404370,
       "hints": [
         "Ich wurde im 18. Jahrhundert erbaut und bin das Wahrzeichen der Stadt.",
         "Mein Park lädt zum Spazieren und Verweilen ein.",
@@ -16,8 +16,8 @@
       "id": 2,
       "question": "An meinem Ort wachsen Pflanzen aus aller Welt. Um meine exotischen Gewächshäuser zu entdecken, begib dich zum Eingang an der Nordseite. Wo bin ich?",
       "answer": "Botanischer Garten Karlsruhe",
-      "latitude": 49.0149,
-      "longitude": 8.4033,
+      "latitude": 49.013048,
+      "longitude": 8.399646,
       "hints": [
         "Ich wurde im 19. Jahrhundert von Heinrich Hübsch gestaltet.",
         "Ich bin ein Ort der Ruhe mitten in der Stadt.",
@@ -28,8 +28,8 @@
       "id": 3,
       "question": "Ich bin ein einzigartiges Bauwerk auf dem Marktplatz, und unter mir ruht der Gründer der Stadt. Begib dich zu meiner Basis, direkt auf dem Marktplatz, um mich zu finden. Wo bin ich?",
       "answer": "Karlsruher Pyramide",
-      "latitude": 49.0097,
-      "longitude": 8.4036,
+      "latitude": 49.00922,
+      "longitude": 8.40394,
       "hints": [
         "Ich bin eine rote Sandsteinpyramide im Zentrum von Karlsruhe.",
         "Ich wurde über der Gruft von Markgraf Karl Wilhelm errichtet.",
