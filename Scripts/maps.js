@@ -85,9 +85,6 @@ document.addEventListener('DOMContentLoaded', () => {
             .then(data => {
                 // Store all riddles without filtering
                 allRiddles = data.riddles;
-
-                // Initiales Filtern basierend auf der aktuellen Position
-                // Hier wird einmalig gefiltert und das Ergebnis in `riddles` gespeichert
                 if (userMarker) {
                     const userLat = userMarker.getLatLng().lat;
                     const userLon = userMarker.getLatLng().lng;
@@ -107,7 +104,6 @@ document.addEventListener('DOMContentLoaded', () => {
             });
     }
 
-
     // Show tutorial if needed, otherwise start round
     function showInstructions() {
         if (!tutorialBox || !tutorialContent || !tutorialCloseButton || !tutorialCheckbox) {
@@ -122,8 +118,8 @@ document.addEventListener('DOMContentLoaded', () => {
         <ul>
             <li>Du bekommst ein Rätsel, das auf einen bestimmten Ort in Karlsruhe hinweist.</li>
             <li>Verwende Hinweise bei Bedarf, jeder Hinweis kostet 100 Punkte.</li>
-            <li>Je näher du dran bist, wenn du deine Position einloggst, desto mehr Punkte erhältst du.</li>
-            <li>Klicke auf "Standort einloggen", wenn du glaubst, am richtigen Ort zu sein.</li>
+            <li>Je näher du bist, wenn du deine Position loggst, desto mehr Punkte erhältst du. Maximal 1000 Punkte</li>
+            <li>Klicke auf "Standort loggen", wenn du glaubst, am richtigen Ort zu sein.</li>
             <li>Nach jeder Runde klicke auf "Weiter" für das nächste Rätsel.</li>
         </ul>
         <p><strong>Hinweise:</strong></p>
@@ -208,7 +204,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function startTimer() {
         let timeLeft = roundDuration;
         updateTimerDisplay(timeLeft);
-    
+
         roundTimer = setInterval(() => {
             timeLeft -= 1000;
             if (timeLeft < 0) timeLeft = 0;
@@ -243,21 +239,21 @@ document.addEventListener('DOMContentLoaded', () => {
     // Log player's current location and calculate points
     function logPlayerLocation() {
         if (!userMarker) {
-            console.error('No known user position available.');
-            showMessage('Cannot log location.', () => {});
+            console.error('Keine bekannte Benutzerposition verfügbar.');
+            showMessage('Standort kann nicht geloggt werden.', () => {});
             return;
         }
-    
+
         const userLat = userMarker.getLatLng().lat;
         const userLon = userMarker.getLatLng().lng;
         const treasureLat = currentRiddle.latitude;
         const treasureLon = currentRiddle.longitude;
-    
+
         const distance = getDistance(userLat, userLon, treasureLat, treasureLon);
-    
+
         let basePoints = 1000 - ((hintsUsed.text + hintsUsed.direction + hintsUsed.radius) * 100);
         if (basePoints < 0) basePoints = 0;
-    
+
         let finalPoints = 0;
         if (distance < 0.5) {
             finalPoints = 0;
@@ -272,36 +268,40 @@ document.addEventListener('DOMContentLoaded', () => {
                 finalPoints = Math.max(0, Math.floor(basePoints * factor));
             }
         }
-    
+
         points += finalPoints;
         updatePointsDisplay();
-    
+
         totalPoints += finalPoints;
         localStorage.setItem('totalPoints', totalPoints);
-    
+
         totalHintsUsed.text += hintsUsed.text;
         totalHintsUsed.direction += hintsUsed.direction;
         totalHintsUsed.radius += hintsUsed.radius;
         localStorage.setItem('totalHintsUsed', JSON.stringify(totalHintsUsed));
-    
+
         let totalRoundsPlayed = parseInt(localStorage.getItem('totalRoundsPlayed'), 10) || 0;
         totalRoundsPlayed++;
         localStorage.setItem('totalRoundsPlayed', totalRoundsPlayed);
-    
+
         let storedTotalDistance = parseFloat(localStorage.getItem('totalDistance')) || 0;
         storedTotalDistance += (distance / 1000);
         localStorage.setItem('totalDistance', storedTotalDistance);
-    
+
+        // Mark the riddle as solved
+        solvedRiddles.push(currentRiddle.id);
+        localStorage.setItem('solvedRiddles', JSON.stringify(solvedRiddles));
+
         showSolution(userLat, userLon, treasureLat, treasureLon);
         if (logLocationButton) logLocationButton.style.display = 'none';
         if (continueButton) continueButton.style.display = 'block';
-    
+
         if (roundPointsEl) {
             roundPointsEl.innerText = `Rundenpunkte: ${finalPoints}`;
         }
-    
+
         disableAllHintButtons();
-    
+
         if (hintMenu && hintMenu.classList.contains('show')) {
             hintMenu.classList.remove('show');
         }
@@ -365,6 +365,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 hintMenu.classList.remove('show');
             }
 
+            // Weiter zur nächsten Runde ohne erneutes Filtern
             round++;
             startRound();
         };
@@ -392,6 +393,17 @@ Durchschnittliche Punkte pro Runde: ${avgPointsPerRound}`;
 
     // Reset the game state
     function resetGame() {
+        // Stop any existing timers or intervals
+        if (roundTimer) {
+            clearInterval(roundTimer);
+            roundTimer = null;
+        }
+        if (positionUpdateInterval !== null) {
+            clearInterval(positionUpdateInterval);
+            positionUpdateInterval = null;
+        }
+
+        // Reset game variables
         round = 1;
         points = 0;
         totalDistance = 0;
@@ -399,14 +411,45 @@ Durchschnittliche Punkte pro Runde: ${avgPointsPerRound}`;
         solvedRiddles = [];
         localStorage.setItem('solvedRiddles', JSON.stringify(solvedRiddles));
 
+        // Reset hints
+        hintsUsed = { text: 0, direction: 0, radius: 0 };
+        totalHintsUsed = { text: 0, direction: 0, radius: 0 };
+        localStorage.setItem('totalHintsUsed', JSON.stringify(totalHintsUsed));
+
+        // Clear map hints and markers
         clearMapHints();
         if (treasureMarker) { map.removeLayer(treasureMarker); treasureMarker = null; }
         if (solutionLine) { map.removeLayer(solutionLine); solutionLine = null; }
         if (solutionArrow) { map.removeLayer(solutionArrow); solutionArrow = null; }
 
+        if (deviceOrientationFan) { map.removeLayer(deviceOrientationFan); deviceOrientationFan = null; }
+
+        // Reset UI elements
         updatePointsDisplay();
         updateRoundUI();
+        if (currentRiddleElement) currentRiddleElement.innerText = '';
+        if (currentHintElement) currentHintElement.innerText = '';
+        if (riddleAnswerElement) riddleAnswerElement.style.display = 'none';
+        if (answerTextElement) answerTextElement.innerText = '';
+        if (roundPointsEl) roundPointsEl.innerText = '';
+
+        // Reset modal visibility
+        if (modal) modal.style.display = 'none';
+
+        // Re-initialize the riddles
+        riddles = allRiddles.filter(r => !solvedRiddles.includes(r.id))
+                           .filter(r => {
+                               const userLat = userMarker.getLatLng().lat;
+                               const userLon = userMarker.getLatLng().lng;
+                               const dist = getDistance(userLat, userLon, r.latitude, r.longitude) / 1000;
+                               return dist <= maxDistance;
+                           });
+
+        // Start watching the position again
         startWatchingPosition();
+
+        // Start the game
+        startRound();
     }
 
     // Update UI elements for rounds and points
@@ -713,6 +756,7 @@ Durchschnittliche Punkte pro Runde: ${avgPointsPerRound}`;
             window.location.href = 'index.html';
         });
     }
+
     if (hintButton) {
         hintButton.addEventListener('click', () => hintMenu.classList.toggle('show'));
     }
